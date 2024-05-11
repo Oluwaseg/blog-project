@@ -208,14 +208,16 @@ const createToken = (user) => {
 // Google OAuth callback route
 router.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/api/login" }),
+  passport.authenticate("google", {
+    failureRedirect: "https://inkverse.onrender.com/api/login",
+  }),
   async (req, res) => {
     try {
       const token = createToken(req.user);
       req.user.tokens.push(token);
       await req.user.save();
       res.cookie("jwt", token, { httpOnly: true });
-      res.redirect("http://localhost:3050/blog");
+      res.redirect("https://inkverse.onrender.com/blog");
     } catch (error) {
       console.log("Error in Google OAuth callback:", error);
       res.status(500).render("error", { error: "Internal Server Error" });
