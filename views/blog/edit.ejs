@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/stylesheets/rte_theme_default.css" />
+    <script type="text/javascript" src="/javascripts/rte.js"></script>
+    <script type="text/javascript" src="/javascripts/all_plugins.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="/javascripts/tailwind.js"></script>
+  </head>
+  <body>
+    <section class="bg-white dark:bg-gray-900">
+      <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+          Create a new article
+        </h2>
+        <form action="/blog/<%= blog.slug %>/edit?_method=PUT" method="post">
+          <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+            <div class="sm:col-span-2">
+              <label
+                for="name"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Tittle</label
+              >
+              <input
+                type="text"
+                name="title"
+                id="name"
+                value="<%= blog ? blog.title : '' %>"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Your title here"
+                required=""
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <label
+                for="description"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Description</label
+              >
+              <textarea
+                id="description"
+                name="description"
+                rows="2"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Your description here"
+              >
+ <%= blog ? blog.description : '' %></textarea
+              >
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                for="content"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Content</label
+              >
+              <textarea
+                id="content"
+                name="content"
+                class="editor-content block form-control p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Your content here"
+              >
+   <%= blog ? blog.content : '' %></textarea
+              >
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+          >
+            Update article
+          </button>
+          <a
+            href="/blog"
+            class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-red-200 dark:focus:ring-red-900 hover:bg-red-800"
+          >
+            Cancel
+          </a>
+        </form>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      var editor1 = new RichTextEditor("#content");
+    </script>
+    <script src="/javascripts/tailwind.config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+    <script>
+      // Function to toggle dark mode
+      function toggleDarkMode() {
+        const modeSwitchIcon = document.getElementById("modeSwitchIcon");
+        let darkMode = localStorage.getItem("darkMode") === "true";
+
+        if (darkMode) {
+          modeSwitchIcon.classList.remove("fa-sun");
+          modeSwitchIcon.classList.add("fa-moon");
+          modeSwitchIcon.classList.remove("text-yellow-500");
+          modeSwitchIcon.classList.add("text-gray-300");
+          document.body.classList.add("dark");
+        } else {
+          modeSwitchIcon.classList.remove("fa-moon");
+          modeSwitchIcon.classList.add("fa-sun");
+          modeSwitchIcon.classList.remove("text-gray-300");
+          modeSwitchIcon.classList.add("text-yellow-500");
+          document.body.classList.remove("dark");
+        }
+      }
+
+      // Toggle dark mode on page load
+      toggleDarkMode();
+
+      // Toggle dark mode on click
+      const modeSwitchIcon = document.getElementById("modeSwitchIcon");
+      modeSwitchIcon.addEventListener("click", function () {
+        let darkMode = localStorage.getItem("darkMode") === "true";
+        localStorage.setItem("darkMode", (!darkMode).toString());
+        toggleDarkMode();
+      });
+
+      // Intercept form submission
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          let darkMode = localStorage.getItem("darkMode") === "true";
+          localStorage.setItem("darkMode", darkMode.toString());
+        });
+    </script>
+  </body>
+</html>

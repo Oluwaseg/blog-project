@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Reset Success</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+      /* Center the modal vertically and horizontally */
+      .modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 0 10px;
+      }
+
+      /* Styling for modal content */
+      .modal-content {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 400px;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Close button style */
+      .close {
+        color: #6b7280;
+        font-size: 20px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="text-center">
+          <div class="text-green-500">
+            <i class="fas fa-check-circle fa-5x"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 mt-4">
+            Password Reset Successful
+          </h2>
+          <p class="text-sm text-gray-600 mt-2">
+            Your password has been successfully reset.
+          </p>
+        </div>
+        <div class="flex justify-center mt-4">
+          <button
+            type="button"
+            onclick="window.location.href = '/api/login';"
+            class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700"
+          >
+            Go to Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

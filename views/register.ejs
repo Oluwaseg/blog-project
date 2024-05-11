@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
+      rel="stylesheet"
+    />
+    <script src="/javascripts/tailwind.js"></script>
+
+    <style>
+      .slider-container {
+        background-image: url("/images/bg-download.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-white dark:bg-gray-900 relative transition duration-500 ease-in-out"
+  >
+    <div
+      class="flex items-center justify-end bg-white dark:bg-gray-900 transition duration-500 ease-in-out"
+    >
+      <i
+        id="modeSwitchIcon"
+        class="fas fa-sun text-lg mr-4 text-yellow-500 dark:text-gray-300 cursor-pointer transition"
+      ></i>
+    </div>
+    <div
+      class="flex justify-center items-center min-h-screen bg-white dark:bg-gray-900 transition duration-500 ease-in-out"
+    >
+      <div
+        class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-900 lg:max-w-4xl"
+      >
+        <div class="w-full px-6 py-8 md:px-8 lg:w-1/2">
+          <div class="flex justify-center mx-auto">
+            <img
+              class="w-auto h-7 sm:h-8"
+              src="https://merakiui.com/images/logo.svg"
+              alt=""
+            />
+          </div>
+
+          <p class="mt-3 text-xl text-center text-gray-600 dark:text-gray-200">
+            Register
+          </p>
+
+          <form
+            class="space-y-4 md:space-y-6"
+            action="/api/register"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <% let first_array =[] %> <% let second_array =[] %> <%
+            if(success_msg && success_msg.length > 0) { %> <%
+            first_array.push(success_msg) %> <% } %> <% if(error_msg &&
+            error_msg.length > 0) { %> <% second_array.push(error_msg) %> <% }
+            %>
+            <div class="mt-4">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+                for="name"
+                >Name</label
+              >
+              <input
+                id="name"
+                class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                type="text"
+                name="name"
+              />
+            </div>
+
+            <div class="mt-4">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+                for="email"
+                >Email Address</label
+              >
+              <input
+                id="email"
+                class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                type="email"
+                name="email"
+              />
+            </div>
+
+            <div class="mt-4">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+                for="password"
+                >Password</label
+              >
+              <input
+                id="password"
+                class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                type="password"
+                name="password"
+              />
+            </div>
+            <div class="mt-4">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+                for="upload"
+                >Upload Image</label
+              >
+              <div class="flex items-center">
+                <label
+                  for="file-upload"
+                  class="cursor-pointer px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:ring focus:ring-blue-300"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6 inline-block mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    ></path>
+                  </svg>
+                  <span>Choose File</span>
+                </label>
+                <input
+                  id="file-upload"
+                  class="hidden"
+                  type="file"
+                  accept="image/*"
+                  name="image"
+                  onchange="updateFileName(this)"
+                />
+                <span
+                  id="file-name"
+                  class="ml-2 text-gray-600 dark:text-gray-300"
+                ></span>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <button
+                type="submit"
+                class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50 dark:bg-yellow-500 dark:hover:bg-yellow-700"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+
+          <div class="flex items-center justify-between mt-4">
+            <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+
+            <a
+              href="/api/login"
+              class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
+              >or login</a
+            >
+
+            <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+          </div>
+        </div>
+
+        <div class="hidden lg:block lg:w-1/2 relative slider-container">
+          <div
+            class="absolute inset-0 flex flex-col items-center justify-center text-white bg-black opacity-50"
+          ></div>
+          <div
+            class="absolute inset-0 flex flex-col items-center justify-center text-white slider-content transition-transform duration-500"
+          >
+            <h2 class="text-3xl font-semibold mb-4"></h2>
+            <p class="text-lg"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/tailwind.config.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script>
+      let darkMode;
+
+      $(document).ready(function () {
+        let toast_Success = "<%=first_array%>";
+        let toast_Error = "<%=second_array%>";
+
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+          const modeSwitchIcon = document.getElementById("modeSwitchIcon");
+          let darkMode = localStorage.getItem("darkMode") === "true";
+
+          if (darkMode) {
+            modeSwitchIcon.classList.remove("fa-sun");
+            modeSwitchIcon.classList.add("fa-moon");
+            modeSwitchIcon.classList.remove("text-yellow-500");
+            modeSwitchIcon.classList.add("text-gray-300");
+            document.body.classList.add("dark");
+          } else {
+            modeSwitchIcon.classList.remove("fa-moon");
+            modeSwitchIcon.classList.add("fa-sun");
+            modeSwitchIcon.classList.remove("text-gray-300");
+            modeSwitchIcon.classList.add("text-yellow-500");
+            document.body.classList.remove("dark");
+          }
+        }
+
+        // Toggle dark mode on page load
+        toggleDarkMode();
+
+        // Toggle dark mode on click
+        const modeSwitchIcon = document.getElementById("modeSwitchIcon");
+        modeSwitchIcon.addEventListener("click", function () {
+          let darkMode = localStorage.getItem("darkMode") === "true";
+          localStorage.setItem("darkMode", (!darkMode).toString());
+          toggleDarkMode();
+        });
+
+        // Intercept form submission
+        document
+          .querySelector("form")
+          .addEventListener("submit", function (event) {
+            let darkMode = localStorage.getItem("darkMode") === "true";
+            localStorage.setItem("darkMode", darkMode.toString());
+          });
+
+        iziToast.settings({
+          resetOnHover: true,
+          close: false,
+        });
+
+        if (toast_Error != "") {
+          iziToast.error({
+            title: "Error",
+            message: toast_Error,
+            position: "topLeft",
+            theme: darkMode ? "dark" : "light",
+            icon: "fa fa-times",
+            iconColor: darkMode ? "white" : "white",
+            backgroundColor: darkMode ? "#FF042E" : "#C41230",
+            titleColor: darkMode ? "white" : "white",
+            messageColor: darkMode ? "white" : "white",
+            progressBarColor: darkMode ? "white" : "white",
+            closeOnClick: true,
+            closeOnEscape: true,
+            rtl: false,
+          });
+        }
+        if (toast_Success != "") {
+          iziToast.success({
+            title: "Success",
+            message: toast_Success,
+            position: "topRight",
+            theme: darkMode ? "dark" : "light",
+            backgroundColor: darkMode ? "#044F2E" : "#2CF79D",
+            icon: "fa fa-check",
+            iconColor: darkMode ? "white" : "white",
+            titleColor: darkMode ? "white" : "white",
+            messageColor: darkMode ? "white" : "white",
+            progressBarColor: darkMode ? "white" : "white",
+            closeOnClick: true,
+            closeOnEscape: true,
+            rtl: false,
+          });
+        }
+      });
+    </script>
+
+    <script>
+      function updateFileName(input) {
+        const fileNameElement = document.getElementById("file-name");
+        if (input.files.length > 0) {
+          fileNameElement.textContent = input.files[0].name;
+        } else {
+          fileNameElement.textContent = "";
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        const sliderContent = document.querySelector(".slider-content");
+        const slides = [
+          {
+            title: "Slide 1",
+            image: "/images/bg-download.jpg",
+            content: "Content for slide 1",
+          },
+          {
+            title: "Slide 2",
+            image: "/images/bg-download.jpg",
+            content: "Content for slide 2",
+          },
+          {
+            title: "Slide 3",
+            image: "/images/bg-download.jpg",
+            content: "Content for slide 3",
+          },
+        ];
+
+        let currentSlide = 0;
+
+        function showSlide() {
+          const sliderContent = document.querySelector(".slider-content");
+          if (sliderContent) {
+            sliderContent.style.backgroundImage = `url('${slides[currentSlide].image}')`;
+            sliderContent.innerHTML = `
+                  <h2 class="text-3xl font-semibold mb-4">${slides[currentSlide].title}</h2>
+                  <p class="text-lg">${slides[currentSlide].content}</p>
+                `;
+          }
+        }
+
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % slides.length;
+          if (sliderContent) {
+            sliderContent.classList.add("translate-x-full");
+            setTimeout(() => {
+              showSlide();
+              sliderContent.classList.remove("translate-x-full");
+            }, 500);
+          }
+        }
+
+        showSlide(); // Show the initial slide
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+      });
+    </script>
+  </body>
+</html>

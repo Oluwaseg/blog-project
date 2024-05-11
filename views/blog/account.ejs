@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="/javascripts/tailwind.js"></script>
+    <script src="/javascripts/tailwind.config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2/dist/purify.min.js"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div class="antialiased bg-gray-50 dark:bg-gray-900">
+      <nav
+        class="bg-purple-800 text-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50 shadow-lg"
+      >
+        <div class="flex flex-wrap justify-between items-center">
+          <div class="flex justify-start items-center">
+            <button
+              data-drawer-target="drawer-navigation"
+              data-drawer-toggle="drawer-navigation"
+              aria-controls="drawer-navigation"
+              class="p-2 mr-2 text-white rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+              <svg
+                aria-hidden="true"
+                class="hidden w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+              <span class="sr-only">Toggle sidebar</span>
+            </button>
+            <a href="/blog" class="flex items-center justify-between mr-4">
+              <svg
+                fill="currentColor"
+                class="w-8 h-8 mr-2"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 323.86 323.86"
+              >
+                <g>
+                  <g>
+                    <path
+                      d="M288.68,247.305c14.805-11.805,3.418-66.739-3.58-85.562l-3.873-9.081c-2.516-6.106-6.322-10.326-12.449-13.044
+               c-14.271-6.334-26.33-11.763-37.99-17.013c-14.176-6.381-27.562-12.408-44.58-19.92c-5.376-2.374-10.965-3.577-16.613-3.577
+               c-17.691,0-32.38,11.374-40.271,17.484c0,0-69.527,56.178-83.278,60.343c-13.887,4.206-29.377,4.943-37.851,4.984v85.283
+               c29.387,0.95,50.025,9.79,66.79,16.97c4.371,1.872,8.499,3.639,12.431,5.116c8.563,3.215,19.276,4.775,32.753,4.775
+               c5.232,0,10.78-0.229,16.928-0.709c1.055,1.571,2.359,2.966,3.903,4.124c3.007,2.256,6.574,3.447,10.318,3.447
+               c6.557,0,11.951-4.464,15.669-8.845l0.638,2.203c1.051,3.626,3.188,6.729,6.182,8.974c3.006,2.255,6.574,3.447,10.317,3.447
+               c12.871,0,21.274-17.202,21.274-17.202s1.861,14.525,9.123,19.846c3.033,2.22,6.574,3.447,10.318,3.447
+               c5.482,0,10.326-2.658,13.797-6.893c19.887-24.255,27.895-64.323,27.895-64.323S280.711,253.659,288.68,247.305z M237.67,192.004
+               l13.975,4.712l10.088,29.813L237.67,192.004z"
+                    />
+                    <path
+                      d="M103.171,26.926c-1.096,1.589-1.88,3.447-2.306,5.54c-3.94,19.299,24.001,59.934,27.201,64.503
+               c1.599,2.285,4.694,2.896,7.032,1.44c0.08-0.051,0.159-0.102,0.237-0.158c2.362-1.651,2.937-4.907,1.283-7.269
+               c-9.687-13.838-23.681-37.966-25.531-51.353l35.332,56.6c6.87-2.946,14.694-5.613,23.176-5.613c6.402,0,12.721,1.779,18.814,4.185
+               L130.772,2.46c-1.523-2.447-4.744-3.194-7.191-1.67l-22.003,13.709c-2.446,1.526-3.194,4.745-1.669,7.192L103.171,26.926z"
+                    />
+                    <path
+                      d="M315.448,317.149l-13.99-46.968c-0.135-0.446-0.326-0.875-0.574-1.271l-8.744-14.012
+               c-1.664,0.369-3.371,0.605-5.105,0.695c-0.637,0.031-1.262,0.048-1.879,0.048c-4.887,0-9.543-1.019-13.732-2.98
+               c-2.002,6.767-4.848,15.184-8.629,23.9l7.229,11.581c0.246,0.396,0.545,0.757,0.889,1.072l35.996,33.259
+               c1.727,1.596,4.307,1.839,6.303,0.596C315.204,321.828,316.12,319.402,315.448,317.149z"
+                    />
+                  </g>
+                </g>
+              </svg>
+              <span
+                class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+                >InkVerse</span
+              >
+            </a>
+            <form action="#" method="GET" class="hidden md:block md:pl-2">
+              <label for="topbar-search" class="sr-only">Search</label>
+              <div class="relative md:w-64 md:w-96">
+                <div
+                  class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+                >
+                  <svg
+                    class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  name="email"
+                  id="topbar-search"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Search"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="flex items-center lg:order-2">
+            <button
+              type="button"
+              data-drawer-toggle="drawer-navigation"
+              aria-controls="drawer-navigation"
+              class="p-2 mr-1 text-white rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            >
+              <span class="sr-only">Toggle search</span>
+              <svg
+                aria-hidden="true"
+                class="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  clip-rule="evenodd"
+                  fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                ></path>
+              </svg>
+            </button>
+            <!-- Notifications -->
+            <button
+              type="button"
+              data-dropdown-toggle="notification-dropdown"
+              class="p-2 mr-1 text-white rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            >
+              <span class="sr-only">View notifications</span>
+              <!-- Bell icon -->
+              <svg
+                aria-hidden="true"
+                class="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+                ></path>
+              </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div
+              class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"
+              id="notification-dropdown"
+            >
+              <div
+                class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300"
+              >
+                Notifications
+              </div>
+              <div>
+                <a
+                  href="#"
+                  class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
+                >
+                  <div class="flex-shrink-0">
+                    <img
+                      class="w-11 h-11 rounded-full"
+                      src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                      alt="Bonnie Green avatar"
+                    />
+                    <div
+                      class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="w-3 h-3 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"
+                        ></path>
+                        <path
+                          d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="pl-3 w-full">
+                    <div
+                      class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400"
+                    >
+                      New message from
+                      <span class="font-semibold text-gray-900 dark:text-white"
+                        >Bonnie Green</span
+                      >: "Hey, what's up? All set for the presentation?"
+                    </div>
+                    <div
+                      class="text-xs font-medium text-primary-600 dark:text-primary-500"
+                    >
+                      a few moments ago
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
+                >
+                  <div class="flex-shrink-0">
+                    <img
+                      class="w-11 h-11 rounded-full"
+                      src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
+                      alt="Jese Leos avatar"
+                    />
+                    <div
+                      class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-gray-900 rounded-full border border-white dark:border-gray-700"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="w-3 h-3 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="pl-3 w-full">
+                    <div
+                      class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400"
+                    >
+                      <span class="font-semibold text-gray-900 dark:text-white"
+                        >Jese leos</span
+                      >
+                      and
+                      <span class="font-medium text-gray-900 dark:text-white"
+                        >5 others</span
+                      >
+                      started following you.
+                    </div>
+                    <div
+                      class="text-xs font-medium text-primary-600 dark:text-primary-500"
+                    >
+                      10 minutes ago
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
+                >
+                  <div class="flex-shrink-0">
+                    <img
+                      class="w-11 h-11 rounded-full"
+                      src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
+                      alt="Joseph McFall avatar"
+                    />
+                    <div
+                      class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-red-600 rounded-full border border-white dark:border-gray-700"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="w-3 h-3 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="pl-3 w-full">
+                    <div
+                      class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400"
+                    >
+                      <span class="font-semibold text-gray-900 dark:text-white"
+                        >Joseph Mcfall</span
+                      >
+                      and
+                      <span class="font-medium text-gray-900 dark:text-white"
+                        >141 others</span
+                      >
+                      love your story. See it and view more stories.
+                    </div>
+                    <div
+                      class="text-xs font-medium text-primary-600 dark:text-primary-500"
+                    >
+                      44 minutes ago
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
+                >
+                  <div class="flex-shrink-0">
+                    <img
+                      class="w-11 h-11 rounded-full"
+                      src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
+                      alt="Roberta Casas image"
+                    />
+                    <div
+                      class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-400 rounded-full border border-white dark:border-gray-700"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="w-3 h-3 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="pl-3 w-full">
+                    <div
+                      class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400"
+                    >
+                      <span class="font-semibold text-gray-900 dark:text-white"
+                        >Leslie Livingston</span
+                      >
+                      mentioned you in a comment:
+                      <span
+                        class="font-medium text-primary-600 dark:text-primary-500"
+                        >@bonnie.green</span
+                      >
+                      what do you say?
+                    </div>
+                    <div
+                      class="text-xs font-medium text-primary-600 dark:text-primary-500"
+                    >
+                      1 hour ago
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-600"
+                >
+                  <div class="flex-shrink-0">
+                    <img
+                      class="w-11 h-11 rounded-full"
+                      src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png"
+                      alt="Robert image"
+                    />
+                    <div
+                      class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-purple-500 rounded-full border border-white dark:border-gray-700"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="w-3 h-3 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="pl-3 w-full">
+                    <div
+                      class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400"
+                    >
+                      <span class="font-semibold text-gray-900 dark:text-white"
+                        >Robert Brown</span
+                      >
+                      posted a new video: Glassmorphism - learn how to implement
+                      the new design trend.
+                    </div>
+                    <div
+                      class="text-xs font-medium text-primary-600 dark:text-primary-500"
+                    >
+                      3 hours ago
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <a
+                href="#"
+                class="block py-2 text-md font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-600 dark:text-white dark:hover:underline"
+              >
+                <div class="inline-flex items-center">
+                  <svg
+                    aria-hidden="true"
+                    class="mr-2 w-4 h-4 text-gray-500 dark:text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    <path
+                      fill-rule="evenodd"
+                      d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                  View all
+                </div>
+              </a>
+            </div>
+
+            <button
+              type="button"
+              class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded="false"
+              data-dropdown-toggle="dropdown"
+            >
+              <span class="sr-only">Open user menu</span>
+              <img
+                class="w-8 h-8 rounded-full"
+                src="<%= user.image %>"
+                alt="user photo"
+              />
+            </button>
+            <!-- Dropdown menu -->
+            <div
+              class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+              id="dropdown"
+            >
+              <div class="py-3 px-4">
+                <span
+                  class="block text-sm font-semibold text-gray-900 dark:text-white"
+                  ><%= user.name %></span
+                >
+                <span
+                  class="block text-sm text-gray-900 truncate dark:text-white"
+                  ><%= user.email %></span
+                >
+              </div>
+              <ul
+                class="py-1 text-gray-700 dark:text-gray-300"
+                aria-labelledby="dropdown"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                    >My profile</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/api/account-setting"
+                    class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                    >Account settings</a
+                  >
+                </li>
+              </ul>
+              <ul
+                class="py-1 text-gray-700 dark:text-gray-300"
+                aria-labelledby="dropdown"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    ><svg
+                      class="mr-2 w-5 h-5 text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                    My likes</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    ><svg
+                      class="mr-2 w-5 h-5 text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
+                      ></path>
+                    </svg>
+                    Collections</a
+                  >
+                </li>
+              </ul>
+              <ul
+                class="py-1 text-gray-700 dark:text-gray-300"
+                aria-labelledby="dropdown"
+              >
+                <li>
+                  <form action="/api/logout" method="post">
+                    <button
+                      type="submit"
+                      class="block py-2 px-20 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Sign out
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sidebar -->
+
+      <aside
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        aria-label="Sidenav"
+        id="drawer-navigation"
+      >
+        <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
+          <form action="#" method="GET" class="md:hidden mb-2">
+            <label for="sidebar-search" class="sr-only">Search</label>
+            <div class="relative">
+              <div
+                class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+              >
+                <svg
+                  class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                type="text"
+                name="search"
+                id="sidebar-search"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Search"
+              />
+            </div>
+          </form>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="#"
+                class="tablinks flex items-center p-2 text-base font-medium border border-purple-600 text-purple-600 rounded-lg transition duration-500 ease-in-out dark:text-white hover:bg-purple-600 hover:text-white dark:hover:bg-gray-700 group"
+                onclick="openTab(event, 'General')"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="flex-shrink-0 text-xl w-6 h-6 transition duration-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                  <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                </svg>
+                <span class="ml-3">General</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="tablinks flex items-center p-2 text-base font-medium border border-purple-600 text-purple-600 rounded-lg transition duration-500 ease-in-out dark:text-white hover:bg-purple-600 hover:text-white dark:hover:bg-gray-700 group"
+                onclick="openTab(event, 'Change-Password')"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 text-xl w-6 h-6 transition duration-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.757-2.243-5-5-5zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7zm4 10.723V20h-2v-2.277a1.993 1.993 0 0 1 .567-3.677A2.001 2.001 0 0 1 14 16a1.99 1.99 0 0 1-1 1.723z"
+                  ></path>
+                </svg>
+
+                <span class="flex-1 ml-3 text-left whitespace-nowrap"
+                  >Change Password</span
+                >
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="tablinks flex items-center p-2 text-base font-medium border border-purple-600 text-purple-600 rounded-lg transition duration-500 ease-in-out dark:text-white hover:bg-purple-600 hover:text-white dark:hover:bg-gray-700 group"
+                onclick="openTab(event, 'Info')"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 text-xl w-6 h-6 transition duration-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+                  ></path>
+                </svg>
+                <span class="flex-1 ml-3 text-left whitespace-nowrap"
+                  >Info</span
+                >
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="tablinks flex items-center p-2 text-base font-medium border border-purple-600 text-purple-600 rounded-lg transition duration-500 ease-in-out dark:text-white hover:bg-purple-600 hover:text-white dark:hover:bg-gray-700 group"
+                onclick="openTab(event, 'Social-Link')"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 text-xl w-6 h-6 transition duration-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707c-.943-.944-2.199-1.465-3.535-1.465s-2.592.521-3.535 1.465L4.929 12a5.008 5.008 0 0 0 0 7.071 4.983 4.983 0 0 0 3.535 1.462A4.982 4.982 0 0 0 12 19.071l.707-.707-1.414-1.414-.707.707a3.007 3.007 0 0 1-4.243 0 3.005 3.005 0 0 1 0-4.243l2.122-2.121z"
+                  ></path>
+                  <path
+                    d="m12 4.929-.707.707 1.414 1.414.707-.707a3.007 3.007 0 0 1 4.243 0 3.005 3.005 0 0 1 0 4.243l-2.122 2.121c-1.133 1.133-3.109 1.133-4.242 0L10.586 12l-1.414 1.414.707.707c.943.944 2.199 1.465 3.535 1.465s2.592-.521 3.535-1.465L19.071 12a5.008 5.008 0 0 0 0-7.071 5.006 5.006 0 0 0-7.071 0z"
+                  ></path>
+                </svg>
+
+                <span class="flex-1 ml-3 whitespace-nowrap">Social Links</span>
+                <span
+                  class="inline-flex justify-center items-center w-5 h-5 text-xs font-semibold rounded-full text-primary-800 bg-primary-100 dark:bg-primary-200 dark:text-primary-800"
+                >
+                  5
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="tablinks flex items-center p-2 text-base font-medium border border-purple-600 text-purple-600 rounded-lg transition duration-500 ease-in-out dark:text-white hover:bg-purple-600 hover:text-white dark:hover:bg-gray-700 group"
+                onclick="openTab(event, 'Connection')"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 text-xl w-6 h-6 transition duration-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M4.222 19.778a4.983 4.983 0 0 0 3.535 1.462 4.986 4.986 0 0 0 3.536-1.462l2.828-2.829-1.414-1.414-2.828 2.829a3.007 3.007 0 0 1-4.243 0 3.005 3.005 0 0 1 0-4.243l2.829-2.828-1.414-1.414-2.829 2.828a5.006 5.006 0 0 0 0 7.071zm15.556-8.485a5.008 5.008 0 0 0 0-7.071 5.006 5.006 0 0 0-7.071 0L9.879 7.051l1.414 1.414 2.828-2.829a3.007 3.007 0 0 1 4.243 0 3.005 3.005 0 0 1 0 4.243l-2.829 2.828 1.414 1.414 2.829-2.828z"
+                  ></path>
+                  <path
+                    d="m8.464 16.95-1.415-1.414 8.487-8.486 1.414 1.415z"
+                  ></path>
+                </svg>
+                <span class="flex-1 ml-3 text-left whitespace-nowrap"
+                  >Connection</span
+                >
+              </a>
+            </li>
+          </ul>
+          <ul
+            class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700"
+          >
+            <li>
+              <a
+                href="#"
+                class="tablinks flex items-center p-2 text-base font-medium border border-purple-600 text-purple-600 rounded-lg transition duration-500 ease-in-out dark:text-white hover:bg-purple-600 hover:text-white dark:hover:bg-gray-700 group"
+                onclick="openTab(event, 'Notifications')"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 text-xl w-6 h-6 transition duration-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 22a2.98 2.98 0 0 0 2.818-2H9.182A2.98 2.98 0 0 0 12 22zm7-7.414V10c0-3.217-2.185-5.927-5.145-6.742C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v4.586l-1.707 1.707A.996.996 0 0 0 3 17v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-1a.996.996 0 0 0-.293-.707L19 14.586z"
+                  ></path>
+                </svg>
+                <span class="ml-3">Notifications</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center p-2 text-base font-medium border border-purple-600 text-purple-600 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 text-xl w-6 h-6 transition duration-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm4.207 12.793-1.414 1.414L12 13.414l-2.793 2.793-1.414-1.414L10.586 12 7.793 9.207l1.414-1.414L12 10.586l2.793-2.793 1.414 1.414L13.414 12l2.793 2.793z"
+                  ></path>
+                </svg>
+
+                <span class="ml-3">Delete Account</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center p-2 text-base font-medium border border-purple-600 text-purple-600 text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="flex-shrink-0 text-xl w-6 h-6 transition duration-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 16h-2v-2h2v2zm.976-4.885c-.196.158-.385.309-.535.459-.408.407-.44.777-.441.793v.133h-2v-.167c0-.118.029-1.177 1.026-2.174.195-.195.437-.393.691-.599.734-.595 1.216-1.029 1.216-1.627a1.934 1.934 0 0 0-3.867.001h-2C8.066 7.765 9.831 6 12 6s3.934 1.765 3.934 3.934c0 1.597-1.179 2.55-1.958 3.181z"
+                  ></path>
+                </svg>
+
+                <span class="ml-3">Help</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <main class="p-4 md:ml-64 h-auto pt-20">
+        <div class="bg-white rounded-lg shadow p-4">
+          <div id="General" class="tabcontent mb-8">
+            <h5 class="font-semibold mb-4">General</h5>
+            <form
+              action="/api/change-profile-picture"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="flex items-center space-x-4">
+                <img
+                  src="<%= user.image %>"
+                  name="image"
+                  alt="Profile Picture"
+                  class="w-20 h-20 rounded-full"
+                  id="profilePicture"
+                />
+                <div class="flex flex-col items-start space-y-2">
+                  <div class="flex items-center">
+                    <label
+                      for="upload-photo"
+                      class="focus:outline-none text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-900 md:w-auto cursor-pointer"
+                    >
+                      Select image
+                    </label>
+                    <input
+                      type="file"
+                      name="image"
+                      id="upload-photo"
+                      class="hidden"
+                      accept="image/*"
+                      onchange="handleFileUpload(event)"
+                    />
+                    <button
+                      type="button"
+                      class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 md:w-auto"
+                      onclick="resetFileUpload()"
+                    >
+                      Reset
+                    </button>
+                    <button
+                      type="submit"
+                      class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900 md:w-auto"
+                    >
+                      Save
+                    </button>
+                  </div>
+                  <p id="uploadedFileName" class="text-sm text-green-600"></p>
+                  <p class="text-xs text-gray-500">
+                    Allowed JPG, GIF or PNG. Max size of 800K
+                  </p>
+                </div>
+              </div>
+            </form>
+
+            <hr class="my-4 border-gray-300" />
+            <div>
+              <% if (success_msg && success_msg.length > 0) { %>
+              <div
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                role="alert"
+              >
+                <%= success_msg %>
+              </div>
+              <% } %> <% if (error_msg && error_msg.length > 0) { %>
+              <div
+                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                role="alert"
+              >
+                <%= error_msg %>
+              </div>
+              <% } %>
+              <form action="/api/update-details" method="POST">
+                <div class="mb-4">
+                  <label
+                    for="username"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Username</label
+                  >
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mt-1 shadow-sm"
+                    value="<%= user.username %>"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label
+                    for="name"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Name</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mt-1 shadow-sm"
+                    value="<%= user.name %>"
+                    required
+                  />
+                </div>
+
+                <div class="text-right mt-8">
+                  <button
+                    type="submit"
+                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  >
+                    Save changes
+                  </button>
+                  <a
+                    id="deleteButton"
+                    data-modal-target="deleteModal"
+                    data-modal-toggle="deleteModal"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ml-2"
+                  >
+                    Cancel
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div id="Change-Password" class="tabcontent mb-8">
+            <% if (success_msg) { %>
+            <div class="text-green-600 font-bold p-1 m-1">
+              <%= success_msg %>
+            </div>
+            <% } %> <% if (error_msg) { %>
+            <div class="text-red-600 font-bold p-1 m-1"><%= error_msg %></div>
+            <% } %>
+            <h5 class="font-semibold mb-4">Change Password</h5>
+            <form action="/api/update-password" method="post">
+              <div class="mb-4">
+                <label
+                  for="current-password"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Current Password</label
+                >
+                <input
+                  type="password"
+                  id="current-password"
+                  name="currentPassword"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mt-1 shadow-sm"
+                  placeholder="••••••••"
+                />
+              </div>
+              <div class="mb-4">
+                <label
+                  for="new-password"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >New Password</label
+                >
+                <input
+                  type="password"
+                  id="new-password"
+                  name="newPassword"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mt-1 shadow-sm"
+                  placeholder="••••••••"
+                />
+              </div>
+              <div class="mb-4">
+                <label
+                  for="confirm-password"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Confirm New Password</label
+                >
+                <input
+                  type="password"
+                  id="confirm-password"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mt-1 shadow-sm"
+                  placeholder="••••••••"
+                />
+                <div class="text-right mt-8">
+                  <button
+                    type="submit"
+                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  >
+                    Save changes
+                  </button>
+                  <button
+                    type="button"
+                    id="deleteButton"
+                    data-modal-target="deleteModal"
+                    data-modal-toggle="deleteModal"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ml-2"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!--  -->
+          <div id="Info" class="tabcontent mb-8">
+            <h5
+              class="block text-xl font-medium text-gray-900 dark:text-white mb-4"
+            >
+              Info
+            </h5>
+            <div class="card-body pb-2">
+              <div class="form-group">
+                <label
+                  class="mb-4 mt-2 block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+                  >Bio</label
+                >
+                <textarea
+                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 resize-none"
+                  rows="5"
+                  placeholder="Enter your bio here..."
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label
+                  class="mt-2 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Birthday</label
+                >
+                <input
+                  type="date"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 mt-1 shadow-sm"
+                  value="May 3, 1995"
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  class="mt-2 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Country</label
+                >
+                <select
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                >
+                  <option>USA</option>
+                  <option selected>Canada</option>
+                  <option>UK</option>
+                  <option>Germany</option>
+                  <option>France</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="card-body pb-2">
+              <h6
+                class="mb-4 mt-2 block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+              >
+                Contacts
+              </h6>
+              <div class="form-group">
+                <label
+                  class="mt-2 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Phone</label
+                >
+                <input
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  value="+0 (123) 456 7891"
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  class="mt-2 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Website</label
+                >
+                <input
+                  type="text"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  value
+                />
+              </div>
+            </div>
+            <div class="text-right mt-8">
+              <button
+                type="button"
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              >
+                Save changes
+              </button>
+              <button
+                type="button"
+                id="deleteButton"
+                data-modal-target="deleteModal"
+                data-modal-toggle="deleteModal"
+                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ml-2"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+
+          <div id="Social-Link" class="tabcontent mb-8">
+            <h5 class="font-semibold mb-4">Social Links</h5>
+            <div class="card-body pb-2">
+              <div class="form-group">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Twitter</label
+                >
+                <input
+                  type="text"
+                  class="m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  value="https://twitter.com/user"
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Facebook</label
+                >
+                <input
+                  type="text"
+                  class="m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  value="https://www.facebook.com/user"
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Google+</label
+                >
+                <input
+                  type="text"
+                  class="m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  value
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >LinkedIn</label
+                >
+                <input
+                  type="text"
+                  class="m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  value
+                />
+              </div>
+              <div class="form-group">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Instagram</label
+                >
+                <input
+                  type="text"
+                  class="m-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  value="https://www.instagram.com/user"
+                />
+              </div>
+              <div class="text-right mt-8">
+                <button
+                  type="button"
+                  class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                >
+                  Save changes
+                </button>
+                <button
+                  type="button"
+                  id="deleteButton"
+                  data-modal-target="deleteModal"
+                  data-modal-toggle="deleteModal"
+                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ml-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="Connection" class="tabcontent mb-8">
+            <h5 class="font-semibold mb-4">Connections</h5>
+            <div class="card-body">
+              <button type="button" class="mb-3 p-1">
+                Connect to <strong>Twitter</strong>
+              </button>
+            </div>
+            <hr class="border-light m-0 mb-1" />
+            <div class="card-body mb-3 p-1">
+              <h5 class="mb-2">
+                <a
+                  href="javascript:void(0)"
+                  class="float-right text-muted text-tiny"
+                  ><i class="ion ion-md-close"></i> Remove</a
+                >
+                <i class="ion ion-logo-google text-google"></i>
+                You are connected to Google:
+              </h5>
+              <a
+                href="/cdn-cgi/l/email-protection"
+                class="__cf_email__"
+                data-cfemail="f9979498818e9c9595b994989095d79a9694"
+                >[email&#160;protected]</a
+              >
+            </div>
+            <hr class="border-light m-0" />
+            <div class="card-body">
+              <button type="button" class="mb-3 p-1">
+                Connect to <strong>Facebook</strong>
+              </button>
+            </div>
+            <hr class="border-light m-0 mb-1" />
+            <div class="card-body">
+              <button type="button" class="mb-3 p-1">
+                Connect to <strong>Instagram</strong>
+              </button>
+              <div class="text-right mt-8">
+                <button
+                  type="button"
+                  class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                >
+                  Save changes
+                </button>
+                <button
+                  type="button"
+                  id="deleteButton"
+                  data-modal-target="deleteModal"
+                  data-modal-toggle="deleteModal"
+                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ml-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="Notifications" class="tabcontent mb-8">
+            <h5 class="font-semibold mb-4">Notifications</h5>
+            <div class="card-body pb-2">
+              <h6 class="mb-4">Activity</h6>
+              <div class="form-group">
+                <label class="switcher">
+                  <input type="checkbox" class="switcher-input" checked />
+                  <span class="switcher-indicator">
+                    <span class="switcher-yes"></span>
+                    <span class="switcher-no"></span>
+                  </span>
+                  <span class="switcher-label"
+                    >Email me when someone comments on my article</span
+                  >
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="switcher">
+                  <input type="checkbox" class="switcher-input" checked />
+                  <span class="switcher-indicator">
+                    <span class="switcher-yes"></span>
+                    <span class="switcher-no"></span>
+                  </span>
+                  <span class="switcher-label"
+                    >Email me when someone answers on my forum thread</span
+                  >
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="switcher">
+                  <input type="checkbox" class="switcher-input" />
+                  <span class="switcher-indicator">
+                    <span class="switcher-yes"></span>
+                    <span class="switcher-no"></span>
+                  </span>
+                  <span class="switcher-label"
+                    >Email me when someone follows me</span
+                  >
+                </label>
+              </div>
+            </div>
+            <hr class="border-light m-0" />
+            <div class="card-body pb-2">
+              <h6 class="mb-4">Application</h6>
+              <div class="form-group">
+                <label class="switcher">
+                  <input type="checkbox" class="switcher-input" checked />
+                  <span class="switcher-indicator">
+                    <span class="switcher-yes"></span>
+                    <span class="switcher-no"></span>
+                  </span>
+                  <span class="switcher-label">News and announcements</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="switcher">
+                  <input type="checkbox" class="switcher-input" />
+                  <span class="switcher-indicator">
+                    <span class="switcher-yes"></span>
+                    <span class="switcher-no"></span>
+                  </span>
+                  <span class="switcher-label">Weekly product updates</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="switcher">
+                  <input type="checkbox" class="switcher-input" checked />
+                  <span class="switcher-indicator">
+                    <span class="switcher-yes"></span>
+                    <span class="switcher-no"></span>
+                  </span>
+                  <span class="switcher-label">Weekly blog digest</span>
+                </label>
+              </div>
+            </div>
+            <div class="text-right mt-8">
+              <button
+                type="button"
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              >
+                Save changes
+              </button>
+              <button
+                type="button"
+                id="deleteButton"
+                data-modal-target="deleteModal"
+                data-modal-toggle="deleteModal"
+                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ml-2"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Main modal -->
+    <div
+      id="deleteModal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full"
+    >
+      <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div
+          class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5"
+        >
+          <button
+            type="button"
+            class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            data-modal-toggle="deleteModal"
+          >
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+          <svg
+            class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto"
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <p class="mb-4 text-gray-500 dark:text-gray-300">
+            Are you sure you want to navigate away from this tab without saving
+            changes?
+          </p>
+          <div class="flex justify-center items-center space-x-4">
+            <button
+              data-modal-toggle="deleteModal"
+              type="button"
+              class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+            >
+              No, cancel
+            </button>
+            <a
+              href="/blog"
+              class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
+            >
+              Yes, continue without saving
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var prevActiveTab = null; // Variable to store the previously active tab
+
+      function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].classList.remove("active");
+          tablinks[i].classList.remove("bg-purple-600", "text-white");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("active");
+        evt.currentTarget.classList.add("bg-purple-600", "text-white");
+
+        // Remove styling from previously active tab
+        if (prevActiveTab !== null && prevActiveTab !== evt.currentTarget) {
+          prevActiveTab.classList.remove("active");
+          prevActiveTab.classList.remove("bg-purple-400", "text-red");
+        }
+
+        prevActiveTab = evt.currentTarget; // Update previously active tab
+      }
+
+      // Remove the default click on page load
+      document.querySelector(".tablinks").click();
+    </script>
+
+    <script src="/javascripts/account.js"></script>
+  </body>
+</html>
