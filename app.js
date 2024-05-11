@@ -75,6 +75,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "public", "uploads")));
 
 // app.use("/", indexRouter);
+app.get("/", (req, res) => {
+  res.send(`
+    <h1>Welcome to the root of the application!</h1>
+    <p>Click <a href="/api/register">here</a> to register.</p>
+    <p>Click <a href="/api/login">here</a> to login.</p>
+  `);
+});
 app.use("/api", authRouter);
 app.use("/blog", blogRouter);
 
