@@ -12,9 +12,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
-    <script src="/javascripts/tailwind.js"></script>
+    <script src="/javascripts/tailwind.config.js"></script>
+    <link rel="stylesheet" href="/stylesheets/output.css" />
   </head>
-  <body class="bg-white dark:bg-gray-900">
+  <body class="bg-white dark:bg-gray-900 min-h-screen">
     <header>
       <nav class="bg-white px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div
@@ -130,9 +131,9 @@
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/blog/categories"
                   class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-yellow-500 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 transition duration-300"
-                  >About Us</a
+                  >category</a
                 >
               </li>
               <li>
@@ -261,8 +262,9 @@
                       >
                         <path
                           d="M 16 3 C 12.210938 3 8.765625 4.113281 6.21875 5.976563 C 3.667969 7.835938 2 10.507813 2 13.5 C 2 17.128906 4.472656 20.199219 8 22.050781 L 8 29 L 14.746094 23.9375 C 15.15625 23.96875 15.570313 24 16 24 C 19.789063 24 23.234375 22.886719 25.78125 21.027344 C 28.332031 19.164063 30 16.492188 30 13.5 C 30 10.507813 28.332031 7.835938 25.78125 5.976563 C 23.234375 4.113281 19.789063 3 16 3 Z M 16 5 C 19.390625 5 22.445313 6.015625 24.601563 7.589844 C 26.757813 9.164063 28 11.246094 28 13.5 C 28 15.753906 26.757813 17.835938 24.601563 19.410156 C 22.445313 20.984375 19.390625 22 16 22 C 15.507813 22 15.015625 21.972656 14.523438 21.925781 L 14.140625 21.894531 L 10 25 L 10 20.859375 L 9.421875 20.59375 C 6.070313 19.019531 4 16.386719 4 13.5 C 4 11.246094 5.242188 9.164063 7.398438 7.589844 C 9.554688 6.015625 12.609375 5 16 5 Z"
-                        ></path></svg
-                    ></span>
+                        ></path>
+                      </svg>
+                    </span>
                     <span
                       class="text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5"
                     >
@@ -289,6 +291,50 @@
         </div>
       </div>
     </section>
+
+    <div class="category-section article-section">
+      <h2 class="category-title">Article</h2>
+      <% if (blogsByCategory.Article && blogsByCategory.Article.length > 0) { %>
+      <% blogsByCategory.Article.forEach(blog => { %>
+      <div class="blog-post article-post">
+        <h3 class="blog-post-title"><%= blog.title %></h3>
+        <p><%= blog.description %></p>
+        <p>By: <%= blog.author.name %> (@<%= blog.author.username %>)</p>
+      </div>
+      <% }); %> <% } else { %>
+      <p>No articles available.</p>
+      <% } %>
+    </div>
+
+    <!-- News Section -->
+    <div class="category-section news-section">
+      <h2 class="category-title">News</h2>
+      <% if (blogsByCategory.News && blogsByCategory.News.length > 0) { %> <%
+      blogsByCategory.News.forEach(blog => { %>
+      <div class="blog-post news-post">
+        <h3 class="blog-post-title"><%= blog.title %></h3>
+        <p><%= blog.description %></p>
+        <p>By: <%= blog.author.name %> (@<%= blog.author.username %>)</p>
+      </div>
+      <% }); %> <% } else { %>
+      <p>No news available.</p>
+      <% } %>
+    </div>
+
+    <!-- Guide Section -->
+    <div class="category-section guide-section">
+      <h2 class="category-title">Guide</h2>
+      <% if (blogsByCategory.Guide && blogsByCategory.Guide.length > 0) { %> <%
+      blogsByCategory.Guide.forEach(blog => { %>
+      <div class="blog-post guide-post">
+        <h3 class="blog-post-title"><%= blog.title %></h3>
+        <p><%= blog.description %></p>
+        <p>By: <%= blog.author.name %> (@<%= blog.author.username %>)</p>
+      </div>
+      <% }); %> <% } else { %>
+      <p>No guides available.</p>
+      <% } %>
+    </div>
 
     <footer class="p-4 bg-white sm:p-6 dark:bg-gray-800">
       <div class="mx-auto max-w-screen-xl">
@@ -496,7 +542,6 @@
       </div>
     </footer>
 
-    <script src="/javascripts/tailwind.config.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
     <script>

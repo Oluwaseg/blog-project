@@ -21,6 +21,67 @@ const createToken = (user) => {
   return token;
 };
 
+// verify email
+const sendVerificationEmail = (email, token) => {
+  const verificationLink = `${process.env.CLIENT_URL}/api/verify-email?token=${token}`;
+
+  // Send email with verification link
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USERNAME,
+    to: email,
+    subject: "Email Verification",
+    html: `<div style="font-family: Arial, sans-serif;">
+    <h1 style="color: #333;">Welcome to Our Website !</h1>
+
+    <p>Thank you for registering with us. To complete your registration, please click the button below to verify your email:</p>
+    <a href="${verificationLink}" style="background-color: #4CAF50; color: white; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 4px; cursor: pointer;">Verify Email</a>
+    <p>If you didn't register on our website, you can ignore this email.</p>
+    <p>Best regards,<br/>Your Website Team</p>
+  </div>`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error("Error sending email:", error);
+    } else {
+      console.log("Email sent:", info.response);
+    }
+  });
+};
+
+const resendVerificationEmail = async (email) => {
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return { success: false, message: "User not found" };
+    }
+
+    if (user.isVerified) {
+      return { success: false, message: "User is already verified" };
+    }
+
+    const verificationToken = crypto.randomBytes(20).toString("hex");
+    user.verificationToken = verificationToken;
+    await user.save();
+
+    sendVerificationEmail(user.email, verificationToken);
+
+    return { success: true, message: "Verification email sent successfully" };
+  } catch (error) {
+    console.error("Error resending verification email:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+};
+
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -48,11 +109,14 @@ const registerUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    const verificationToken = crypto.randomBytes(20).toString("hex");
+
     const user = new User({
       name,
       email,
       password: hashedPassword,
       image: imageUrl,
+      verificationToken: verificationToken,
     });
 
     const token = createToken(user);
@@ -67,7 +131,12 @@ const registerUser = async (req, res) => {
 
     await user.save();
 
-    req.flash("success_msg", "Registration successful. Please login");
+    sendVerificationEmail(user.email, verificationToken);
+
+    req.flash(
+      "success_msg",
+      "Registration successful. Please check your email to verify your account."
+    );
 
     return res.redirect("/api/login");
   } catch (error) {
@@ -85,8 +154,15 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      req.flash("error_msg", "User not found");
+      req.flash("error_msg", "User doesn't exist ");
       return res.redirect("/api/login");
+    }
+    if (!user.isVerified) {
+      req.flash(
+        "error_msg",
+        "User isn't verified. Please check your email or resend the verification link."
+      );
+      return res.redirect("/api/resend-verification");
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -105,8 +181,6 @@ const loginUser = async (req, res) => {
       sameSite: "strict",
     });
     req.session.user = user;
-    req.flash("success_msg", "Login Successful");
-
     res.redirect("/blog");
   } catch (error) {
     // res.status(500).json({ message: error.message });
@@ -424,4 +498,5 @@ module.exports = {
   updatePassword,
   changeProfilePicture,
   updateUserDetails,
+  resendVerificationEmail,
 };

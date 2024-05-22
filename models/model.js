@@ -31,6 +31,11 @@ const schema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  verificationToken: String,
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
   resetPasswordToken: String,
 });
 

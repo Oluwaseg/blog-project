@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="/javascripts/tailwind.js"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
       rel="stylesheet"
@@ -572,8 +571,8 @@
                     </div>
                     <% } %>
                   </footer>
-                  <p class="m-2"><%= comment.content %></p>
                   <div class="flex items-center mt-4">
+                    <p class="m-2"><%= comment.content %></p>
                     <form
                       action="/blog/comment/<%= comment._id %>/reply"
                       method="post"
@@ -612,16 +611,20 @@
                     <% if (user) { %>
 
                     <form
+                      id="likecomment"
                       action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/react"
                       method="post"
                     >
                       <input type="hidden" name="reactionType" value="likes" />
                       <button
                         type="submit"
-                        class="inline-flex p-2 cursor-pointer dark:text-gray-400 dark:hover:text-white <%= comment.reactions.likes.includes(user._id) ? 'text-red-500 hover:text-red-700' : 'text-gray-500 hover:text-gray-700' %>"
+                        class="inline-flex p-2 cursor-pointer dark:text-gray-400 dark:hover:text-white"
                       >
+                        <input type="radio" name="reaction" value="like" <%=
+                        comment.reactions.likes.includes(user._id) ? 'checked' :
+                        '' %> class="hidden">
                         <svg
-                          class="w-5 h-5"
+                          class="w-5 h-5 likeCommentBtn <%= comment.reactions.likes.includes(user._id) ? 'text-red-500' : 'text-gray-500' %>"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
@@ -636,6 +639,7 @@
                     </form>
 
                     <form
+                      id="dislikecomment"
                       action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/react"
                       method="post"
                     >
@@ -646,10 +650,13 @@
                       />
                       <button
                         type="submit"
-                        class="cursor-pointer p-2 <%= comment.reactions.dislikes.includes(user._id) ? 'text-blue-500 hover:text-blue-700' : 'text-gray-500 hover:text-gray-700' %> dark:text-gray-400"
+                        class="cursor-pointer p-2 text-gray-500 rounded-lg focus:outline-none"
                       >
+                        <input type="radio" name="reaction" value="dislike" <%=
+                        comment.reactions.dislikes.includes(user._id) ?
+                        'checked' : '' %> class="hidden">
                         <svg
-                          class="w-5 h-5"
+                          class="w-5 h-5 dislikeCommentBtn <%= comment.reactions.dislikes.includes(user._id) ? 'text-blue-500' : 'text-gray-500' %>"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
@@ -665,6 +672,11 @@
                         <span class="sr-only">Dislike</span>
                       </button>
                     </form>
+
+                    <div class="flex items-center gap-3 sm:gap-x-5">
+                      <span id="likesComment"></span>
+                      <span id="dislikesComment"></span>
+                    </div>
 
                     <% } %>
                   </div>

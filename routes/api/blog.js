@@ -3,7 +3,6 @@ const {
   authenticateToken,
   checkSessionExpiration,
   authenticateTokenPublic,
-  isLoggedOut,
 } = require("../../middleware/authenticate");
 
 const { blogUpload } = require("../../middleware/image.config");
@@ -13,12 +12,34 @@ const router = express.Router();
 // Define CRUD routes
 router.get("/", authenticateTokenPublic, async (req, res) => {
   try {
-    const { blogs, randomBlogByCategory } = await blogController.getAllBlogs();
+    const { blogs, randomBlogByCategory, blogsByCategory } =
+      await blogController.getAllBlogs();
     if (!req.user) {
-      res.render("blog/guestBlog", { blogs, randomBlogByCategory });
+      res.render("blog/guestBlog", {
+        blogs,
+        randomBlogByCategory,
+        blogsByCategory,
+      });
     } else {
-      res.render("blog/blog", { blogs, randomBlogByCategory, user: req.user });
+      res.render("blog/blog", {
+        blogs,
+        randomBlogByCategory,
+        blogsByCategory,
+        user: req.user,
+      });
     }
+  } catch (error) {
+    console.error("Error getting blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
+});
+router.get("/categories", authenticateToken, async (req, res) => {
+  try {
+    let blogsByCategory = await blogController.getCategoryPage();
+    res.render("category/categories", {
+      blogsByCategory,
+      user: req.user,
+    });
   } catch (error) {
     console.error("Error getting blogs:", error);
     res.status(500).render("error", { error: "Internal Server Error" });
@@ -97,6 +118,125 @@ router.post(
   checkSessionExpiration,
   blogController.replyToComment
 );
+
+router.get("/article", authenticateTokenPublic, async (req, res) => {
+  try {
+    const article = await blogController.getBlogsByCategory("Article");
+    const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
+      "Article"
+    );
+    res.render("category/article", {
+      category: "Article",
+      blogs: article,
+      randomBlogByCategory: randomBlogsByCategory,
+    });
+  } catch (error) {
+    console.error("Error getting article blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
+});
+
+router.get("/guide", async (req, res) => {
+  try {
+    const guide = await blogController.getBlogsByCategory("Guide");
+    const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
+      "Guide"
+    );
+    res.render("category/guide", {
+      category: "Guide",
+      blogs: guide,
+      randomBlogByCategory: randomBlogsByCategory,
+    });
+  } catch (error) {
+    console.error("Error getting guide blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
+});
+
+router.get("/news", async (req, res) => {
+  try {
+    const news = await blogController.getBlogsByCategory("News");
+    const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
+      "News"
+    );
+    res.render("category/news", {
+      category: "News",
+      blogs: news,
+      randomBlogByCategory: randomBlogsByCategory,
+    });
+  } catch (error) {
+    console.error("Error getting news blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
+});
+
+router.get("/opinion", async (req, res) => {
+  try {
+    const opinion = await blogController.getBlogsByCategory("Opinion");
+    const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
+      "Opinion"
+    );
+    res.render("category/opinion", {
+      category: "Opinion",
+      blogs: opinion,
+      randomBlogByCategory: randomBlogsByCategory,
+    });
+  } catch (error) {
+    console.error("Error getting opinion blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
+});
+
+router.get("/review", async (req, res) => {
+  try {
+    const review = await blogController.getBlogsByCategory("Review");
+    const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
+      "Review"
+    );
+    res.render("category/review", {
+      category: "Review",
+      blogs: review,
+      randomBlogByCategory: randomBlogsByCategory,
+    });
+  } catch (error) {
+    console.error("Error getting review blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
+});
+
+router.get("/tutorial", async (req, res) => {
+  try {
+    const tutorial = await blogController.getBlogsByCategory("Tutorial");
+    const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
+      "Tutorial"
+    );
+    res.render("category/tutorial", {
+      category: "Tutorial",
+      blogs: tutorial,
+      randomBlogByCategory: randomBlogsByCategory,
+    });
+  } catch (error) {
+    console.error("Error getting tutorial blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
+});
+
+router.get("/technology", async (req, res) => {
+  try {
+    const technology = await blogController.getBlogsByCategory("Technology");
+    const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
+      "Technology"
+    );
+    res.render("category/technology", {
+      category: "Technology",
+      blogs: technology,
+      randomBlogByCategory: randomBlogsByCategory,
+    });
+  } catch (error) {
+    console.error("Error getting technology blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
+});
 
 router.get("/edit-comment/:commentId", blogController.getEditComment);
 

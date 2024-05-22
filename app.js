@@ -91,22 +91,17 @@ app.use(function (req, res, next) {
   next();
 });
 
-// catch 404 and forward to error handler
+// Middleware to handle 404 errors
 app.use(function (req, res, next) {
-  next(createError(404));
+  res.status(404).render("error", { error: { status: 404 } });
 });
 
-// error handler
+// Middleware to handle 500 errors
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  const errorMessage =
-    err.message || "Something went wrong. Please try again later.";
-  res.locals.message = errorMessage;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+  console.error("Error handling middleware encountered an error:", err);
+  console.error(err.stack);
+  const statusCode = err.status || 500; // Use the status code from the error, or default to 500
+  res.status(statusCode).render("error-ms", { error: err });
 });
 
 module.exports = app;

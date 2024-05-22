@@ -70,8 +70,38 @@ const checkSessionExpiration = (req, res, next) => {
   next();
 };
 
+const verifyEmail = async (req, res) => {
+  try {
+    const token = req.query.token;
+
+    if (!token) {
+      return res
+        .status(400)
+        .render("error", { status: 400, message: "Invalid token" });
+    }
+
+    const user = await User.findOne({ verificationToken: token });
+
+    if (!user) {
+      return res
+        .status(404)
+        .render("error", { status: 404, message: "User not found" });
+    }
+
+    user.verificationToken = null;
+    user.isVerified = true;
+    await user.save();
+
+    res.render("verify-success");
+  } catch (error) {
+    res.status(500).render("error", { status: 500, message: error.message });
+    console.error("Verification failed:", error);
+  }
+};
+
 module.exports = {
   authenticateToken,
   checkSessionExpiration,
   authenticateTokenPublic,
+  verifyEmail,
 };

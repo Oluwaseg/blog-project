@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="/javascripts/tailwind.config.js"></script>
+    <link rel="stylesheet" href="/stylesheets/output.css" />
+  </head>
+  <body>
+    <section class="bg-white dark:bg-gray-900">
+      <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+          <h1
+            class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500"
+          >
+            <%= error.status %>
+          </h1>
+
+          <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
+            <%= error.message %>
+          </p>
+          <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
+            <%= error.stack %>
+          </p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
