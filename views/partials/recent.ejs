@@ -1,0 +1,40 @@
+<% if (recent.length > 0) { %>
+<div class="max-w-screen-xl mx-auto p-16">
+  <div class="sm:grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+    <% recent.forEach(blog => { %>
+    <div
+      class="hover:bg-gray-900 hover:text-white transition duration-300 max-w-sm rounded overflow-hidden shadow-lg"
+    >
+      <div class="py-4 px-8">
+        <div class="flex items-center justify-between mb-4">
+          <img
+            src="https://tailwindcss.com/img/jonathan.jpg"
+            class="rounded-full h-12 w-12 mb-4"
+          />
+          <span class="text-sm text-gray-600"
+            >Author: <%= blog.author.name %></span
+          >
+        </div>
+        <a href="/blog/<%= blog.slug %>">
+          <h4 class="text-lg mb-3 font-semibold"><%= blog.title %></h4>
+        </a>
+        <p class="mb-2 text-sm text-gray-600">
+          <%= blog.description.length > 80 ? blog.description.slice(0, 80) +
+          '...' : blog.description %>
+        </p>
+
+        <img
+          src="<%= blog.image ||
+              'https://res.cloudinary.com/djc5o8g94/image/upload/v1714825994/blog-folder/images/ywt3yuwsqycmftpbuotd.jpg' %>"
+          class="w-100"
+        />
+
+        <hr class="mt-4" />
+        <span class="text-xs"> <%= blog.category%></span>
+        &nbsp;<span class="text-xs text-gray-500"> <%= blog.tags %></span>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+<% } %>

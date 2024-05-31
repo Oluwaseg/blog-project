@@ -10,32 +10,25 @@ const { blogUpload } = require("../../middleware/image.config");
 const express = require("express");
 const router = express.Router();
 // Define CRUD routes
-router.get("/", authenticateTokenPublic, async (req, res) => {
+router.get("/", authenticateToken, async (req, res) => {
   try {
     const { blogs, randomBlogByCategory, blogsByCategory } =
       await blogController.getAllBlogs();
-    if (!req.user) {
-      res.render("blog/guestBlog", {
-        blogs,
-        randomBlogByCategory,
-        blogsByCategory,
-      });
-    } else {
-      res.render("blog/blog", {
-        blogs,
-        randomBlogByCategory,
-        blogsByCategory,
-        user: req.user,
-      });
-    }
+    res.render("blog/blog", {
+      blogs,
+      randomBlogByCategory,
+      blogsByCategory,
+      user: req.user,
+    });
   } catch (error) {
     console.error("Error getting blogs:", error);
     res.status(500).render("error", { error: "Internal Server Error" });
   }
 });
+
 router.get("/categories", authenticateToken, async (req, res) => {
   try {
-    let blogsByCategory = await blogController.getCategoryPage();
+    let blogsByCategory = await blogController.getBlogsGroupedByCategory();
     res.render("category/categories", {
       blogsByCategory,
       user: req.user,
@@ -122,11 +115,16 @@ router.post(
 router.get("/article", authenticateTokenPublic, async (req, res) => {
   try {
     const article = await blogController.getBlogsByCategory("Article");
+    console.log(article);
     const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
       "Article"
     );
+    const latest = article.slice(0, 10);
+    const recent = article.slice(10);
     res.render("category/article", {
       category: "Article",
+      latest,
+      recent,
       blogs: article,
       randomBlogByCategory: randomBlogsByCategory,
     });
@@ -142,8 +140,12 @@ router.get("/guide", async (req, res) => {
     const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
       "Guide"
     );
+    const latest = guide.slice(0, 10);
+    const recent = guide.slice(10);
     res.render("category/guide", {
       category: "Guide",
+      latest,
+      recent,
       blogs: guide,
       randomBlogByCategory: randomBlogsByCategory,
     });
@@ -159,8 +161,12 @@ router.get("/news", async (req, res) => {
     const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
       "News"
     );
+    const latest = news.slice(0, 10);
+    const recent = news.slice(10);
     res.render("category/news", {
       category: "News",
+      latest,
+      recent,
       blogs: news,
       randomBlogByCategory: randomBlogsByCategory,
     });
@@ -176,9 +182,13 @@ router.get("/opinion", async (req, res) => {
     const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
       "Opinion"
     );
+    const latest = opinion.slice(0, 10);
+    const recent = opinion.slice(10);
     res.render("category/opinion", {
       category: "Opinion",
       blogs: opinion,
+      latest,
+      recent,
       randomBlogByCategory: randomBlogsByCategory,
     });
   } catch (error) {
@@ -193,8 +203,12 @@ router.get("/review", async (req, res) => {
     const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
       "Review"
     );
+    const latest = review.slice(0, 10);
+    const recent = review.slice(10);
     res.render("category/review", {
       category: "Review",
+      latest,
+      recent,
       blogs: review,
       randomBlogByCategory: randomBlogsByCategory,
     });
@@ -210,8 +224,12 @@ router.get("/tutorial", async (req, res) => {
     const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
       "Tutorial"
     );
+    const latest = tutorial.slice(0, 10);
+    const recent = tutorial.slice(10);
     res.render("category/tutorial", {
       category: "Tutorial",
+      latest,
+      recent,
       blogs: tutorial,
       randomBlogByCategory: randomBlogsByCategory,
     });
@@ -227,8 +245,12 @@ router.get("/technology", async (req, res) => {
     const randomBlogsByCategory = await blogController.getRandomBlogsByCategory(
       "Technology"
     );
+    const latest = technology.slice(0, 10);
+    const recent = technology.slice(10);
     res.render("category/technology", {
       category: "Technology",
+      latest,
+      recent,
       blogs: technology,
       randomBlogByCategory: randomBlogsByCategory,
     });

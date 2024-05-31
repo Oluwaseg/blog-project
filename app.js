@@ -7,8 +7,9 @@ var session = require("express-session");
 var flash = require("connect-flash");
 var cors = require("cors");
 var methodOverride = require("method-override");
+const { authenticateTokenPublic } = require("./middleware/authenticate");
+const blogController = require("./controllers/blogController");
 
-// var indexRouter = require("./routes/api/index");
 var authRouter = require("./routes/api/auth");
 var blogRouter = require("./routes/api/blog");
 
@@ -74,13 +75,19 @@ app.use(logSession);
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "public", "uploads")));
 
-// app.use("/", indexRouter);
-app.get("/", (req, res) => {
-  res.send(`
-    <h1>Welcome to the root of the application!</h1>
-    <p>Click <a href="/api/register">here</a> to register.</p>
-    <p>Click <a href="/api/login">here</a> to login.</p>
-  `);
+app.get("/", authenticateTokenPublic, async (req, res) => {
+  try {
+    const { blogs, randomBlogByCategory, blogsByCategory } =
+      await blogController.getAllBlogs();
+    res.render("blog/guestBlog", {
+      blogs,
+      randomBlogByCategory,
+      blogsByCategory,
+    });
+  } catch (error) {
+    console.error("Error getting blogs:", error);
+    res.status(500).render("error", { error: "Internal Server Error" });
+  }
 });
 app.use("/api", authRouter);
 app.use("/blog", blogRouter);

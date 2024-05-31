@@ -12,272 +12,324 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
-
-    <script src="/javascripts/tailwind.config.js"></script>
     <link rel="stylesheet" href="/stylesheets/output.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
-      /* Add CSS for hover effect */
-      html {
-        scroll-behavior: smooth;
+      .smooth {
+        transition: box-shadow 0.3s ease-in-out;
       }
-      #scrollToTop:hover {
-        transform: translateY(-5px);
+      ::selection {
+        background-color: aliceblue;
       }
-
-      /* Add CSS for the smooth transition */
-      #scrollToTop {
-        transition: transform 0.3s ease-in-out;
+      :root {
+        ::-webkit-scrollbar {
+          height: 10px;
+          width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #efefef;
+          border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #d5d5d5;
+          border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #c4c4c4;
+        }
       }
-
-      /* Add CSS for hiding the button by default */
-      #scrollToTop.hidden {
+      /*scroll to top*/
+      .scroll-top {
+        position: fixed;
+        z-index: 50;
+        padding: 0;
+        right: 30px;
+        bottom: 100px;
         opacity: 0;
-        pointer-events: none;
+        visibility: hidden;
+        transform: translateY(15px);
+        height: 46px;
+        width: 46px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.4s ease;
+        border: none;
+        box-shadow: inset 0 0 0 2px #ccc;
+        color: #ccc;
+        background-color: #fff;
+      }
+      .scroll-top.is-active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .scroll-top .icon-tabler-arrow-up {
+        position: absolute;
+        stroke-width: 2px;
+        stroke: #333;
+      }
+      .scroll-top svg path {
+        fill: none;
+      }
+      .scroll-top svg.progress-circle path {
+        stroke: #333;
+        stroke-width: 4;
+        transition: all 0.4s ease;
+      }
+      .scroll-top:hover {
+        color: var(--ghost-accent-color);
+      }
+      .scroll-top:hover .progress-circle path,
+      .scroll-top:hover .icon-tabler-arrow-up {
+        stroke: var(--ghost-accent-color);
       }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
 
-  <body>
-    <div class="fixed top-0 right-0 z-50">
-      <div
-        class="flex items-center justify-end transition duration-500 ease-in-out antialiased p-4 rounded-lg"
-      >
-        <i
-          id="modeSwitchIcon"
-          class="fas fa-sun text-lg text-yellow-500 dark:text-gray-300 cursor-pointer transition"
-        ></i>
+  <body class="bg-white font-sans leading-normal tracking-normal">
+    <!--Nav-->
+    <nav aria-label="breadcrumb" class="flex item-center justify-between">
+      <ul class="flex flex-wrap space-x-3 text-sm font-medium mx-auto p-4">
+        <li class="flex items-center space-x-3">
+          <a href="/blog" class="flex items-center space-x-1 text-gray-800">
+            <svg
+              class="h-4 w-4 shrink-0 fill-gray-500"
+              aria-hidden="true"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M184 32H72A16 16 0 0056 48V224a8.1 8.1.0 004.1 7 7.6 7.6.0 003.9 1 7.9 7.9.0 004.2-1.2L128 193.4l59.7 37.4a8.3 8.3.0 008.2.2 8.1 8.1.0 004.1-7V48A16 16 0 00184 32z"
+              ></path>
+            </svg>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="flex items-center space-x-3">
+          <div
+            aria-hidden="true"
+            class="h-4 w-px rotate-12 rounded-full bg-gray-300"
+          ></div>
+          <a
+            href="/blog/categories"
+            class="flex items-center space-x-1 text-gray-800"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 fill-gray-500"
+              aria-hidden="true"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M2e2 32H163.7a47.8 47.8.0 00-71.4.0H56A16 16 0 0040 48V216a16 16 0 0016 16H2e2a16 16 0 0016-16V48A16 16 0 002e2 32zm-72 0a32.1 32.1.0 0132 32H96a32.1 32.1.0 0132-32z"
+              ></path>
+            </svg>
+            <span>Category</span>
+          </a>
+        </li>
+        <li class="flex items-center space-x-3" aria-current="page">
+          <div
+            aria-hidden="true"
+            class="h-4 w-px rotate-12 rounded-full bg-gray-300"
+          ></div>
+
+          <span class="flex items-center space-x-1">
+            <svg
+              class="h-4 w-4 shrink-0 fill-gray-400"
+              aria-hidden="true"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M136 88H120V35.3L91.7 63.6A8 8 0 0180.3 52.3l42-42a8.1 8.1.0 0111.4.0l42 42a8 8 0 010 11.3 8 8 0 01-11.4.0L136 35.3zm64 0H136v40a8 8 0 01-16 0V88H56a16 16 0 00-16 16V208a16 16 0 0016 16H2e2a16 16 0 0016-16V104A16 16 0 002e2 88z"
+              ></path>
+            </svg>
+            <span class="text-gray-400"><%= blog.category %></span>
+          </span>
+        </li>
+      </ul>
+    </nav>
+
+    <!--slide in nav-->
+    <div
+      id="header"
+      class="bg-white fixed w-full z-10 top-0 hidden animated"
+      style="opacity: 0.95"
+    >
+      <div class="bg-white">
+        <div class="flex flex-wrap items-center content-center">
+          <div class="flex w-1/2 justify-start text-white font-extrabold">
+            <a
+              class="flex text-gray-900 no-underline hover:text-gray-900 hover:no-underline pl-2"
+              href="#"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#334484"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-squirrel"
+              >
+                <path
+                  d="M18 6a4 4 0 0 0-4 4 7 7 0 0 0-7 7c0-5 4-5 4-10.5a4.5 4.5 0 1 0-9 0 2.5 2.5 0 0 0 5 0C7 10 3 11 3 17c0 2.8 2.2 5 5 5h10"
+                />
+                <path
+                  d="M16 20c0-1.7 1.3-3 3-3h1a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4V4"
+                />
+                <path d="M15.2 22a3 3 0 0 0-2.2-5" />
+                <path d="M18 13h.01" />
+              </svg>
+              <span class="hidden w-0 md:w-auto md:block pl-1">InkVerse</span>
+            </a>
+          </div>
+          <div class="flex w-1/2 justify-end content-center">
+            <p class="hidden sm:block mr-3 text-center h-14 p-4 text-xs">
+              <span class="pr-2">Share this</span> 👉
+            </p>
+            <a
+              class="inline-block text-white no-underline hover:text-white hover:text-underline text-center h-10 w-10 p-2 md:h-auto md:w-16 md:p-4"
+              href="https://twitter.com/intent/tweet?url=#"
+              style="background-color: #33b1ff"
+            >
+              <svg
+                class="fill-current text-white h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              class="inline-block text-white no-underline hover:text-white hover:text-underline text-center h-10 w-10 p-2 md:h-auto md:w-16 md:p-4"
+              href="https://www.facebook.com/sharer/sharer.php?u=#"
+              style="background-color: #005e99"
+            >
+              <svg
+                class="fill-current text-white h-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
+      <!--Progress bar-->
+      <div
+        id="progress"
+        class="h-1 bg-white shadow"
+        style="
+          background: linear-gradient(
+            to right,
+            #4dc0b5 var(--scroll),
+            transparent 0
+          );
+        "
+      ></div>
     </div>
-    <div data-dial-init class="fixed end-6 bottom-6 group">
-      <div
-        class="flex flex-col items-center transition duration-500 ease-in-out antialiased p-4 rounded-lg"
-      >
-        <a
-          href="#"
-          id="scrollToTop"
-          class="text-lg text-blue-500 dark:text-gray-300 cursor-pointer transition"
-        >
-          <i class="fas fa-arrow-up"></i>
-        </a>
-      </div>
-      <div
-        id="speed-dial-menu-default"
-        class="flex flex-col items-center hidden mb-4 space-y-2"
-      >
-        <button
-          type="button"
-          onclick="shareURL()"
-          data-tooltip-target="tooltip-share"
-          data-tooltip-placement="left"
-          class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
-        >
-          <svg
-            class="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 18 18"
-          >
-            <path
-              d="M14.419 10.581a3.564 3.564 0 0 0-2.574 1.1l-4.756-2.49a3.54 3.54 0 0 0 .072-.71 3.55 3.55 0 0 0-.043-.428L11.67 6.1a3.56 3.56 0 1 0-.831-2.265c.006.143.02.286.043.428L6.33 6.218a3.573 3.573 0 1 0-.175 4.743l4.756 2.491a3.58 3.58 0 1 0 3.508-2.871Z"
-            />
-          </svg>
-          <span class="sr-only">Share</span>
-        </button>
+
+    <% if (blog) { %>
+    <!--Title-->
+    <div class="text-center pt-16 md:pt-32">
+      <p class="text-sm md:text-base text-green-500 font-bold">
+        <%= formatTimeDifference(new Date(blog.createdAt)) %>
+        <span class="text-gray-900">/</span> <%= blog.tags %>
+      </p>
+      <h1 class="font-bold break-normal text-3xl md:text-5xl">
+        <%= blog.title %>
+      </h1>
+    </div>
+
+    <!--image-->
+    <% const imageUrl = blog.image ||
+    'https://res.cloudinary.com/djc5o8g94/image/upload/v1714825994/blog-folder/images/ywt3yuwsqycmftpbuotd.jpg';
+    %>
+    <div
+      class="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded"
+      style="background-image: url('<%= imageUrl %>'); height: 75vh"
+    ></div>
+
+    <!--Container-->
+    <div class="container max-w-5xl mx-auto -mt-32">
+      <div class="mx-0 sm:mx-6">
         <div
-          id="tooltip-share"
-          role="tooltip"
-          class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+          class="bg-white w-full p-8 md:p-24 text-xl md:text-2xl text-gray-800 leading-normal"
+          style="font-family: Georgia, serif"
         >
-          Share
-          <div class="tooltip-arrow" data-popper-arrow></div>
+          <p class="text-2xl md:text-3xl mb-5"><%= blog.description %></p>
+          <p class="py-6"><%- blog.content %></p>
         </div>
-        <button
-          type="button"
-          onclick="window.print()"
-          class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
-        >
-          <svg
-            class="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 20"
+        <% if (user) { %>
+        <div class="flex items-center space-x-4 mt-4">
+          <form
+            id="likeForm"
+            action="/blog/<%= blog.slug %>/react"
+            method="post"
           >
-            <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z" />
-            <path
-              d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"
-            />
-          </svg>
-          <span class="sr-only">Print</span>
-        </button>
-        <button
-          type="button"
-          onclick="downloadFile()"
-          class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
-        >
-          <svg
-            class="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 20"
+            <input type="hidden" name="reactionType" value="likes" />
+            <button
+              class="flex items-center space-x-2 text-gray-500 px-4 py-2 rounded-lg focus:outline-none"
+            >
+              <input type="radio" name="reaction" value="like" <%=
+              blog.reactions.likes.includes(user._id) ? 'checked' : '' %>
+              class="hidden">
+
+              <i
+                class="far fa-thumbs-up text-lg likeButton <%= blog.reactions.likes.includes(user._id) ? 'text-red-500' : 'text-gray-500' %>"
+              ></i>
+            </button>
+          </form>
+
+          <form
+            id="dislikeForm"
+            action="/blog/<%= blog.slug %>/react"
+            method="post"
           >
-            <path
-              d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"
-            />
-            <path
-              d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-            />
-          </svg>
-          <span class="sr-only">Download</span>
-        </button>
-        <button
-          type="button"
-          onclick="copyToClipboard()"
-          class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 dark:hover:text-white shadow-sm dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
-        >
-          <svg
-            class="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 18 20"
-          >
-            <path
-              d="M5 9V4.13a2.96 2.96 0 0 0-1.293.749L.879 7.707A2.96 2.96 0 0 0 .13 9H5Zm11.066-9H9.829a2.98 2.98 0 0 0-2.122.879L7 1.584A.987.987 0 0 0 6.766 2h4.3A3.972 3.972 0 0 1 15 6v10h1.066A1.97 1.97 0 0 0 18 14V2a1.97 1.97 0 0 0-1.934-2Z"
-            />
-            <path
-              d="M11.066 4H7v5a2 2 0 0 1-2 2H0v7a1.969 1.969 0 0 0 1.933 2h9.133A1.97 1.97 0 0 0 13 18V6a1.97 1.97 0 0 0-1.934-2Z"
-            />
-          </svg>
-          <span class="sr-only">Copy</span>
-        </button>
-        <div
-          id="tooltip-copy"
-          role="tooltip"
-          class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-        >
-          Copy
-          <div class="tooltip-arrow" data-popper-arrow></div>
+            <input type="hidden" name="reactionType" value="dislikes" />
+            <button
+              class="flex items-center space-x-2 text-gray-500 px-4 py-2 rounded-lg focus:outline-none"
+            >
+              <input type="radio" name="reaction" value="dislike" <%=
+              blog.reactions.dislikes.includes(user._id) ? 'checked' : '' %>
+              class="hidden">
+              <i
+                class="far fa-thumbs-down text-lg dislikeButton <%= blog.reactions.dislikes.includes(user._id) ? 'text-blue-500' : 'text-gray-500' %>"
+              ></i>
+            </button>
+          </form>
         </div>
-      </div>
-      <button
-        type="button"
-        data-dial-toggle="speed-dial-menu-default"
-        aria-controls="speed-dial-menu-default"
-        aria-expanded="false"
-        class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
-      >
-        <svg
-          class="w-5 h-5 transition-transform group-hover:rotate-45"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 18 18"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 1v16M1 9h16"
+        <% } %>
+        <!--Author-->
+        <div class="flex w-full items-center font-sans p-6 md:p-12">
+          <img
+            class="w-10 h-10 rounded-full mr-4"
+            src="<%= blog.author.image %>"
+            alt="Avatar of Author"
           />
-        </svg>
-        <span class="sr-only">Open actions menu</span>
-      </button>
-    </div>
-    <div class="fixed top-2 left-3 z-10 transition-transform duration-300">
-      <a
-        href="/blog"
-        class="inline-flex items-center font-medium no-underline text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-      >
-        <i
-          class="fas fa-arrow-left transition-transform hover:translate-x-1 hover:translate-y-1"
-        ></i>
-      </a>
-    </div>
-    <section class="bg-white dark:bg-gray-900">
-      <div class="container px-6 py-10 mx-auto">
-        <div class="lg:flex lg:-mx-6">
-          <% if (blog) { %>
-
-          <div class="lg:w-3/4 lg:px-6">
-            <img
-              class="object-contain w-full h-80 xl:h-[28rem] rounded-xl"
-              src="<%= blog.image || 'https://res.cloudinary.com/djc5o8g94/image/upload/v1714825994/blog-folder/images/ywt3yuwsqycmftpbuotd.jpg' %>"
-              alt="try again later"
-            />
-
-            <div class="flex justify-between items-center m-4 text-gray-500">
-              <span
-                class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800"
-              >
-                <svg
-                  class="mr-1 w-3 h-3"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                    clip-rule="evenodd"
-                  ></path>
-                  <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
-                </svg>
-                <%= blog.category %>
-              </span>
-              <span class="text-sm"
-                ><%= formatTimeDifference(new Date(blog.createdAt)) %></span
-              >
-            </div>
-            <% if (user) { %>
-            <div class="flex items-center space-x-4 mt-4">
-              <form
-                id="likeForm"
-                action="/blog/<%= blog.slug %>/react"
-                method="post"
-              >
-                <input type="hidden" name="reactionType" value="likes" />
-                <button
-                  class="flex items-center space-x-2 text-gray-500 px-4 py-2 rounded-lg focus:outline-none"
-                >
-                  <input type="radio" name="reaction" value="like" <%=
-                  blog.reactions.likes.includes(user._id) ? 'checked' : '' %>
-                  class="hidden">
-
-                  <i
-                    class="far fa-thumbs-up text-lg likeButton <%= blog.reactions.likes.includes(user._id) ? 'text-red-500' : 'text-gray-500' %>"
-                  ></i>
-                </button>
-              </form>
-
-              <form
-                id="dislikeForm"
-                action="/blog/<%= blog.slug %>/react"
-                method="post"
-              >
-                <input type="hidden" name="reactionType" value="dislikes" />
-                <button
-                  class="flex items-center space-x-2 text-gray-500 px-4 py-2 rounded-lg focus:outline-none"
-                >
-                  <input type="radio" name="reaction" value="dislike" <%=
-                  blog.reactions.dislikes.includes(user._id) ? 'checked' : '' %>
-                  class="hidden">
-                  <i
-                    class="far fa-thumbs-down dislikeButton <%= blog.reactions.dislikes.includes(user._id) ? 'text-blue-500' : 'text-gray-500' %>"
-                  ></i>
-                </button>
-              </form>
-            </div>
-            <% } %> <% if (isOwner) { %>
-            <div class="flex items-center gap-3 sm:gap-x-5">
-              <span id="likesCount"></span>
-              <span id="dislikesCount"></span>
-            </div>
-            <% } %> <% if (isOwner) { %>
+          <div class="flex-1">
+            <p class="text-base font-bold md:text-xl leading-none">
+              <%= blog.author.name %>
+            </p>
+            <%= blog.author.username %>
+            <p class="text-gray-600 text-xs md:text-base"></p>
+          </div>
+          <div class="justify-end">
+            <% if (isOwner) { %>
             <button
               id="dropdownCommentButton"
               data-dropdown-toggle="dropdownSettings"
@@ -335,1229 +387,816 @@
               </ul>
             </div>
             <% } %>
+          </div>
+          <!--/Author-->
+        </div>
+      </div>
+    </div>
 
-            <div>
-              <p class="mt-6 text-sm text-blue-500 uppercase">
-                <%= blog.title %>
-              </p>
+    <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
+      <% if (user) { %>
+      <div class="max-w-2xl mx-auto px-4">
+        <div class="flex justify-between items-center mb-6">
+          <h2
+            class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white"
+          >
+            Discussion (<%= commentCount %>)
+          </h2>
+        </div>
+        <form
+          action="/blog/<%= blog._id
+    %>/comment"
+          method="post"
+          class="mb-6"
+        >
+          <div
+            class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+          >
+            <label for="comment" class="sr-only">Your comment</label>
+            <textarea
+              id="comment"
+              rows="6"
+              name="content"
+              class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+              placeholder="Write a comment..."
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-indigo-700 rounded-lg focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-900 hover:bg-indigo-800"
+          >
+            Post comment
+          </button>
+        </form>
 
-              <div
-                class="max-w-lg mt-4 text-2xl font-semibold leading-tight text-gray-800 dark:text-white"
-                id="content"
+        <% if (blog.comments.length > 0) { %>
+        <article class="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+          <% blog.comments.forEach((comment, index) => { %>
+          <footer class="flex justify-between items-center mb-2">
+            <div class="flex items-center">
+              <p
+                class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"
               >
-                <%- blog.content %>
-              </div>
-
-              <div class="flex items-center mt-6">
                 <img
-                  class="object-cover object-center w-10 h-10 rounded-full"
-                  src="<%= blog.author.image %>"
-                  alt=""
+                  class="mr-2 w-6 h-6 rounded-full"
+                  src="<%= comment.author.image %>"
+                  alt="Michael Gough"
                 />
-
-                <div class="mx-4">
-                  <h1 class="text-sm text-gray-700 dark:text-gray-200">
-                    <%= blog.author.name %>
-                  </h1>
-                  <p class="text-sm text-gray-500 dark:text-gray-400">
-                    <%= blog.author.username %>
-                  </p>
-                </div>
-              </div>
-              <section class="not-format mt-3">
-                <% if (user) { %>
-                <div class="flex justify-between items-center m-4 mb-6">
-                  <h2
-                    class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white"
-                  >
-                    Discussion (<%= commentCount %>)
-                  </h2>
-                </div>
-
-                <div class="flex items-start space-x-4 mt-6">
-                  <img class="h-10 w-10 object-cover rounded-full" src="<%=
-                  user.image ||
-                  "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                  %>" alt="Your Avatar" />
-                  <form
-                    action="/blog/<%= blog._id
-                  %>/comment"
-                    method="post"
-                  >
-                    <label for="chat" class="sr-only">Your message</label>
-                    <div
-                      class="flex items-center px-3 py-2 rounded-lg bg-transparent"
-                    >
-                      <button
-                        type="submit"
-                        class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                      >
-                        <svg
-                          class="w-5 h-5"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 20 18"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"
-                          />
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
-                          />
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"
-                          />
-                        </svg>
-                        <span class="sr-only">Upload image</span>
-                      </button>
-                      <button
-                        type="button"
-                        class="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-                      >
-                        <svg
-                          class="w-5 h-5"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M13.408 7.5h.01m-6.876 0h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM4.6 11a5.5 5.5 0 0 0 10.81 0H4.6Z"
-                          />
-                        </svg>
-                        <span class="sr-only">Add emoji</span>
-                      </button>
-                      <textarea
-                        id="chat"
-                        rows="1"
-                        name="content"
-                        class="block mx-4 p-2.5 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Your message..."
-                      ></textarea>
-                      <button
-                        type="submit"
-                        class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
-                      >
-                        <svg
-                          class="w-5 h-5 rotate-90 rtl:-rotate-90"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 18 20"
-                        >
-                          <path
-                            d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"
-                          />
-                        </svg>
-                        <span class="sr-only">Send message</span>
-                      </button>
-                    </div>
-                  </form>
-                </div>
-                <% if (blog.comments.length > 0) { %>
-                <article
-                  class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900"
+                <%= comment.author.name %>
+              </p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                <time pubdate datetime="2022-02-08" title="February 8th, 2022">
+                  <%= formatTimeDifference(new Date(comment.createdAt)) %></time
                 >
-                  <% blog.comments.forEach((comment, index) => { %>
-                  <footer class="flex justify-between items-center mb-2">
-                    <div class="flex items-center">
-                      <p
-                        class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white"
-                      >
-                        <img
-                          class="mr-2 w-6 h-6 rounded-full"
-                          src="<%= comment.author.image %>"
-                          alt="Michael Gough"
-                        />
-                        <%= comment.author.name %>
-                      </p>
-                      <p class="text-sm text-gray-600 dark:text-gray-400">
-                        <time
-                          pubdate
-                          datetime="2022-02-08"
-                          title="February 8th, 2022"
-                        >
-                          <%= formatTimeDifference(new Date(comment.createdAt))
-                          %>
-                        </time>
-                      </p>
-                    </div>
-                    <% if (user && user._id.toString() ===
-                    comment.author._id.toString() || isOwner) { %>
+              </p>
+            </div>
+            <% if (user && user._id.toString() === comment.author._id.toString()
+            || isOwner) { %>
+            <button
+              id="dropdownComment<%= index + 1 %>Button"
+              data-dropdown-toggle="dropdownComment<%= index + 1 %>"
+              class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              type="button"
+            >
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 16 3"
+              >
+                <path
+                  d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                />
+              </svg>
+              <span class="sr-only">Comment settings</span>
+            </button>
+            <!-- Dropdown menu -->
+            <div
+              id="dropdownComment<%= index + 1 %>"
+              class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+            >
+              <ul
+                class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownMenuIconHorizontalButton"
+              >
+                <li>
+                  <a
+                    href="/blog/edit-comment/<%= comment._id %>"
+                    class="flex items-center justify-between py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400"
+                  >
+                    <span class="mr-4 font-medium">Edit</span>
+                    <i class="fas fa-edit"></i>
+                  </a>
+                </li>
+                <li>
+                  <% if (isOwner || user && user._id.toString() ===
+                  comment.author._id.toString()) { %>
+                  <form
+                    action="/blog/comment/<%= comment._id %>?_method=DELETE"
+                    method="POST"
+                  >
+                    <input type="hidden" name="_method" value="DELETE" />
                     <button
-                      id="dropdownComment<%= index + 1 %>Button"
-                      data-dropdown-toggle="dropdownComment<%= index + 1 %>"
-                      class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                      type="submit"
+                      class="flex items-center justify-between font-medium focus:outline-none text-gray-400 font-medium rounded-lg text-sm py-2 px-4"
+                    >
+                      <span class="flex items-center">
+                        <span class="mr-10">Delete</span>
+                        <i class="ml-4 fas fa-trash-alt"></i>
+                      </span>
+                    </button>
+                  </form>
+                  <% } %>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Report</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <% } %>
+          </footer>
+          <p class="text-gray-500 dark:text-gray-400"><%= comment.content %></p>
+          <div class="flex items-center mt-4 space-x-4">
+            <button
+              type="button"
+              class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium"
+              data-modal-target="replyModal"
+              data-modal-toggle="replyModal"
+            >
+              <svg
+                class="mr-1.5 w-3.5 h-3.5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 18"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
+                />
+              </svg>
+              Reply
+            </button>
+
+            <!-- Reply Modal -->
+            <div
+              id="replyModal"
+              tabindex="-1"
+              aria-hidden="true"
+              class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
+            >
+              <div class="relative w-full h-full max-w-md md:h-auto">
+                <!-- Modal content -->
+                <div
+                  class="relative bg-white rounded-lg shadow dark:bg-gray-700"
+                >
+                  <!-- Modal header -->
+                  <div
+                    class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600"
+                  >
+                    <h3
+                      class="text-xl font-semibold text-gray-900 dark:text-white"
+                    >
+                      Reply
+                    </h3>
+                    <button
                       type="button"
+                      class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                      data-modal-toggle="replyModal"
                     >
                       <svg
-                        class="w-4 h-4"
+                        class="w-5 h-5"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 16 3"
+                        fill="none"
+                        viewBox="0 0 14 14"
                       >
                         <path
-                          d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M1 1l12 12M13 1L1 13"
                         />
                       </svg>
-                      <span class="sr-only">Comment settings</span>
+                      <span class="sr-only">Close modal</span>
                     </button>
-
-                    <div
-                      id="dropdownComment<%= index + 1 %>"
-                      class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                    >
-                      <ul
-                        class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                        aria-labelledby="dropdownMenuIconHorizontalButton"
-                      >
-                        <li>
-                          <a
-                            href="/blog/edit-comment/<%= comment._id %>"
-                            class="flex items-center justify-between py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-400"
-                          >
-                            <span class="mr-4 font-medium">Edit</span>
-                            <i class="fas fa-edit"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <% if (isOwner || user && user._id.toString() ===
-                          comment.author._id.toString()) { %>
-                          <form
-                            action="/blog/comment/<%= comment._id %>?_method=DELETE"
-                            method="POST"
-                          >
-                            <input
-                              type="hidden"
-                              name="_method"
-                              value="DELETE"
-                            />
-                            <button
-                              type="submit"
-                              class="flex items-center justify-between font-medium focus:outline-none text-gray-400 font-medium rounded-lg text-sm py-2 px-4"
-                            >
-                              <span class="flex items-center">
-                                <span class="mr-10">Delete</span>
-                                <i class="ml-4 fas fa-trash-alt"></i>
-                              </span>
-                            </button>
-                          </form>
-                          <% } %>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Report
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <% } %>
-                  </footer>
-                  <div class="flex items-center mt-4">
-                    <p class="m-2"><%= comment.content %></p>
+                  </div>
+                  <!-- Modal body -->
+                  <div class="p-6 space-y-6">
                     <form
                       action="/blog/comment/<%= comment._id %>/reply"
                       method="post"
                     >
-                      <label for="chat" class="sr-only">Your message</label>
-                      <div
-                        class="flex items-center px-3 py-2 rounded-lg bg-transparent"
-                      >
+                      <div class="mb-4">
+                        <label
+                          for="replyText"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Your Reply</label
+                        >
                         <textarea
-                          id="chat"
-                          rows="1"
+                          id="replyText"
+                          rows="4"
                           name="content"
-                          class="block mx-4 p-2.5 w-64 text-sm text-gray-900 resize-none bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="Your message..."
+                          class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Write your reply here..."
                         ></textarea>
-                        <button
-                          type="submit"
-                          class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
-                        >
-                          <svg
-                            class="w-5 h-5 rotate-90 rtl:-rotate-90"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 18 20"
-                          >
-                            <path
-                              d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"
-                            />
-                          </svg>
-                          <span class="sr-only">Send message</span>
-                        </button>
                       </div>
-                    </form>
-
-                    <% if (user) { %>
-
-                    <form
-                      id="likecomment"
-                      action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/react"
-                      method="post"
-                    >
-                      <input type="hidden" name="reactionType" value="likes" />
                       <button
                         type="submit"
-                        class="inline-flex p-2 cursor-pointer dark:text-gray-400 dark:hover:text-white"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       >
-                        <input type="radio" name="reaction" value="like" <%=
-                        comment.reactions.likes.includes(user._id) ? 'checked' :
-                        '' %> class="hidden">
-                        <svg
-                          class="w-5 h-5 likeCommentBtn <%= comment.reactions.likes.includes(user._id) ? 'text-red-500' : 'text-gray-500' %>"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"
-                          />
-                        </svg>
-                        <span class="sr-only">Like</span>
+                        Submit
                       </button>
                     </form>
-
-                    <form
-                      id="dislikecomment"
-                      action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/react"
-                      method="post"
-                    >
-                      <input
-                        type="hidden"
-                        name="reactionType"
-                        value="dislikes"
-                      />
-                      <button
-                        type="submit"
-                        class="cursor-pointer p-2 text-gray-500 rounded-lg focus:outline-none"
-                      >
-                        <input type="radio" name="reaction" value="dislike" <%=
-                        comment.reactions.dislikes.includes(user._id) ?
-                        'checked' : '' %> class="hidden">
-                        <svg
-                          class="w-5 h-5 dislikeCommentBtn <%= comment.reactions.dislikes.includes(user._id) ? 'text-blue-500' : 'text-gray-500' %>"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"
-                          />
-                          <circle cx="8.5" cy="10.5" r="1.5"></circle>
-                          <circle cx="15.493" cy="10.493" r="1.493"></circle>
-                          <path d="M12 14c-3 0-4 3-4 3h8s-1-3-4-3z"></path>
-                        </svg>
-                        <span class="sr-only">Dislike</span>
-                      </button>
-                    </form>
-
-                    <div class="flex items-center gap-3 sm:gap-x-5">
-                      <span id="likesComment"></span>
-                      <span id="dislikesComment"></span>
-                    </div>
-
-                    <% } %>
                   </div>
-
-                  <% if (comment.replies.length > 0) { %>
-                  <article
-                    class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"
-                  >
-                    <% comment.replies.slice(0, 3).forEach((reply, index) => {
-                    %>
-                    <footer class="flex justify-between items-center mb-2">
-                      <div
-                        class="flex items-center border-0 border-l-4 border-blue-400"
-                      >
-                        <% if (reply.author) { %>
-                        <img
-                          class="mr-2 ml-2 w-6 h-6 rounded-full"
-                          src="<%= reply.author.image || 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' %>"
-                          alt="Profile Picture"
-                        />
-                        <p
-                          class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white"
-                        >
-                          <%= reply.author.name %>
-                        </p>
-                        <% } %>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">
-                          <time
-                            pubdate
-                            datetime="2022-02-12"
-                            title="February 12th, 2022"
-                            ><%= formatTimeDifference(new Date(reply.createdAt))
-                            %></time
-                          >
-                        </p>
-                      </div>
-                      <button
-                        id="dropdownComment<%= index + 2 %>Button"
-                        data-dropdown-toggle="dropdownComment<%= index + 2 %>"
-                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                        type="button"
-                      >
-                        <svg
-                          class="w-4 h-4"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 16 3"
-                        >
-                          <path
-                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
-                          />
-                        </svg>
-                        <span class="sr-only">Comment settings</span>
-                      </button>
-                      <!-- Dropdown menu -->
-                      <div
-                        id="dropdownComment<%= index + 2 %>"
-                        class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                      >
-                        <ul
-                          class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                          aria-labelledby="dropdownMenuIconHorizontalButton"
-                        >
-                          <li>
-                            <a
-                              href="/blog/<%= blog.slug %>/comment/<%= comment._id %>/edit-reply/<%= reply._id %>"
-                              class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                              >Edit</a
-                            >
-                          </li>
-                          <li>
-                            <form
-                              action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/delete-reply/<%= reply._id %>?_method=DELETE"
-                              method="POST"
-                            >
-                              <button
-                                type="submit"
-                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                              >
-                                Remove
-                              </button>
-                            </form>
-                          </li>
-                          <li>
-                            <a
-                              href="#"
-                              class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                              >Report</a
-                            >
-                          </li>
-                        </ul>
-                      </div>
-                    </footer>
-                    <p><%= reply.content %></p>
-                    <div class="flex items-center mt-4 space-x-4">
-                      <button
-                        type="button"
-                        class="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
-                      >
-                        <svg
-                          class="mr-1.5 w-3 h-3"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 20 18"
-                        >
-                          <path
-                            d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z"
-                          />
-                        </svg>
-                        Reply
-                      </button>
-                    </div>
-                    <% }); %> <% if (comment.replies.length > 3) { %>
-                    <div id="hiddenReplies" class="hidden">
-                      <% comment.replies.slice(3).forEach((reply, index) => { %>
-                      <footer class="flex justify-between items-center mb-2">
-                        <div
-                          class="flex items-center border-0 border-l-4 border-blue-400"
-                        >
-                          <% if (reply.author) { %>
-                          <img
-                            class="mr-2 ml-2 w-6 h-6 rounded-full"
-                            src="<%= reply.author.image || 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' %>"
-                            alt="Profile Picture"
-                          />
-                          <p
-                            class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white"
-                          >
-                            <%= reply.author.name %>
-                          </p>
-                          <% } %>
-                          <p class="text-sm text-gray-600 dark:text-gray-400">
-                            <time
-                              pubdate
-                              datetime="2022-02-12"
-                              title="February 12th, 2022"
-                              ><%= formatTimeDifference(new
-                              Date(reply.createdAt)) %></time
-                            >
-                          </p>
-                        </div>
-                        <button
-                          id="dropdownComment<%= index + 2 %>Button"
-                          data-dropdown-toggle="dropdownComment<%= index + 2 %>"
-                          class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                          type="button"
-                        >
-                          <svg
-                            class="w-4 h-4"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 16 3"
-                          >
-                            <path
-                              d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
-                            />
-                          </svg>
-                          <span class="sr-only">Comment settings</span>
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div
-                          id="dropdownComment<%= index + 2 %>"
-                          class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                        >
-                          <ul
-                            class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownMenuIconHorizontalButton"
-                          >
-                            <li>
-                              <a
-                                href="/blog/<%= blog.slug %>/comment/<%= comment._id %>/edit-reply/<%= reply._id %>"
-                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                >Edit</a
-                              >
-                            </li>
-                            <li>
-                              <form
-                                action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/delete-reply/<%= reply._id %>?_method=DELETE"
-                                method="POST"
-                              >
-                                <button
-                                  type="submit"
-                                  class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                >
-                                  Remove
-                                </button>
-                              </form>
-                            </li>
-                            <li>
-                              <a
-                                href="#"
-                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                >Report</a
-                              >
-                            </li>
-                          </ul>
-                        </div>
-                      </footer>
-                      <p><%= reply.content %></p>
-                      <div class="flex items-center mt-4 space-x-4">
-                        <button
-                          type="button"
-                          class="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
-                        >
-                          <svg
-                            class="mr-1.5 w-3 h-3"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 20 18"
-                          >
-                            <path
-                              d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z"
-                            />
-                          </svg>
-                          Reply
-                        </button>
-                      </div>
-                      <% }); %>
-                    </div>
-                    <% if (comment.replies.length > 3) { %>
-                    <div
-                      class="inline-flex rounded-lg shadow-sm m-3"
-                      role="group"
-                    >
-                      <button
-                        id="showMoreRepliesButton"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
-                      >
-                        <span>Show more</span>
-                        <svg
-                          class="rtl:rotate-180 w-3 h-3 ml-2"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 10"
-                        >
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M1 1l6 6 6-6"
-                          />
-                        </svg>
-                      </button>
-                      <button
-                        id="hideRepliesButton"
-                        class="hidden inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
-                      >
-                        Hide replies
-                        <svg
-                          class="rtl:rotate-180 ml-3 w-3 h-3"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 10"
-                        >
-                          <!-- Modified path to point upwards -->
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M1 9l6-6 6 6"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <% } %> <% } %>
-                  </article>
-                  <% } %> <% }); %>
-                </article>
-                <% } else { %>
-                <p>No comments yet.</p>
-                <% } %> <% } %>
-              </section>
+                </div>
+              </div>
             </div>
-          </div>
+            <% if (user) { %>
+            <form
+              id="likecomment<%= comment._id %>"
+              action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/react"
+              method="post"
+              class="flex items-center space-x-2"
+            >
+              <input type="hidden" name="reactionType" value="likes" />
 
-          <% } else { %>
-
-          <div class="px-4 mx-auto max-w-screen-xl">Blog not found.</div>
-          <% } %> <% if (relatedBlog.length > 0) { %>
-          <div class="mt-8 lg:w-1/4 lg:mt-0 lg:px-6">
-            <h3 class="mb-2 text-lg">
-              Related <span class="text-blue-500"><%= blog.category %></span>
-            </h3>
-            <% relatedBlog.forEach((relatedBlog) => { %>
-            <div>
-              <h3 class="text-blue-500 capitalize"><%= relatedBlog.title %></h3>
-
-              <a
-                href="/blog/<%= relatedBlog.slug %>"
-                class="inline-flex items-center mt-2 font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400"
+              <button
+                type="submit"
+                class="flex items-center text-sm hover:underline dark:text-gray-400 font-medium"
               >
-                Read more
+                <input type="radio" name="reaction" value="like" <%=
+                comment.reactions.likes.includes(user._id) ? 'checked' : '' %>
+                class="hidden">
                 <svg
-                  class="ml-2 w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                  class="mr-1.5 w-4 h-4 likeCommentBtn <%= comment.reactions.likes.includes(user._id) ? 'text-red-500' : 'text-gray-500' %>"
                   xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
                   <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
                 </svg>
-              </a>
-            </div>
-
-            <hr class="my-6 border-gray-200 dark:border-gray-700" />
-            <% }); %>
-          </div>
-
-          <% } %>
-        </div>
-      </div>
-    </section>
-
-    <aside
-      aria-label="Related articles"
-      class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800"
-    >
-      <div class="px-4 mx-auto max-w-screen-xl">
-        <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">
-          Related articles
-        </h2>
-        <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          <article class="max-w-xs">
-            <a href="#">
-              <img
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-1.png"
-                class="mb-5 rounded-lg"
-                alt="Image 1"
-              />
-            </a>
-            <h2
-              class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white"
+                Like
+              </button>
+            </form>
+            <form
+              id="dislikecomment<%= comment._id %>"
+              action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/react"
+              method="post"
+              class="flex items-center space-x-2"
             >
-              <a href="#">Our first office</a>
-            </h2>
-            <p class="mb-4 text-gray-500 dark:text-gray-400">
-              Over the past year, Volosoft has undergone many changes! After
-              months of preparation.
-            </p>
-            <a
-              href="#"
-              class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline"
-            >
-              Read in 2 minutes
-            </a>
-          </article>
-          <article class="max-w-xs">
-            <a href="#">
-              <img
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-2.png"
-                class="mb-5 rounded-lg"
-                alt="Image 2"
-              />
-            </a>
-            <h2
-              class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white"
-            >
-              <a href="#">Enterprise design tips</a>
-            </h2>
-            <p class="mb-4 text-gray-500 dark:text-gray-400">
-              Over the past year, Volosoft has undergone many changes! After
-              months of preparation.
-            </p>
-            <a
-              href="#"
-              class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline"
-            >
-              Read in 12 minutes
-            </a>
-          </article>
-          <article class="max-w-xs">
-            <a href="#">
-              <img
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-3.png"
-                class="mb-5 rounded-lg"
-                alt="Image 3"
-              />
-            </a>
-            <h2
-              class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white"
-            >
-              <a href="#">We partnered with Google</a>
-            </h2>
-            <p class="mb-4 text-gray-500 dark:text-gray-400">
-              Over the past year, Volosoft has undergone many changes! After
-              months of preparation.
-            </p>
-            <a
-              href="#"
-              class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline"
-            >
-              Read in 8 minutes
-            </a>
-          </article>
-          <article class="max-w-xs">
-            <a href="#">
-              <img
-                src="'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-4.png"
-                class="mb-5 rounded-lg"
-                alt="Image 4"
-              />
-            </a>
-            <h2
-              class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white"
-            >
-              <a href="#">Our first project with React</a>
-            </h2>
-            <p class="mb-4 text-gray-500 dark:text-gray-400">
-              Over the past year, Volosoft has undergone many changes! After
-              months of preparation.
-            </p>
-            <a
-              href="#"
-              class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline"
-            >
-              Read in 4 minutes
-            </a>
-          </article>
-        </div>
-      </div>
-    </aside>
-
-    <section class="bg-white dark:bg-gray-900">
-      <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-        <div class="mx-auto max-w-screen-md sm:text-center">
-          <h2
-            class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white"
-          >
-            Sign up for our newsletter
-          </h2>
-          <p
-            class="mx-auto mb-8 max-w-2xl text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400"
-          >
-            Stay up to date with the roadmap progress, announcements and
-            exclusive discounts feel free to sign up with your email.
-          </p>
-          <form action="#">
-            <div
-              class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0"
-            >
-              <div class="relative w-full">
-                <label
-                  for="email"
-                  class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  >Email address</label
+              <input type="hidden" name="reactionType" value="dislikes" />
+              <button
+                type="submit"
+                class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium"
+              >
+                <input type="radio" name="reaction" value="dislike" <%=
+                comment.reactions.dislikes.includes(user._id) ? 'checked' : ''
+                %> class="hidden">
+                <svg
+                  class="mr-1.5 w-4 h-4 dislikeCommentBtn <%= comment.reactions.dislikes.includes(user._id) ? 'text-blue-500' : 'text-gray-500' %>"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
+                  <path
+                    d="M12 2.65l1.45 1.32c5.15 4.68 8.55 7.76 8.55 11.54 0 3.08-2.42 5.5-5.5 5.5-1.74 0-3.41-.81-4.5-2.09C10.91 20.19 9.24 21 7.5 21 4.42 21 2 18.58 2 15.5c0-3.78 3.4-6.86 8.55-11.54L12 2.65z"
+                  />
+                </svg>
+                Dislike
+              </button>
+            </form>
+            <% if(isOwner){%>
+            <div class="flex items-center gap-3 sm:gap-x-5">
+              <span id="likesComment<%= comment._id %>"
+                ><%= comment.reactions.likes.length %> Likes</span
+              >
+              <span id="dislikesComment<%= comment._id %>"
+                ><%= comment.reactions.dislikes.length %> Dislikes</span
+              >
+            </div>
+            <%}%> <% } %>
+          </div>
+          <% if (comment.replies.length > 0) { %>
+          <article
+            class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900"
+          >
+            <% comment.replies.slice(0, 3).forEach((reply, index) => { %>
+            <footer class="flex justify-between items-center mb-2">
+              <div
+                class="flex items-center border-0 border-l-4 border-blue-400"
+              >
+                <% if (reply.author) { %>
+                <img
+                  class="mr-2 ml-2 w-6 h-6 rounded-full"
+                  src="<%= reply.author.image || 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' %>"
+                  alt="Profile Picture"
+                />
+                <p
+                  class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white"
+                >
+                  <%= reply.author.name %>
+                </p>
+                <% } %>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  <time
+                    pubdate
+                    datetime="2022-02-12"
+                    title="February 12th, 2022"
+                    ><%= formatTimeDifference(new Date(reply.createdAt))
+                    %></time
+                  >
+                </p>
+              </div>
+              <button
+                id="dropdownComment<<%= index %>-<%= reply._id %>>Button"
+                data-dropdown-toggle="dropdownComment<%= index %>-<%= reply._id %>"
+                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                type="button"
+              >
+                <svg
+                  class="w-4 h-4"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 16 3"
+                >
+                  <path
+                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                  />
+                </svg>
+                <span class="sr-only">Comment settings</span>
+              </button>
+              <!-- Dropdown menu -->
+              <div
+                id="dropdownComment<%= index %>-<%= reply._id %>"
+                class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+              >
+                <ul
+                  class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownMenuIconHorizontalButton"
+                >
+                  <li>
+                    <a
+                      href="/blog/<%= blog.slug %>/comment/<%= comment._id %>/edit-reply/<%= reply._id %>"
+                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >Edit</a
+                    >
+                  </li>
+                  <li>
+                    <form
+                      action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/delete-reply/<%= reply._id %>?_method=DELETE"
+                      method="POST"
+                    >
+                      <button
+                        type="submit"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Remove
+                      </button>
+                    </form>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >Report</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </footer>
+            <p><%= reply.content %></p>
+            <div class="flex items-center mt-4 space-x-4">
+              <button
+                type="button"
+                class="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
+              >
+                <svg
+                  class="mr-1.5 w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 18"
+                >
+                  <path
+                    d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z"
+                  />
+                </svg>
+                Reply
+              </button>
+            </div>
+            <% }); %> <% if (comment.replies.length > 3) { %>
+            <div id="hiddenReplies" class="hidden">
+              <% comment.replies.slice(3).forEach((reply, index) => { %>
+              <footer class="flex justify-between items-center mb-2">
                 <div
-                  class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+                  class="flex items-center border-0 border-l-4 border-blue-400"
+                >
+                  <% if (reply.author) { %>
+                  <img
+                    class="mr-2 ml-2 w-6 h-6 rounded-full"
+                    src="<%= reply.author.image || 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' %>"
+                    alt="Profile Picture"
+                  />
+                  <p
+                    class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white"
+                  >
+                    <%= reply.author.name %>
+                  </p>
+                  <% } %>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    <time
+                      pubdate
+                      datetime="2022-02-12"
+                      title="February 12th, 2022"
+                      ><%= formatTimeDifference(new Date(reply.createdAt))
+                      %></time
+                    >
+                  </p>
+                </div>
+                <button
+                  id="dropdownComment<%= index %>-<%= reply._id %>Button"
+                  data-dropdown-toggle="dropdownComment<%= index %>-<%= reply._id %>"
+                  class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  type="button"
                 >
                   <svg
-                    class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    class="w-4 h-4"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
-                    viewBox="0 0 20 16"
+                    viewBox="0 0 16 3"
                   >
                     <path
-                      d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"
-                    />
-                    <path
-                      d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"
+                      d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
                     />
                   </svg>
-                </div>
-                <input
-                  class="block p-3 pl-9 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Enter your email"
-                  type="email"
-                  id="email"
-                  required=""
-                />
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  class="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  <span class="sr-only">Comment settings</span>
+                </button>
+                <!-- Dropdown menu -->
+                <div
+                  id="dropdownComment<%= index %>-<%= reply._id %>"
+                  class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
                 >
-                  Subscribe
+                  <ul
+                    class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownMenuIconHorizontalButton"
+                  >
+                    <li>
+                      <a
+                        href="/blog/<%= blog.slug %>/comment/<%= comment._id %>/edit-reply/<%= reply._id %>"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >Edit</a
+                      >
+                    </li>
+                    <li>
+                      <form
+                        action="/blog/<%= blog.slug %>/comment/<%= comment._id %>/delete-reply/<%= reply._id %>?_method=DELETE"
+                        method="POST"
+                      >
+                        <button
+                          type="submit"
+                          class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Remove
+                        </button>
+                      </form>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >Report</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </footer>
+              <p><%= reply.content %></p>
+              <div class="flex items-center mt-4 space-x-4">
+                <button
+                  type="button"
+                  class="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
+                >
+                  <svg
+                    class="mr-1.5 w-3 h-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 20 18"
+                  >
+                    <path
+                      d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z"
+                    />
+                  </svg>
+                  Reply
                 </button>
               </div>
+              <% }); %>
             </div>
-            <div
-              class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer dark:text-gray-300"
-            >
-              We care about the protection of your data.
-              <a
-                href="#"
-                class="font-medium text-primary-600 dark:text-primary-500 hover:underline"
-                >Read our Privacy Policy</a
-              >.
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer class="bg-gray-50 dark:bg-gray-800 antialiased">
-      <div class="p-4 py-6 mx-auto max-w-screen-xl md:p-8 lg:p-10">
-        <div class="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
-          <div>
-            <h2
-              class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
-            >
-              Company
-            </h2>
-            <ul class="text-gray-500 dark:text-gray-400">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">About</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Careers</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Brand Center</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Blog</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2
-              class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
-            >
-              Help center
-            </h2>
-            <ul class="text-gray-500 dark:text-gray-400">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Discord Server</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Twitter</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Facebook</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Contact Us</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2
-              class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
-            >
-              Legal
-            </h2>
-            <ul class="text-gray-500 dark:text-gray-400">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Privacy Policy</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Licensing</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Terms</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2
-              class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
-            >
-              Company
-            </h2>
-            <ul class="text-gray-500 dark:text-gray-400">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">About</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Careers</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Brand Center</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Blog</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2
-              class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
-            >
-              Download
-            </h2>
-            <ul class="text-gray-500 dark:text-gray-400">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">iOS</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Android</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Windows</a>
-              </li>
-              <li class="mb-4">
-                <a href="#" class="hover:underline">MacOS</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <hr
-          class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"
-        />
-        <div class="text-center">
-          <a
-            href="#"
-            class="flex justify-center items-center mb-5 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            <svg
-              class="mr-2 h-8"
-              viewBox="0 0 33 33"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M25.2696 13.126C25.1955 13.6364 24.8589 14.3299 24.4728 14.9328C23.9856 15.6936 23.2125 16.2264 22.3276 16.4114L18.43 17.2265C17.8035 17.3575 17.2355 17.6853 16.8089 18.1621L14.2533 21.0188C13.773 21.5556 13.4373 21.4276 13.4373 20.7075C13.4315 20.7342 12.1689 23.9903 15.5149 25.9202C16.8005 26.6618 18.6511 26.3953 19.9367 25.6538L26.7486 21.7247C29.2961 20.2553 31.0948 17.7695 31.6926 14.892C31.7163 14.7781 31.7345 14.6639 31.7542 14.5498L25.2696 13.126Z"
-                fill="url(#paint0_linear_11430_22515)"
-              />
-              <path
-                d="M23.5028 9.20133C24.7884 9.94288 25.3137 11.0469 25.3137 12.53C25.3137 12.7313 25.2979 12.9302 25.2694 13.1261L28.0141 14.3051L31.754 14.5499C32.2329 11.7784 31.2944 8.92561 29.612 6.65804C28.3459 4.9516 26.7167 3.47073 24.7581 2.34097C23.167 1.42325 21.5136 0.818599 19.8525 0.486816L17.9861 2.90382L17.3965 5.67918L23.5028 9.20133Z"
-                fill="url(#paint1_linear_11430_22515)"
-              />
-              <path
-                d="M1.5336 11.2352C1.5329 11.2373 1.53483 11.238 1.53556 11.2358C1.67958 10.8038 1.86018 10.3219 2.08564 9.80704C3.26334 7.11765 5.53286 5.32397 8.32492 4.40943C11.117 3.49491 14.1655 3.81547 16.7101 5.28323L17.3965 5.67913L19.8525 0.486761C12.041 -1.07341 4.05728 3.51588 1.54353 11.2051C1.54233 11.2087 1.53796 11.2216 1.5336 11.2352Z"
-                fill="url(#paint2_linear_11430_22515)"
-              />
-              <path
-                d="M19.6699 25.6538C18.3843 26.3953 16.8003 26.3953 15.5147 25.6538C15.3402 25.5531 15.1757 25.4399 15.0201 25.3174L12.7591 26.8719L10.8103 30.0209C12.9733 31.821 15.7821 32.3997 18.589 32.0779C20.7013 31.8357 22.7995 31.1665 24.7582 30.0368C26.3492 29.1191 27.7 27.9909 28.8182 26.7195L27.6563 23.8962L25.7762 22.1316L19.6699 25.6538Z"
-                fill="url(#paint3_linear_11430_22515)"
-              />
-              <path
-                d="M15.0201 25.3175C14.0296 24.5373 13.4371 23.3406 13.4371 22.0588V21.931V11.2558C13.4371 10.6521 13.615 10.5494 14.1384 10.8513C13.3323 10.3864 11.4703 8.79036 9.17118 10.1165C7.88557 10.858 6.8269 12.4949 6.8269 13.978V21.8362C6.8269 24.775 8.34906 27.8406 10.5445 29.7966C10.6313 29.874 10.7212 29.9469 10.8103 30.0211L15.0201 25.3175Z"
-                fill="url(#paint4_linear_11430_22515)"
-              />
-              <path
-                d="M28.6604 5.49565C28.6589 5.49395 28.6573 5.49532 28.6589 5.49703C28.9613 5.83763 29.2888 6.23485 29.6223 6.68734C31.3648 9.05099 32.0158 12.0447 31.4126 14.9176C30.8093 17.7906 29.0071 20.2679 26.4625 21.7357L25.7761 22.1316L28.8181 26.7195C34.0764 20.741 34.09 11.5388 28.6815 5.51929C28.6789 5.51641 28.67 5.50622 28.6604 5.49565Z"
-                fill="url(#paint5_linear_11430_22515)"
-              />
-              <path
-                d="M7.09355 13.978C7.09354 12.4949 7.88551 11.1244 9.17113 10.3829C9.34564 10.2822 9.52601 10.1965 9.71002 10.1231L9.49304 7.38962L7.96861 4.26221C5.32671 5.23364 3.1897 7.24125 2.06528 9.83067C1.2191 11.7793 0.75001 13.9294 0.75 16.1888C0.75 18.0243 1.05255 19.7571 1.59553 21.3603L4.62391 21.7666L7.09355 21.0223V13.978Z"
-                fill="url(#paint6_linear_11430_22515)"
-              />
-              <path
-                d="M9.71016 10.1231C10.8817 9.65623 12.2153 9.74199 13.3264 10.3829L13.4372 10.4468L22.3326 15.5777C22.9566 15.9376 22.8999 16.2918 22.1946 16.4392L22.7078 16.332C23.383 16.1908 23.9999 15.8457 24.4717 15.3428C25.2828 14.4782 25.5806 13.4351 25.5806 12.5299C25.5806 11.0468 24.7886 9.67634 23.503 8.93479L16.6911 5.00568C14.1436 3.53627 11.0895 3.22294 8.29622 4.14442C8.18572 4.18087 8.07756 4.2222 7.96875 4.26221L9.71016 10.1231Z"
-                fill="url(#paint7_linear_11430_22515)"
-              />
-              <path
-                d="M20.0721 31.8357C20.0744 31.8352 20.0739 31.8332 20.0717 31.8337C19.6252 31.925 19.1172 32.0097 18.5581 32.0721C15.638 32.3978 12.7174 31.4643 10.5286 29.5059C8.33986 27.5474 7.09347 24.7495 7.09348 21.814L7.09347 21.0222L1.59546 21.3602C4.1488 28.8989 12.1189 33.5118 20.0411 31.8421C20.0449 31.8413 20.0582 31.8387 20.0721 31.8357Z"
-                fill="url(#paint8_linear_11430_22515)"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_11430_22515"
-                  x1="20.8102"
-                  y1="23.9532"
-                  x2="23.9577"
-                  y2="12.9901"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#1724C9" />
-                  <stop offset="1" stop-color="#1C64F2" />
-                </linearGradient>
-                <linearGradient
-                  id="paint1_linear_11430_22515"
-                  x1="28.0593"
-                  y1="10.5837"
-                  x2="19.7797"
-                  y2="2.33321"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#1C64F2" />
-                  <stop offset="1" stop-color="#0092FF" />
-                </linearGradient>
-                <linearGradient
-                  id="paint2_linear_11430_22515"
-                  x1="16.9145"
-                  y1="5.2045"
-                  x2="4.42432"
-                  y2="5.99375"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#0092FF" />
-                  <stop offset="1" stop-color="#45B2FF" />
-                </linearGradient>
-                <linearGradient
-                  id="paint3_linear_11430_22515"
-                  x1="16.0698"
-                  y1="28.846"
-                  x2="27.2866"
-                  y2="25.8192"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#1C64F2" />
-                  <stop offset="1" stop-color="#0092FF" />
-                </linearGradient>
-                <linearGradient
-                  id="paint4_linear_11430_22515"
-                  x1="8.01881"
-                  y1="15.8661"
-                  x2="15.9825"
-                  y2="24.1181"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#1724C9" />
-                  <stop offset="1" stop-color="#1C64F2" />
-                </linearGradient>
-                <linearGradient
-                  id="paint5_linear_11430_22515"
-                  x1="26.2004"
-                  y1="21.8189"
-                  x2="31.7569"
-                  y2="10.6178"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#0092FF" />
-                  <stop offset="1" stop-color="#45B2FF" />
-                </linearGradient>
-                <linearGradient
-                  id="paint6_linear_11430_22515"
-                  x1="6.11387"
-                  y1="9.31427"
-                  x2="3.14054"
-                  y2="20.4898"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#1C64F2" />
-                  <stop offset="1" stop-color="#0092FF" />
-                </linearGradient>
-                <linearGradient
-                  id="paint7_linear_11430_22515"
-                  x1="21.2932"
-                  y1="8.78271"
-                  x2="10.4278"
-                  y2="11.488"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#1724C9" />
-                  <stop offset="1" stop-color="#1C64F2" />
-                </linearGradient>
-                <linearGradient
-                  id="paint8_linear_11430_22515"
-                  x1="7.15667"
-                  y1="21.5399"
-                  x2="14.0824"
-                  y2="31.9579"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#0092FF" />
-                  <stop offset="1" stop-color="#45B2FF" />
-                </linearGradient>
-              </defs>
-            </svg>
-            InkVerse
-          </a>
-          <span
-            class="block text-sm text-center text-gray-500 dark:text-gray-400"
-            >© 2021-2022 <a href="#" class="hover:underline">Flowbite™</a>. All
-            Rights Reserved.
-          </span>
-          <ul class="flex justify-center mt-5 space-x-5">
-            <li>
-              <a
-                href="#"
-                class="text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-gray-400"
+            <% if (comment.replies.length > 3) { %>
+            <div class="inline-flex rounded-lg shadow-sm m-3" role="group">
+              <button
+                id="showMoreRepliesButton"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
               >
+                <span>Show more</span>
                 <svg
-                  class="h-4 w-4"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 8 19"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-gray-400"
-              >
-                <svg
-                  class="w-4 h-4"
+                  class="rtl:rotate-180 w-3 h-3 ml-2"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  viewBox="0 0 20 20"
+                  viewBox="0 0 14 10"
                 >
                   <path
-                    fill="currentColor"
-                    d="M12.186 8.672 18.743.947h-2.927l-5.005 5.9-4.44-5.9H0l7.434 9.876-6.986 8.23h2.927l5.434-6.4 4.82 6.4H20L12.186 8.672Zm-2.267 2.671L8.544 9.515 3.2 2.42h2.2l4.312 5.719 1.375 1.828 5.731 7.613h-2.2l-4.699-6.237Z"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M1 1l6 6 6-6"
                   />
                 </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-gray-400"
+              </button>
+              <button
+                id="hideRepliesButton"
+                class="hidden inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
               >
+                Hide replies
                 <svg
-                  class="w-4 h-4"
+                  class="rtl:rotate-180 ml-3 w-3 h-3"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                  fill="none"
+                  viewBox="0 0 14 10"
                 >
+                  <!-- Modified path to point upwards -->
                   <path
-                    fill-rule="evenodd"
-                    d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z"
-                    clip-rule="evenodd"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M1 9l6-6 6 6"
                   />
                 </svg>
+              </button>
+            </div>
+            <% } %> <% } %>
+          </article>
+          <% } %> <% }); %>
+        </article>
+        <% } else { %>
+        <p>No comments yet.</p>
+        <% } %> <% } %>
+      </div>
+    </section>
+    <% } else { %>
+
+    <div class="px-4 mx-auto max-w-screen-xl">Blog not found.</div>
+    <% } %>
+
+    <!--   Scroll Top Button  -->
+    <button
+      class="btn-toggle-round scroll-top js-scroll-top is-active"
+      type="button"
+      title="Scroll to top"
+    >
+      <svg
+        class="progress-circle"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path
+          d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+          style="
+            transition: stroke-dashoffset 10ms linear 0s;
+            stroke-dasharray: 307.919, 307.919;
+            stroke-dashoffset: 90.53;
+          "
+        ></path>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-arrow-up"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="cuurentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="18" y1="11" x2="12" y2="5"></line>
+        <line x1="6" y1="11" x2="12" y2="5"></line>
+      </svg>
+    </button>
+
+    <% if (relatedBlog.length > 0) { %>
+    <div class="bg-white py-12 sm:py-16 lg:py-10">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="flex justify-between items-center mb-8">
+          <h3 class="text-2xl font-semibold">Trending News</h3>
+          <a href="#" class="text-blue-500 hover:underline">View More</a>
+        </div>
+        <div class="sm:grid lg:grid-cols-3 sm:grid-cols-2 gap-10">
+          <% relatedBlog.forEach((relatedBlog) => { %>
+          <div
+            class="hover:bg-gray-900 hover:text-white transition duration-300 max-w-sm rounded overflow-hidden shadow-lg"
+          >
+            <div class="py-4 px-8">
+              <div class="flex items-center justify-between mb-4">
+                <img
+                  src="<%= relatedBlog.author.image %>"
+                  class="rounded-full h-12 w-12 mr-4"
+                />
+                <span class="text-sm text-gray-600"
+                  >Author: <%= relatedBlog.author.name %></span
+                >
+              </div>
+              <a href="/blog/<%= relatedBlog.slug %>">
+                <h4 class="text-lg mb-3 font-semibold">
+                  <%= relatedBlog.title %>
+                </h4>
               </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-gray-400"
+
+              <p class="mb-2 text-sm text-gray-600">
+                <%= relatedBlog.description %>
+              </p>
+
+              <img
+                src="<%= relatedBlog.image ||
+                'https://res.cloudinary.com/djc5o8g94/image/upload/v1714825994/blog-folder/images/ywt3yuwsqycmftpbuotd.jpg' %>"
+                class="w-100"
+              />
+
+              <hr class="mt-4" />
+              <span class="text-xs"> <%= relatedBlog.category%></span>
+              &nbsp;<span class="text-xs text-gray-500">
+                <%= relatedBlog.tags %></span
               >
-                <svg
-                  class="w-4 h-4"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+    <% } else{%>
+    <p
+      class="text-red-400 flex items-center justify-center font-bold text-2xl m-3 p-2"
+    >
+      Not Available At The Moment
+    </p>
+    <%} %>
+
+    <footer class="bg-gray-900">
+      <div class="container max-w-6xl mx-auto flex items-center px-2 py-8">
+        <div class="w-full mx-auto flex flex-wrap items-center">
+          <div
+            class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold"
+          >
+            <a
+              class="text-gray-900 no-underline hover:text-gray-900 hover:no-underline"
+              href="#"
+            >
+              <span class="text-base text-gray-200">Ghostwind</span>
+            </a>
+          </div>
+          <div
+            class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end"
+          >
+            <ul
+              class="list-reset flex justify-center flex-1 md:flex-none items-center"
+            >
+              <li>
+                <a
+                  class="inline-block py-2 px-3 text-white no-underline"
+                  href="index.html"
+                  >HOME</a
                 >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 0a10 10 0 1 0 10 10A10.009 10.009 0 0 0 10 0Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.094 20.094 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM8 1.707a8.821 8.821 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.758 45.758 0 0 0 8 1.707ZM1.642 8.262a8.57 8.57 0 0 1 4.73-5.981A53.998 53.998 0 0 1 9.54 7.222a32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.64 31.64 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM10 18.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 13.113 11a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </a>
-            </li>
-          </ul>
+              </li>
+              <li>
+                <a
+                  class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3"
+                  href="#"
+                  >link</a
+                >
+              </li>
+              <li>
+                <a
+                  class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3"
+                  href="#"
+                  >link</a
+                >
+              </li>
+              <li>
+                <a
+                  class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3"
+                  href="#"
+                  >link</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
-    <script src="/javascripts/view_AJAX.js "></script>
     <script>
-      // Get the scroll-to-top button element
-      const scrollToTopBtn = document.getElementById("scrollToTop");
+      /* Progress bar */
+      //Source: https://alligator.io/js/progress-bar-javascript-css-variables/
+      var h = document.documentElement,
+        b = document.body,
+        st = "scrollTop",
+        sh = "scrollHeight",
+        progress = document.querySelector("#progress"),
+        scroll;
+      var scrollpos = window.scrollY;
+      var header = document.getElementById("header");
 
-      // Add scroll event listener to window
-      window.addEventListener("scroll", () => {
-        // Check if page is scrolled beyond a certain threshold (e.g., 200px)
-        if (window.scrollY > 200) {
-          // If scrolled down, show the scroll-to-top button
-          scrollToTopBtn.classList.remove("hidden");
+      document.addEventListener("scroll", function () {
+        /*Refresh scroll % width*/
+        scroll = ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
+        progress.style.setProperty("--scroll", scroll + "%");
+
+        /*Apply classes for slide in bar*/
+        scrollpos = window.scrollY;
+
+        if (scrollpos > 100) {
+          header.classList.remove("hidden");
+          header.classList.remove("fadeOutUp");
+          header.classList.add("slideInDown");
         } else {
-          // If not scrolled down, hide the scroll-to-top button
-          scrollToTopBtn.classList.add("hidden");
+          header.classList.remove("slideInDown");
+          header.classList.add("fadeOutUp");
+          header.classList.add("hidden");
         }
       });
 
-      scrollToTopBtn.addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      });
+      // scroll to top
+      const t = document.querySelector(".js-scroll-top");
+      if (t) {
+        t.onclick = () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+        const e = document.querySelector(".scroll-top path"),
+          o = e.getTotalLength();
+        (e.style.transition = e.style.WebkitTransition = "none"),
+          (e.style.strokeDasharray = `${o} ${o}`),
+          (e.style.strokeDashoffset = o),
+          e.getBoundingClientRect(),
+          (e.style.transition = e.style.WebkitTransition =
+            "stroke-dashoffset 10ms linear");
+        const n = function () {
+          const t =
+              window.scrollY ||
+              window.scrollTopBtn ||
+              document.documentElement.scrollTopBtn,
+            n = Math.max(
+              document.body.scrollHeight,
+              document.documentElement.scrollHeight,
+              document.body.offsetHeight,
+              document.documentElement.offsetHeight,
+              document.body.clientHeight,
+              document.documentElement.clientHeight
+            ),
+            s = Math.max(
+              document.documentElement.clientHeight,
+              window.innerHeight || 0
+            );
+          var l = o - (t * o) / (n - s);
+          e.style.strokeDashoffset = l;
+        };
+        n();
+        const s = 100;
+        window.addEventListener(
+          "scroll",
+          function (e) {
+            n();
+            (window.scrollY ||
+              window.scrollTopBtn ||
+              document.getElementsByTagName("html")[0].scrollTopBtn) > s
+              ? t.classList.add("is-active")
+              : t.classList.remove("is-active");
+          },
+          !1
+        );
+      }
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -1582,8 +1221,8 @@
         }
       });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
-    <script src="/javascripts/speed_dial.js"></script>
-    <script src="/javascripts/mode.config.js"></script>
+    <script src="/javascripts/view_AJAX.js "></script>
   </body>
 </html>

@@ -3,140 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title><%= category %></title>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/output.css" />
     <script src="/javascripts/switch.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
   </head>
-  <body class="bg-white min-h-screen">
+  <body class="bg-white dark:bg-gray-900 min-h-screen">
     <%- include('../partials/header.ejs') %> <% blogs.sort((a, b) => new
-    Date(b.createdAt) - new Date(a.createdAt)); %> <% if (blogs.length > 0) { %>
-    <div class="bg-white dark:bg-gray-800 py-12 sm:py-16 lg:py-10">
-      <div class="mx-auto max-w-7xl px-6 lg:px-7">
-        <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <!-- Repeat this block for each blog card -->
-            <% blogs.forEach(blog => { %>
-            <div class="swiper-slide">
-              <article
-                class="flex-shrink-0 w-full sm:w-96 flex flex-col items-start justify-between p-4 border rounded-lg shadow-md"
-              >
-                <div class="mb-4">
-                  <img
-                    src="<%= blog.image || 'https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80' %>"
-                    alt=""
-                    class="rounded-lg w-full"
-                  />
-                </div>
-                <div class="flex items-center gap-x-4 text-xs">
-                  <time
-                    datetime="2020-03-16"
-                    class="text-gray-500 dark:text-white"
-                    ><%= blog.createdAt.toDateString() %></time
-                  >
-                  <a
-                    href="#"
-                    class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                    ><%= blog.category %></a
-                  >
-                </div>
-                <div class="group relative">
-                  <h3
-                    class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 dark:text-white"
-                  >
-                    <a href="#">
-                      <span class="absolute inset-0"></span>
-                      <%= blog.title %>
-                    </a>
-                  </h3>
-                  <p
-                    class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600 dark:text-white"
-                  >
-                    <%= blog.description %>
-                  </p>
-                </div>
-                <div class="relative mt-8 flex items-center gap-x-4">
-                  <img
-                    src="<%= blog.author.image %>"
-                    alt=""
-                    class="h-10 w-10 rounded-full bg-gray-50"
-                  />
-                  <div class="text-sm leading-6">
-                    <p class="font-semibold text-gray-900 dark:text-white">
-                      <a href="#">
-                        <span class="absolute inset-0"></span>
-                        <%= blog.author.name %>
-                      </a>
-                    </p>
-                    <p class="text-gray-900 dark:text-white">
-                      <%= blog.author.username %>
-                    </p>
-                    <a
-                      href="/blog/<%= blog.slug %>"
-                      class="text-gray-600 underline dark:text-white"
-                      >Read</a
-                    >
-                  </div>
-                </div>
-              </article>
-            </div>
-            <% }); %>
-            <!-- End of blog card -->
-          </div>
-          <div class="swiper-pagination"></div>
-          <!-- Add Pagination -->
-        </div>
-      </div>
-    </div>
-    <% } else { %>
-    <p class="lead text-2xl text-red-500 text-center m-3 font-medium">
-      No blogs found in the <%= category %> category.
-    </p>
-    <% } %>
+    Date(b.createdAt) - new Date(a.createdAt)); %> <%-
+    include('../partials/latest.ejs') %> <%- include('../partials/recent.ejs')
+    %> <%- include('../partials/randomBlog.ejs') %>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script>
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-          dynamicBullets: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        autoplay: {
-          delay: 10000,
-          disableOnInteraction: false,
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 1,
-            spaceBetween: 20,
+      document.addEventListener("DOMContentLoaded", function () {
+        new Glide(".myGlide", {
+          type: "carousel",
+          startAt: 0,
+          perView: 3,
+          autoplay: 3000,
+          hoverpause: true,
+          breakpoints: {
+            1024: {
+              perView: 2,
+            },
+            600: {
+              perView: 1,
+            },
           },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-          },
-        },
+        }).mount();
       });
     </script>
-    <%- include('../partials/randomBlog.ejs') %>
   </body>
 </html>

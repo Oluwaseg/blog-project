@@ -96,10 +96,10 @@ const getRandomBlogsByCategory = async (currentCategory) => {
 
 const createBlog = async (req, res) => {
   try {
-    const { title, description, content, category } = req.body;
+    const { title, description, content, category, tags } = req.body;
     const author = req.user._id;
 
-    if (!title || !description || !content || !category) {
+    if (!title || !description || !content || !category || !tags) {
       return res.status(400).render("error-ms", {
         error: {
           status: 400,
@@ -117,6 +117,8 @@ const createBlog = async (req, res) => {
       image = req.file.path; // This should be the path of the uploaded image
     }
 
+    const tagArray = tags.split(",").map((tag) => tag.trim());
+
     const blog = new Blog({
       title,
       description,
@@ -124,6 +126,7 @@ const createBlog = async (req, res) => {
       author,
       image: image ? image : undefined,
       category,
+      tags: tagArray,
     });
 
     await blog.save();
@@ -193,7 +196,9 @@ const getBlogBySlug = async (req, res) => {
     const relatedBlog = await Blog.find({
       category: blog.category,
       _id: { $ne: blog._id },
-    }).limit(3);
+    })
+      .populate("author", "name image")
+      .limit(3);
 
     const blogsByCategory = await getRandomBlogsByCategory();
 
@@ -565,6 +570,7 @@ const addReactionToComment = async (req, res) => {
     if (req.xhr) {
       // If the request was made via AJAX, send JSON response
       res.json({
+        commentId: commentId,
         likedComment: comment.reactions.likes.includes(userId),
         dislikedComment: comment.reactions.dislikes.includes(userId),
         likesComment: comment.reactions.likes.length,

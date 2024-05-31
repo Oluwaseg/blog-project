@@ -68,6 +68,7 @@ const blogSchema = new mongoose.Schema({
   },
   image: { type: String },
   category: { type: String, required: true, default: "Article" },
+  tags: [String],
 });
 
 blogSchema.pre("save", async function (next) {
