@@ -1,11 +1,20 @@
 <div class="navbar bg-white dark:bg-gray-900">
   <div class="flex-1">
     <a class="btn btn-ghost text-xl text-black dark:text-white">
-      <img
-        src="https://flowbite.com/docs/images/logo.svg"
-        class="h-8"
-        alt="Flowbite Logo"
-      />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+        ></path>
+      </svg>
       InkVerse</a
     >
   </div>
@@ -47,8 +56,8 @@
           <span><%= user.name %></span>
         </li>
         <li>
-          <a class="justify-between">
-            Profile
+          <a href="/blog/categories" class="justify-between">
+            Category
             <span class="badge">New</span>
           </a>
         </li>
@@ -64,7 +73,7 @@
           </form>
         </li>
       </ul>
-      <label class="swap swap-rotate">
+      <label class="swap swap-rotate dark:text-white">
         <!-- this hidden checkbox controls the state -->
         <input type="checkbox" hidden />
 

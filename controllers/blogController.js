@@ -200,7 +200,7 @@ const getBlogBySlug = async (req, res) => {
       .populate("author", "name image")
       .limit(3);
 
-    const blogsByCategory = await getRandomBlogsByCategory();
+    const randomBlogByCategory = await getRandomBlogsByCategory();
 
     const commentCount = blog.comments.length;
 
@@ -216,7 +216,7 @@ const getBlogBySlug = async (req, res) => {
       comment,
       formatTimeDifference: formatTimeDifference,
       relatedBlog: relatedBlog,
-      blogsByCategory: blogsByCategory,
+      randomBlogByCategory: randomBlogByCategory,
       displayedReplies: displayedReplies,
     });
   } catch (error) {

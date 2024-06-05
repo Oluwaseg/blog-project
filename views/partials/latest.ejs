@@ -1,14 +1,10 @@
 <% if (latest.length > 0) { %>
-<div class="bg-white dark:bg-gray-800 py-12 sm:py-16 lg:py-10">
+<div class="bg-white text-black dark:bg-gray-900 py-12 sm:py-16 lg:py-10">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="flex justify-between items-center mb-8">
-      <h3 class="text-2xl font-semibold">Trending News</h3>
-      <a href="#" class="text-blue-500 hover:underline">View More</a>
-    </div>
     <% if (latest.length === 1) { %>
     <div class="single-blog">
       <div
-        class="hover:bg-gray-900 hover:text-white transition duration-300 max-w-sm rounded overflow-hidden shadow-lg"
+        class="hover:bg-gray-900 hover:text-white transition duration-300 max-w-sm rounded overflow-hidden shadow-lg dark:text-white"
       >
         <div class="py-4 px-8">
           <div class="flex items-center justify-between mb-4">
@@ -16,14 +12,14 @@
               src="<%= latest[0].author.image %>"
               class="rounded-full h-12 w-12 mr-4"
             />
-            <span class="text-sm text-gray-600"
+            <span class="text-sm text-gray-600 dark:text-white"
               >Author: <%= latest[0].author.name %></span
             >
           </div>
           <a href="/blog/<%= latest[0].slug %>">
             <h4 class="text-lg mb-3 font-semibold"><%= latest[0].title %></h4>
           </a>
-          <p class="mb-2 text-sm text-gray-600">
+          <p class="mb-2 text-sm text-gray-600 dark:text-white">
             <%= latest[0].description.length > 80 ?
             latest[0].description.slice(0, 80) + '...' : latest[0].description
             %>
@@ -34,7 +30,7 @@
           />
           <hr class="mt-4" />
           <span class="text-xs">ARTICLE</span>
-          &nbsp;<span class="text-xs text-gray-500"
+          &nbsp;<span class="text-xs text-gray-500 dark:text-white"
             ><%= latest[0].category %></span
           >
         </div>
@@ -45,9 +41,9 @@
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
           <% latest.forEach(blog => { %>
-          <li class="glide__slide">
+          <li class="glide__slide mb-5">
             <div
-              class="hover:bg-gray-900 hover:text-white transition duration-300 max-w-sm rounded overflow-hidden shadow-md"
+              class="hover:text-indigo-600 transition duration-300 max-w-sm rounded overflow-hidden shadow-md border-2 border-indigo-600 dark:border-white font-medium dark:text-white"
             >
               <div class="py-4 px-8">
                 <div class="flex items-center justify-between mb-4">
@@ -55,16 +51,14 @@
                     src="<%= blog.author.image %>"
                     class="rounded-full h-12 w-12 mr-4"
                   />
-                  <span class="text-sm text-gray-600"
-                    >Author: <%= blog.author.name %></span
-                  >
+                  <span class="text-sm">Author: <%= blog.author.name %></span>
                 </div>
                 <a href="/blog/<%= blog.slug %>">
                   <h4 class="text-lg mb-3 font-semibold"><%= blog.title %></h4>
                 </a>
-                <p class="mb-2 text-sm text-gray-600">
-                  <%= blog.description.length > 80 ? blog.description.slice(0,
-                  80) + '...' : blog.description %>
+                <p class="mb-2 text-sm">
+                  <%= blog.description.length > 30 ? blog.description.slice(0,
+                  30) + '...' : blog.description %>
                 </p>
                 <img
                   src="<%= blog.image || 'https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80' %>"
@@ -72,9 +66,7 @@
                 />
                 <hr class="mt-4" />
                 <span class="text-xs">ARTICLE</span>
-                &nbsp;<span class="text-xs text-gray-500"
-                  ><%= blog.category %></span
-                >
+                &nbsp;<span class="text-xs"><%= blog.category %></span>
               </div>
             </div>
           </li>

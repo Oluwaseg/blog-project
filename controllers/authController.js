@@ -211,7 +211,7 @@ const logoutUser = async (req, res) => {
     // Clear cookie
     res.clearCookie("jwt");
 
-    res.redirect("/api/login");
+    res.redirect("/");
   } catch (error) {
     res.status(500).render("error", { status: 500, message: error.message });
     console.error("Logout failed:", error);

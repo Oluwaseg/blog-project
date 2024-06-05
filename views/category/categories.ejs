@@ -12,298 +12,864 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/output.css" />
   </head>
-  <body>
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
-      <div
-        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-      >
-        <a
-          href="https://flowbite.com/"
-          class="flex items-center space-x-3 rtl:space-x-reverse"
-        >
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            class="h-8"
-            alt="Flowbite Logo"
-          />
-          <span
-            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-            >Flowbite</span
-          >
-        </a>
-        <div
-          class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
-        >
-          <button
-            type="button"
-            class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            id="user-menu-button"
-            aria-expanded="false"
-            data-dropdown-toggle="user-dropdown"
-            data-dropdown-placement="bottom"
-          >
-            <span class="sr-only">Open user menu</span>
-            <img
-              class="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-3.jpg"
-              alt="user photo"
-            />
-          </button>
-          <!-- Dropdown menu -->
-          <div
-            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-            id="user-dropdown"
-          >
-            <div class="px-4 py-3">
-              <span class="block text-sm text-gray-900 dark:text-white"
-                >Bonnie Green</span
-              >
-              <span
-                class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                >name@flowbite.com</span
-              >
-            </div>
-            <ul class="py-2" aria-labelledby="user-menu-button">
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >Dashboard</a
-                >
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >Settings</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >Earnings</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >Sign out</a
-                >
-              </li>
-            </ul>
-          </div>
-          <button
-            data-collapse-toggle="navbar-user"
-            type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-user"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Open main menu</span>
+  <body class="bg-white">
+    <nav aria-label="breadcrumb" class="flex item-center justify-between">
+      <ul class="flex flex-wrap space-x-3 text-sm font-medium mx-auto p-4">
+        <li class="flex items-center space-x-3 text-indigo-600">
+          <a href="/blog" class="flex items-center space-x-1">
             <svg
-              class="w-5 h-5"
+              class="h-4 w-4 shrink-0 fill-indigo-500"
               aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
+              viewBox="0 0 256 256"
             >
               <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
+                d="M184 32H72A16 16 0 0056 48V224a8.1 8.1.0 004.1 7 7.6 7.6.0 003.9 1 7.9 7.9.0 004.2-1.2L128 193.4l59.7 37.4a8.3 8.3.0 008.2.2 8.1 8.1.0 004.1-7V48A16 16 0 00184 32z"
+              ></path>
             </svg>
-          </button>
-        </div>
-        <div
-          class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-          id="navbar-user"
-        >
-          <ul
-            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-          >
-            <li>
-              <a
-                href="#"
-                class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                aria-current="page"
-                >Home</a
-              >
-            </li>
-            <li>
-              <button
-                id="dropdownNavbarLink"
-                data-dropdown-toggle="dropdownNavbar"
-                class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-              >
-                Categories
-                <svg
-                  class="w-2.5 h-2.5 ms-2.5"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-              <!-- Dropdown menu -->
-              <div
-                id="dropdownNavbar"
-                class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
-              >
-                <ul
-                  class="py-2 text-sm text-gray-700 dark:text-gray-400"
-                  aria-labelledby="dropdownLargeButton"
-                >
-                  <li>
-                    <a
-                      href="/blog/article"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >Article</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/blog/news"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >News</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/blog/guide"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >Guide</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/blog/opinion"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >Opinion</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/blog/review"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >Review</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/blog/tutorial"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >Tutorial</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/blog/technology"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >Technology</a
-                    >
-                  </li>
-                </ul>
-                <div class="py-1">
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >Sign out</a
-                  >
-                </div>
-              </div>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >About</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >Services</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >Pricing</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                >Contact</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="flex items-center space-x-3">
+          <div
+            aria-hidden="true"
+            class="h-4 w-px rotate-12 rounded-full bg-indigo-300"
+          ></div>
+          <a href="/api/account-setting" class="flex items-center space-x-1">
+            <svg
+              class="h-4 w-4 shrink-0 fill-indigo-500"
+              aria-hidden="true"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M2e2 32H163.7a47.8 47.8.0 00-71.4.0H56A16 16 0 0040 48V216a16 16 0 0016 16H2e2a16 16 0 0016-16V48A16 16 0 002e2 32zm-72 0a32.1 32.1.0 0132 32H96a32.1 32.1.0 0132-32z"
+              ></path>
+            </svg>
+            <span class="text-indigo-600">Setting</span>
+          </a>
+        </li>
+        <li class="flex items-center space-x-3" aria-current="page">
+          <div
+            aria-hidden="true"
+            class="h-4 w-px rotate-12 rounded-full bg-indigo-300"
+          ></div>
+
+          <span class="flex items-center space-x-1">
+            <svg
+              class="h-4 w-4 shrink-0 fill-indigo-400"
+              aria-hidden="true"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M136 88H120V35.3L91.7 63.6A8 8 0 0180.3 52.3l42-42a8.1 8.1.0 0111.4.0l42 42a8 8 0 010 11.3 8 8 0 01-11.4.0L136 35.3zm64 0H136v40a8 8 0 01-16 0V88H56a16 16 0 00-16 16V208a16 16 0 0016 16H2e2a16 16 0 0016-16V104A16 16 0 002e2 88z"
+              ></path>
+            </svg>
+            <span class="text-indigo-600">Category</span>
+          </span>
+        </li>
+      </ul>
     </nav>
 
-    <h1>Blog Categories</h1>
-
-    <!-- Article Section -->
-    <div class="category-section article-section">
-      <h2 class="category-title">Article</h2>
-      <% if (blogsByCategory.Article && blogsByCategory.Article.length > 0) { %>
-      <% blogsByCategory.Article.forEach(blog => { %>
-      <div class="blog-post article-post">
-        <h3 class="blog-post-title"><%= blog.title %></h3>
-        <p><%= blog.description %></p>
-        <p>By: <%= blog.author.name %> (@<%= blog.author.username %>)</p>
+    <% if (blogsByCategory.Article && blogsByCategory.Article.length > 0) { %>
+    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <% if (blogsByCategory.Article[0] && blogsByCategory.Article[0].category)
+      { %>
+      <div class="border-b mb-5 flex justify-between text-sm">
+        <div
+          class="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase"
+        >
+          <svg
+            class="h-6 mr-3"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 455.005 455.005"
+            style="enable-background: new 0 0 455.005 455.005"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                d="M446.158,267.615c-5.622-3.103-12.756-2.421-19.574,1.871l-125.947,79.309c-3.505,2.208-4.557,6.838-2.35,10.343 c2.208,3.505,6.838,4.557,10.343,2.35l125.947-79.309c2.66-1.675,4.116-1.552,4.331-1.432c0.218,0.12,1.096,1.285,1.096,4.428 c0,8.449-6.271,19.809-13.42,24.311l-122.099,76.885c-6.492,4.088-12.427,5.212-16.284,3.084c-3.856-2.129-6.067-7.75-6.067-15.423 c0-19.438,13.896-44.61,30.345-54.967l139.023-87.542c2.181-1.373,3.503-3.77,3.503-6.347s-1.323-4.974-3.503-6.347L184.368,50.615 c-2.442-1.538-5.551-1.538-7.993,0L35.66,139.223C15.664,151.815,0,180.188,0,203.818v4c0,23.63,15.664,52.004,35.66,64.595 l209.292,131.791c3.505,2.207,8.136,1.154,10.343-2.35c2.207-3.505,1.155-8.136-2.35-10.343L43.653,259.72 C28.121,249.941,15,226.172,15,207.818v-4c0-18.354,13.121-42.122,28.653-51.902l136.718-86.091l253.059,159.35l-128.944,81.196 c-20.945,13.189-37.352,42.909-37.352,67.661c0,13.495,4.907,23.636,13.818,28.555c3.579,1.976,7.526,2.956,11.709,2.956 c6.231,0,12.985-2.176,19.817-6.479l122.099-76.885c11.455-7.213,20.427-23.467,20.427-37.004 C455.004,277.119,451.78,270.719,446.158,267.615z"
+              ></path>
+              <path
+                d="M353.664,232.676c2.492,0,4.928-1.241,6.354-3.504c2.207-3.505,1.155-8.136-2.35-10.343l-173.3-109.126 c-3.506-2.207-8.136-1.154-10.343,2.35c-2.207,3.505-1.155,8.136,2.35,10.343l173.3,109.126 C350.916,232.303,352.298,232.676,353.664,232.676z"
+              ></path>
+              <path
+                d="M323.68,252.58c2.497,0,4.938-1.246,6.361-3.517c2.201-3.509,1.14-8.138-2.37-10.338L254.46,192.82 c-3.511-2.202-8.139-1.139-10.338,2.37c-2.201,3.51-1.14,8.138,2.37,10.338l73.211,45.905 C320.941,252.21,322.318,252.58,323.68,252.58z"
+              ></path>
+              <path
+                d="M223.903,212.559c-3.513-2.194-8.14-1.124-10.334,2.39c-2.194,3.514-1.124,8.14,2.39,10.334l73.773,46.062 c1.236,0.771,2.608,1.139,3.965,1.139c2.501,0,4.947-1.251,6.369-3.529c2.194-3.514,1.124-8.14-2.39-10.334L223.903,212.559z"
+              ></path>
+              <path
+                d="M145.209,129.33l-62.33,39.254c-2.187,1.377-3.511,3.783-3.503,6.368s1.345,4.983,3.54,6.348l74.335,46.219 c1.213,0.754,2.586,1.131,3.96,1.131c1.417,0,2.833-0.401,4.071-1.201l16.556-10.7c3.479-2.249,4.476-6.891,2.228-10.37 c-2.248-3.479-6.891-4.475-10.37-2.228l-12.562,8.119l-60.119-37.38l48.2-30.355l59.244,37.147l-6.907,4.464 c-3.479,2.249-4.476,6.891-2.228,10.37c2.249,3.479,6.894,4.476,10.37,2.228l16.8-10.859c2.153-1.392,3.446-3.787,3.429-6.351 c-0.018-2.563-1.344-4.94-3.516-6.302l-73.218-45.909C150.749,127.792,147.647,127.795,145.209,129.33z"
+              ></path>
+              <path
+                d="M270.089,288.846c2.187-3.518,1.109-8.142-2.409-10.329l-74.337-46.221c-3.518-2.188-8.143-1.109-10.329,2.409 c-2.187,3.518-1.109,8.142,2.409,10.329l74.337,46.221c1.232,0.767,2.601,1.132,3.953,1.132 C266.219,292.387,268.669,291.131,270.089,288.846z"
+              ></path>
+              <path
+                d="M53.527,192.864c-2.187,3.518-1.109,8.142,2.409,10.329l183.478,114.081c1.232,0.767,2.601,1.132,3.953,1.132 c2.506,0,4.956-1.256,6.376-3.541c2.187-3.518,1.109-8.142-2.409-10.329L63.856,190.455 C60.338,188.266,55.714,189.346,53.527,192.864z"
+              ></path>
+            </g>
+          </svg>
+          <a href="#" class="font-semibold inline-block"
+            ><%= blogsByCategory.Article[0].category %></a
+          >
+        </div>
+        <a href="/blog/article" class="font-medium hover:text-indigo-600"
+          >See All</a
+        >
       </div>
-      <% }); %> <% } else { %>
-      <p>No articles available.</p>
       <% } %>
-    </div>
 
-    <!-- News Section -->
-    <div class="category-section news-section">
-      <h2 class="category-title">News</h2>
-      <% if (blogsByCategory.News && blogsByCategory.News.length > 0) { %> <%
-      blogsByCategory.News.forEach(blog => { %>
-      <div class="blog-post news-post">
-        <h3 class="blog-post-title"><%= blog.title %></h3>
-        <p><%= blog.description %></p>
-        <p>By: <%= blog.author.name %> (@<%= blog.author.username %>)</p>
-      </div>
-      <% }); %> <% } else { %>
-      <p>No news available.</p>
-      <% } %>
+      <ul
+        class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8"
+      >
+        <% blogsByCategory.Article.slice(0,6).forEach(blog => { %>
+        <li
+          class="relative border-2 border-indigo-600 shadow-md rounded-xl px-2 py-4 flex flex-col sm:flex-row xl:flex-col items-start hover:scale-105 duration-500 hover:shadow-xl"
+        >
+          <div class="order-1 sm:ml-6 xl:ml-0">
+            <h3 class="mb-1 text-slate-900 font-semibold">
+              <span class="mb-1 block text-sm leading-6 text-indigo-600"
+                ><%= blog.tags %></span
+              >
+              <%= blog.title %>
+            </h3>
+            <div class="prose prose-slate prose-sm text-slate-600">
+              <p class="whitespace-nowrap">
+                <%= blog.description.length > 30 ? blog.description.slice(0, 30)
+                + '...' : blog.description %>
+              </p>
+            </div>
+            <a
+              href="/blog/<%= blog.slug %>"
+              class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 duration-300 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6"
+            >
+              Learn more
+              <span class="sr-only"
+                >, Completely unstyled, fully accessible UI components</span
+              >
+              <svg
+                class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+                width="3"
+                height="6"
+                viewBox="0 0 3 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M0 0L3 3L0 6"></path>
+              </svg>
+            </a>
+          </div>
+          <img
+            src="<%= blog.image || 'https://images.unsplash.com/photo-1716831320710-5b159b831fdb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8' %>"
+            alt=""
+            class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
+            width="1216"
+            height="640"
+          />
+        </li>
+        <% }); %>
+      </ul>
     </div>
+    <% } else { %>
+    <p
+      class="mb-4 text-3xl tracking-tight font-bold mx-auto text-red-900 md:text-4xl dark:text-white"
+    >
+      No Article available.
+    </p>
+    <% } %> <% if (blogsByCategory.News && blogsByCategory.News.length > 0) { %>
+    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <% if (blogsByCategory.News[0] && blogsByCategory.News[0].category) { %>
+      <div class="border-b mb-5 flex justify-between text-sm">
+        <div
+          class="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase"
+        >
+          <svg
+            class="h-6 mr-3"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 455.005 455.005"
+            style="enable-background: new 0 0 455.005 455.005"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                d="M446.158,267.615c-5.622-3.103-12.756-2.421-19.574,1.871l-125.947,79.309c-3.505,2.208-4.557,6.838-2.35,10.343 c2.208,3.505,6.838,4.557,10.343,2.35l125.947-79.309c2.66-1.675,4.116-1.552,4.331-1.432c0.218,0.12,1.096,1.285,1.096,4.428 c0,8.449-6.271,19.809-13.42,24.311l-122.099,76.885c-6.492,4.088-12.427,5.212-16.284,3.084c-3.856-2.129-6.067-7.75-6.067-15.423 c0-19.438,13.896-44.61,30.345-54.967l139.023-87.542c2.181-1.373,3.503-3.77,3.503-6.347s-1.323-4.974-3.503-6.347L184.368,50.615 c-2.442-1.538-5.551-1.538-7.993,0L35.66,139.223C15.664,151.815,0,180.188,0,203.818v4c0,23.63,15.664,52.004,35.66,64.595 l209.292,131.791c3.505,2.207,8.136,1.154,10.343-2.35c2.207-3.505,1.155-8.136-2.35-10.343L43.653,259.72 C28.121,249.941,15,226.172,15,207.818v-4c0-18.354,13.121-42.122,28.653-51.902l136.718-86.091l253.059,159.35l-128.944,81.196 c-20.945,13.189-37.352,42.909-37.352,67.661c0,13.495,4.907,23.636,13.818,28.555c3.579,1.976,7.526,2.956,11.709,2.956 c6.231,0,12.985-2.176,19.817-6.479l122.099-76.885c11.455-7.213,20.427-23.467,20.427-37.004 C455.004,277.119,451.78,270.719,446.158,267.615z"
+              ></path>
+              <path
+                d="M353.664,232.676c2.492,0,4.928-1.241,6.354-3.504c2.207-3.505,1.155-8.136-2.35-10.343l-173.3-109.126 c-3.506-2.207-8.136-1.154-10.343,2.35c-2.207,3.505-1.155,8.136,2.35,10.343l173.3,109.126 C350.916,232.303,352.298,232.676,353.664,232.676z"
+              ></path>
+              <path
+                d="M323.68,252.58c2.497,0,4.938-1.246,6.361-3.517c2.201-3.509,1.14-8.138-2.37-10.338L254.46,192.82 c-3.511-2.202-8.139-1.139-10.338,2.37c-2.201,3.51-1.14,8.138,2.37,10.338l73.211,45.905 C320.941,252.21,322.318,252.58,323.68,252.58z"
+              ></path>
+              <path
+                d="M223.903,212.559c-3.513-2.194-8.14-1.124-10.334,2.39c-2.194,3.514-1.124,8.14,2.39,10.334l73.773,46.062 c1.236,0.771,2.608,1.139,3.965,1.139c2.501,0,4.947-1.251,6.369-3.529c2.194-3.514,1.124-8.14-2.39-10.334L223.903,212.559z"
+              ></path>
+              <path
+                d="M145.209,129.33l-62.33,39.254c-2.187,1.377-3.511,3.783-3.503,6.368s1.345,4.983,3.54,6.348l74.335,46.219 c1.213,0.754,2.586,1.131,3.96,1.131c1.417,0,2.833-0.401,4.071-1.201l16.556-10.7c3.479-2.249,4.476-6.891,2.228-10.37 c-2.248-3.479-6.891-4.475-10.37-2.228l-12.562,8.119l-60.119-37.38l48.2-30.355l59.244,37.147l-6.907,4.464 c-3.479,2.249-4.476,6.891-2.228,10.37c2.249,3.479,6.894,4.476,10.37,2.228l16.8-10.859c2.153-1.392,3.446-3.787,3.429-6.351 c-0.018-2.563-1.344-4.94-3.516-6.302l-73.218-45.909C150.749,127.792,147.647,127.795,145.209,129.33z"
+              ></path>
+              <path
+                d="M270.089,288.846c2.187-3.518,1.109-8.142-2.409-10.329l-74.337-46.221c-3.518-2.188-8.143-1.109-10.329,2.409 c-2.187,3.518-1.109,8.142,2.409,10.329l74.337,46.221c1.232,0.767,2.601,1.132,3.953,1.132 C266.219,292.387,268.669,291.131,270.089,288.846z"
+              ></path>
+              <path
+                d="M53.527,192.864c-2.187,3.518-1.109,8.142,2.409,10.329l183.478,114.081c1.232,0.767,2.601,1.132,3.953,1.132 c2.506,0,4.956-1.256,6.376-3.541c2.187-3.518,1.109-8.142-2.409-10.329L63.856,190.455 C60.338,188.266,55.714,189.346,53.527,192.864z"
+              ></path>
+            </g>
+          </svg>
+          <a href="#" class="font-semibold inline-block"
+            ><%= blogsByCategory.News[0].category %></a
+          >
+        </div>
+        <a href="/blog/news" class="font-medium hover:text-indigo-600"
+          >See All</a
+        >
+      </div>
+      <% } %>
 
-    <!-- Guide Section -->
-    <div class="category-section guide-section">
-      <h2 class="category-title">Guide</h2>
-      <% if (blogsByCategory.Guide && blogsByCategory.Guide.length > 0) { %> <%
-      blogsByCategory.Guide.forEach(blog => { %>
-      <div class="blog-post guide-post">
-        <h3 class="blog-post-title"><%= blog.title %></h3>
-        <p><%= blog.description %></p>
-        <p>By: <%= blog.author.name %> (@<%= blog.author.username %>)</p>
-      </div>
-      <% }); %> <% } else { %>
-      <p>No guides available.</p>
-      <% } %>
+      <ul
+        class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8"
+      >
+        <% blogsByCategory.News.slice(0,6).forEach(blog => { %>
+        <li
+          class="relative border-2 border-indigo-600 shadow-md rounded-xl px-2 py-4 flex flex-col sm:flex-row xl:flex-col items-start hover:scale-105 duration-500 hover:shadow-xl"
+        >
+          <div class="order-1 sm:ml-6 xl:ml-0">
+            <h3 class="mb-1 text-slate-900 font-semibold">
+              <span class="mb-1 block text-sm leading-6 text-indigo-600"
+                ><%= blog.tags %></span
+              >
+              <%= blog.title %>
+            </h3>
+            <div class="prose prose-slate prose-sm text-slate-600">
+              <p class="whitespace-nowrap">
+                <%= blog.description.length > 30 ? blog.description.slice(0, 30)
+                + '...' : blog.description %>
+              </p>
+            </div>
+            <a
+              href="/blog/<%= blog.slug %>"
+              class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 duration-300 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6"
+            >
+              Learn more
+              <span class="sr-only"
+                >, Completely unstyled, fully accessible UI components</span
+              >
+              <svg
+                class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+                width="3"
+                height="6"
+                viewBox="0 0 3 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M0 0L3 3L0 6"></path>
+              </svg>
+            </a>
+          </div>
+          <img
+            src="<%= blog.image || 'https://images.unsplash.com/photo-1716831320710-5b159b831fdb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8' %>"
+            alt=""
+            class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
+            width="1216"
+            height="640"
+          />
+        </li>
+        <% }); %>
+      </ul>
     </div>
+    <% } else { %>
+    <p
+      class="mb-4 text-3xl tracking-tight font-bold mx-auto text-red-900 md:text-4xl dark:text-white"
+    >
+      No News available.
+    </p>
+    <% } %> <% if (blogsByCategory.Guide && blogsByCategory.Guide.length > 0) {
+    %>
+    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <% if (blogsByCategory.Guide[0] && blogsByCategory.Guide[0].category) { %>
+      <div class="border-b mb-5 flex justify-between text-sm">
+        <div
+          class="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase"
+        >
+          <svg
+            class="h-6 mr-3"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 455.005 455.005"
+            style="enable-background: new 0 0 455.005 455.005"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                d="M446.158,267.615c-5.622-3.103-12.756-2.421-19.574,1.871l-125.947,79.309c-3.505,2.208-4.557,6.838-2.35,10.343 c2.208,3.505,6.838,4.557,10.343,2.35l125.947-79.309c2.66-1.675,4.116-1.552,4.331-1.432c0.218,0.12,1.096,1.285,1.096,4.428 c0,8.449-6.271,19.809-13.42,24.311l-122.099,76.885c-6.492,4.088-12.427,5.212-16.284,3.084c-3.856-2.129-6.067-7.75-6.067-15.423 c0-19.438,13.896-44.61,30.345-54.967l139.023-87.542c2.181-1.373,3.503-3.77,3.503-6.347s-1.323-4.974-3.503-6.347L184.368,50.615 c-2.442-1.538-5.551-1.538-7.993,0L35.66,139.223C15.664,151.815,0,180.188,0,203.818v4c0,23.63,15.664,52.004,35.66,64.595 l209.292,131.791c3.505,2.207,8.136,1.154,10.343-2.35c2.207-3.505,1.155-8.136-2.35-10.343L43.653,259.72 C28.121,249.941,15,226.172,15,207.818v-4c0-18.354,13.121-42.122,28.653-51.902l136.718-86.091l253.059,159.35l-128.944,81.196 c-20.945,13.189-37.352,42.909-37.352,67.661c0,13.495,4.907,23.636,13.818,28.555c3.579,1.976,7.526,2.956,11.709,2.956 c6.231,0,12.985-2.176,19.817-6.479l122.099-76.885c11.455-7.213,20.427-23.467,20.427-37.004 C455.004,277.119,451.78,270.719,446.158,267.615z"
+              ></path>
+              <path
+                d="M353.664,232.676c2.492,0,4.928-1.241,6.354-3.504c2.207-3.505,1.155-8.136-2.35-10.343l-173.3-109.126 c-3.506-2.207-8.136-1.154-10.343,2.35c-2.207,3.505-1.155,8.136,2.35,10.343l173.3,109.126 C350.916,232.303,352.298,232.676,353.664,232.676z"
+              ></path>
+              <path
+                d="M323.68,252.58c2.497,0,4.938-1.246,6.361-3.517c2.201-3.509,1.14-8.138-2.37-10.338L254.46,192.82 c-3.511-2.202-8.139-1.139-10.338,2.37c-2.201,3.51-1.14,8.138,2.37,10.338l73.211,45.905 C320.941,252.21,322.318,252.58,323.68,252.58z"
+              ></path>
+              <path
+                d="M223.903,212.559c-3.513-2.194-8.14-1.124-10.334,2.39c-2.194,3.514-1.124,8.14,2.39,10.334l73.773,46.062 c1.236,0.771,2.608,1.139,3.965,1.139c2.501,0,4.947-1.251,6.369-3.529c2.194-3.514,1.124-8.14-2.39-10.334L223.903,212.559z"
+              ></path>
+              <path
+                d="M145.209,129.33l-62.33,39.254c-2.187,1.377-3.511,3.783-3.503,6.368s1.345,4.983,3.54,6.348l74.335,46.219 c1.213,0.754,2.586,1.131,3.96,1.131c1.417,0,2.833-0.401,4.071-1.201l16.556-10.7c3.479-2.249,4.476-6.891,2.228-10.37 c-2.248-3.479-6.891-4.475-10.37-2.228l-12.562,8.119l-60.119-37.38l48.2-30.355l59.244,37.147l-6.907,4.464 c-3.479,2.249-4.476,6.891-2.228,10.37c2.249,3.479,6.894,4.476,10.37,2.228l16.8-10.859c2.153-1.392,3.446-3.787,3.429-6.351 c-0.018-2.563-1.344-4.94-3.516-6.302l-73.218-45.909C150.749,127.792,147.647,127.795,145.209,129.33z"
+              ></path>
+              <path
+                d="M270.089,288.846c2.187-3.518,1.109-8.142-2.409-10.329l-74.337-46.221c-3.518-2.188-8.143-1.109-10.329,2.409 c-2.187,3.518-1.109,8.142,2.409,10.329l74.337,46.221c1.232,0.767,2.601,1.132,3.953,1.132 C266.219,292.387,268.669,291.131,270.089,288.846z"
+              ></path>
+              <path
+                d="M53.527,192.864c-2.187,3.518-1.109,8.142,2.409,10.329l183.478,114.081c1.232,0.767,2.601,1.132,3.953,1.132 c2.506,0,4.956-1.256,6.376-3.541c2.187-3.518,1.109-8.142-2.409-10.329L63.856,190.455 C60.338,188.266,55.714,189.346,53.527,192.864z"
+              ></path>
+            </g>
+          </svg>
+          <a href="#" class="font-semibold inline-block"
+            ><%= blogsByCategory.Guide[0].category %></a
+          >
+        </div>
+        <a href="/blog/guide" class="font-medium hover:text-indigo-600"
+          >See All</a
+        >
+      </div>
+      <% } %>
+
+      <ul
+        class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8"
+      >
+        <% blogsByCategory.Guide.slice(0,6).forEach(blog => { %>
+        <li
+          class="relative border-2 border-indigo-600 shadow-md rounded-xl px-2 py-4 flex flex-col sm:flex-row xl:flex-col items-start hover:scale-105 duration-500 hover:shadow-xl"
+        >
+          <div class="order-1 sm:ml-6 xl:ml-0">
+            <h3 class="mb-1 text-slate-900 font-semibold">
+              <span class="mb-1 block text-sm leading-6 text-indigo-600"
+                ><%= blog.tags %></span
+              >
+              <%= blog.title %>
+            </h3>
+            <div class="prose prose-slate prose-sm text-slate-600">
+              <p class="whitespace-nowrap">
+                <%= blog.description.length > 30 ? blog.description.slice(0, 30)
+                + '...' : blog.description %>
+              </p>
+            </div>
+            <a
+              href="/blog/<%= blog.slug %>"
+              class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 duration-300 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6"
+            >
+              Learn more
+              <span class="sr-only"
+                >, Completely unstyled, fully accessible UI components</span
+              >
+              <svg
+                class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+                width="3"
+                height="6"
+                viewBox="0 0 3 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M0 0L3 3L0 6"></path>
+              </svg>
+            </a>
+          </div>
+          <img
+            src="<%= blog.image || 'https://images.unsplash.com/photo-1716831320710-5b159b831fdb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8' %>"
+            alt=""
+            class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
+            width="1216"
+            height="640"
+          />
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <% } else { %>
+    <p
+      class="mb-4 text-3xl tracking-tight font-bold mx-auto text-red-900 md:text-4xl dark:text-white"
+    >
+      No Guide available.
+    </p>
+    <% } %> <% if (blogsByCategory.Opinion && blogsByCategory.Opinion.length >
+    0) { %>
+    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <% if (blogsByCategory.Opinion[0] && blogsByCategory.Opinion[0].category)
+      { %>
+      <div class="border-b mb-5 flex justify-between text-sm">
+        <div
+          class="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase"
+        >
+          <svg
+            class="h-6 mr-3"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 455.005 455.005"
+            style="enable-background: new 0 0 455.005 455.005"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                d="M446.158,267.615c-5.622-3.103-12.756-2.421-19.574,1.871l-125.947,79.309c-3.505,2.208-4.557,6.838-2.35,10.343 c2.208,3.505,6.838,4.557,10.343,2.35l125.947-79.309c2.66-1.675,4.116-1.552,4.331-1.432c0.218,0.12,1.096,1.285,1.096,4.428 c0,8.449-6.271,19.809-13.42,24.311l-122.099,76.885c-6.492,4.088-12.427,5.212-16.284,3.084c-3.856-2.129-6.067-7.75-6.067-15.423 c0-19.438,13.896-44.61,30.345-54.967l139.023-87.542c2.181-1.373,3.503-3.77,3.503-6.347s-1.323-4.974-3.503-6.347L184.368,50.615 c-2.442-1.538-5.551-1.538-7.993,0L35.66,139.223C15.664,151.815,0,180.188,0,203.818v4c0,23.63,15.664,52.004,35.66,64.595 l209.292,131.791c3.505,2.207,8.136,1.154,10.343-2.35c2.207-3.505,1.155-8.136-2.35-10.343L43.653,259.72 C28.121,249.941,15,226.172,15,207.818v-4c0-18.354,13.121-42.122,28.653-51.902l136.718-86.091l253.059,159.35l-128.944,81.196 c-20.945,13.189-37.352,42.909-37.352,67.661c0,13.495,4.907,23.636,13.818,28.555c3.579,1.976,7.526,2.956,11.709,2.956 c6.231,0,12.985-2.176,19.817-6.479l122.099-76.885c11.455-7.213,20.427-23.467,20.427-37.004 C455.004,277.119,451.78,270.719,446.158,267.615z"
+              ></path>
+              <path
+                d="M353.664,232.676c2.492,0,4.928-1.241,6.354-3.504c2.207-3.505,1.155-8.136-2.35-10.343l-173.3-109.126 c-3.506-2.207-8.136-1.154-10.343,2.35c-2.207,3.505-1.155,8.136,2.35,10.343l173.3,109.126 C350.916,232.303,352.298,232.676,353.664,232.676z"
+              ></path>
+              <path
+                d="M323.68,252.58c2.497,0,4.938-1.246,6.361-3.517c2.201-3.509,1.14-8.138-2.37-10.338L254.46,192.82 c-3.511-2.202-8.139-1.139-10.338,2.37c-2.201,3.51-1.14,8.138,2.37,10.338l73.211,45.905 C320.941,252.21,322.318,252.58,323.68,252.58z"
+              ></path>
+              <path
+                d="M223.903,212.559c-3.513-2.194-8.14-1.124-10.334,2.39c-2.194,3.514-1.124,8.14,2.39,10.334l73.773,46.062 c1.236,0.771,2.608,1.139,3.965,1.139c2.501,0,4.947-1.251,6.369-3.529c2.194-3.514,1.124-8.14-2.39-10.334L223.903,212.559z"
+              ></path>
+              <path
+                d="M145.209,129.33l-62.33,39.254c-2.187,1.377-3.511,3.783-3.503,6.368s1.345,4.983,3.54,6.348l74.335,46.219 c1.213,0.754,2.586,1.131,3.96,1.131c1.417,0,2.833-0.401,4.071-1.201l16.556-10.7c3.479-2.249,4.476-6.891,2.228-10.37 c-2.248-3.479-6.891-4.475-10.37-2.228l-12.562,8.119l-60.119-37.38l48.2-30.355l59.244,37.147l-6.907,4.464 c-3.479,2.249-4.476,6.891-2.228,10.37c2.249,3.479,6.894,4.476,10.37,2.228l16.8-10.859c2.153-1.392,3.446-3.787,3.429-6.351 c-0.018-2.563-1.344-4.94-3.516-6.302l-73.218-45.909C150.749,127.792,147.647,127.795,145.209,129.33z"
+              ></path>
+              <path
+                d="M270.089,288.846c2.187-3.518,1.109-8.142-2.409-10.329l-74.337-46.221c-3.518-2.188-8.143-1.109-10.329,2.409 c-2.187,3.518-1.109,8.142,2.409,10.329l74.337,46.221c1.232,0.767,2.601,1.132,3.953,1.132 C266.219,292.387,268.669,291.131,270.089,288.846z"
+              ></path>
+              <path
+                d="M53.527,192.864c-2.187,3.518-1.109,8.142,2.409,10.329l183.478,114.081c1.232,0.767,2.601,1.132,3.953,1.132 c2.506,0,4.956-1.256,6.376-3.541c2.187-3.518,1.109-8.142-2.409-10.329L63.856,190.455 C60.338,188.266,55.714,189.346,53.527,192.864z"
+              ></path>
+            </g>
+          </svg>
+          <a href="#" class="font-semibold inline-block"
+            ><%= blogsByCategory.Opinion[0].category %></a
+          >
+        </div>
+        <a href="/blog/opinion" class="font-medium hover:text-indigo-600"
+          >See All</a
+        >
+      </div>
+      <% } %>
+
+      <ul
+        class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8"
+      >
+        <% blogsByCategory.Opinion.slice(0,6).forEach(blog => { %>
+        <li
+          class="relative border-2 border-indigo-600 shadow-md rounded-xl px-2 py-4 flex flex-col sm:flex-row xl:flex-col items-start hover:scale-105 duration-500 hover:shadow-xl"
+        >
+          <div class="order-1 sm:ml-6 xl:ml-0">
+            <h3 class="mb-1 text-slate-900 font-semibold">
+              <span class="mb-1 block text-sm leading-6 text-indigo-600"
+                ><%= blog.tags %></span
+              >
+              <%= blog.title %>
+            </h3>
+            <div class="prose prose-slate prose-sm text-slate-600">
+              <p class="whitespace-nowrap">
+                <%= blog.description.length > 30 ? blog.description.slice(0, 30)
+                + '...' : blog.description %>
+              </p>
+            </div>
+            <a
+              href="/blog/<%= blog.slug %>"
+              class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 duration-300 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6"
+            >
+              Learn more
+              <span class="sr-only"
+                >, Completely unstyled, fully accessible UI components</span
+              >
+              <svg
+                class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+                width="3"
+                height="6"
+                viewBox="0 0 3 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M0 0L3 3L0 6"></path>
+              </svg>
+            </a>
+          </div>
+          <img
+            src="<%= blog.image || 'https://images.unsplash.com/photo-1716831320710-5b159b831fdb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8' %>"
+            alt=""
+            class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
+            width="1216"
+            height="640"
+          />
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <% } else { %>
+    <p
+      class="mb-4 text-3xl tracking-tight font-bold mx-auto text-red-900 md:text-4xl dark:text-white"
+    >
+      No Opinion available.
+    </p>
+    <% } %> <% if (blogsByCategory.Review && blogsByCategory.Review.length > 0)
+    { %>
+    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <% if (blogsByCategory.Review[0] && blogsByCategory.Review[0].category) {
+      %>
+      <div class="border-b mb-5 flex justify-between text-sm">
+        <div
+          class="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase"
+        >
+          <svg
+            class="h-6 mr-3"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 455.005 455.005"
+            style="enable-background: new 0 0 455.005 455.005"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                d="M446.158,267.615c-5.622-3.103-12.756-2.421-19.574,1.871l-125.947,79.309c-3.505,2.208-4.557,6.838-2.35,10.343 c2.208,3.505,6.838,4.557,10.343,2.35l125.947-79.309c2.66-1.675,4.116-1.552,4.331-1.432c0.218,0.12,1.096,1.285,1.096,4.428 c0,8.449-6.271,19.809-13.42,24.311l-122.099,76.885c-6.492,4.088-12.427,5.212-16.284,3.084c-3.856-2.129-6.067-7.75-6.067-15.423 c0-19.438,13.896-44.61,30.345-54.967l139.023-87.542c2.181-1.373,3.503-3.77,3.503-6.347s-1.323-4.974-3.503-6.347L184.368,50.615 c-2.442-1.538-5.551-1.538-7.993,0L35.66,139.223C15.664,151.815,0,180.188,0,203.818v4c0,23.63,15.664,52.004,35.66,64.595 l209.292,131.791c3.505,2.207,8.136,1.154,10.343-2.35c2.207-3.505,1.155-8.136-2.35-10.343L43.653,259.72 C28.121,249.941,15,226.172,15,207.818v-4c0-18.354,13.121-42.122,28.653-51.902l136.718-86.091l253.059,159.35l-128.944,81.196 c-20.945,13.189-37.352,42.909-37.352,67.661c0,13.495,4.907,23.636,13.818,28.555c3.579,1.976,7.526,2.956,11.709,2.956 c6.231,0,12.985-2.176,19.817-6.479l122.099-76.885c11.455-7.213,20.427-23.467,20.427-37.004 C455.004,277.119,451.78,270.719,446.158,267.615z"
+              ></path>
+              <path
+                d="M353.664,232.676c2.492,0,4.928-1.241,6.354-3.504c2.207-3.505,1.155-8.136-2.35-10.343l-173.3-109.126 c-3.506-2.207-8.136-1.154-10.343,2.35c-2.207,3.505-1.155,8.136,2.35,10.343l173.3,109.126 C350.916,232.303,352.298,232.676,353.664,232.676z"
+              ></path>
+              <path
+                d="M323.68,252.58c2.497,0,4.938-1.246,6.361-3.517c2.201-3.509,1.14-8.138-2.37-10.338L254.46,192.82 c-3.511-2.202-8.139-1.139-10.338,2.37c-2.201,3.51-1.14,8.138,2.37,10.338l73.211,45.905 C320.941,252.21,322.318,252.58,323.68,252.58z"
+              ></path>
+              <path
+                d="M223.903,212.559c-3.513-2.194-8.14-1.124-10.334,2.39c-2.194,3.514-1.124,8.14,2.39,10.334l73.773,46.062 c1.236,0.771,2.608,1.139,3.965,1.139c2.501,0,4.947-1.251,6.369-3.529c2.194-3.514,1.124-8.14-2.39-10.334L223.903,212.559z"
+              ></path>
+              <path
+                d="M145.209,129.33l-62.33,39.254c-2.187,1.377-3.511,3.783-3.503,6.368s1.345,4.983,3.54,6.348l74.335,46.219 c1.213,0.754,2.586,1.131,3.96,1.131c1.417,0,2.833-0.401,4.071-1.201l16.556-10.7c3.479-2.249,4.476-6.891,2.228-10.37 c-2.248-3.479-6.891-4.475-10.37-2.228l-12.562,8.119l-60.119-37.38l48.2-30.355l59.244,37.147l-6.907,4.464 c-3.479,2.249-4.476,6.891-2.228,10.37c2.249,3.479,6.894,4.476,10.37,2.228l16.8-10.859c2.153-1.392,3.446-3.787,3.429-6.351 c-0.018-2.563-1.344-4.94-3.516-6.302l-73.218-45.909C150.749,127.792,147.647,127.795,145.209,129.33z"
+              ></path>
+              <path
+                d="M270.089,288.846c2.187-3.518,1.109-8.142-2.409-10.329l-74.337-46.221c-3.518-2.188-8.143-1.109-10.329,2.409 c-2.187,3.518-1.109,8.142,2.409,10.329l74.337,46.221c1.232,0.767,2.601,1.132,3.953,1.132 C266.219,292.387,268.669,291.131,270.089,288.846z"
+              ></path>
+              <path
+                d="M53.527,192.864c-2.187,3.518-1.109,8.142,2.409,10.329l183.478,114.081c1.232,0.767,2.601,1.132,3.953,1.132 c2.506,0,4.956-1.256,6.376-3.541c2.187-3.518,1.109-8.142-2.409-10.329L63.856,190.455 C60.338,188.266,55.714,189.346,53.527,192.864z"
+              ></path>
+            </g>
+          </svg>
+          <a href="#" class="font-semibold inline-block"
+            ><%= blogsByCategory.Review[0].category %></a
+          >
+        </div>
+        <a href="/blog/review" class="font-medium hover:text-indigo-600"
+          >See All</a
+        >
+      </div>
+      <% } %>
+
+      <ul
+        class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8"
+      >
+        <% blogsByCategory.Review.slice(0,6).forEach(blog => { %>
+        <li
+          class="relative border-2 border-indigo-600 shadow-md rounded-xl px-2 py-4 flex flex-col sm:flex-row xl:flex-col items-start hover:scale-105 duration-500 hover:shadow-xl"
+        >
+          <div class="order-1 sm:ml-6 xl:ml-0">
+            <h3 class="mb-1 text-slate-900 font-semibold">
+              <span class="mb-1 block text-sm leading-6 text-indigo-600"
+                ><%= blog.tags %></span
+              >
+              <%= blog.title %>
+            </h3>
+            <div class="prose prose-slate prose-sm text-slate-600">
+              <p class="whitespace-nowrap">
+                <%= blog.description.length > 30 ? blog.description.slice(0, 30)
+                + '...' : blog.description %>
+              </p>
+            </div>
+            <a
+              href="/blog/<%= blog.slug %>"
+              class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 duration-300 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6"
+            >
+              Learn more
+              <span class="sr-only"
+                >, Completely unstyled, fully accessible UI components</span
+              >
+              <svg
+                class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+                width="3"
+                height="6"
+                viewBox="0 0 3 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M0 0L3 3L0 6"></path>
+              </svg>
+            </a>
+          </div>
+          <img
+            src="<%= blog.image || 'https://images.unsplash.com/photo-1716831320710-5b159b831fdb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8' %>"
+            alt=""
+            class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
+            width="1216"
+            height="640"
+          />
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <% } else { %>
+    <p
+      class="mb-4 text-3xl tracking-tight font-bold mx-auto text-red-900 md:text-4xl dark:text-white"
+    >
+      No Review available.
+    </p>
+    <% } %> <% if (blogsByCategory.Tutorial && blogsByCategory.Tutorial.length >
+    0) { %>
+    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <% if (blogsByCategory.Tutorial[0] &&
+      blogsByCategory.Tutorial[0].category) { %>
+      <div class="border-b mb-5 flex justify-between text-sm">
+        <div
+          class="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase"
+        >
+          <svg
+            class="h-6 mr-3"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 455.005 455.005"
+            style="enable-background: new 0 0 455.005 455.005"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                d="M446.158,267.615c-5.622-3.103-12.756-2.421-19.574,1.871l-125.947,79.309c-3.505,2.208-4.557,6.838-2.35,10.343 c2.208,3.505,6.838,4.557,10.343,2.35l125.947-79.309c2.66-1.675,4.116-1.552,4.331-1.432c0.218,0.12,1.096,1.285,1.096,4.428 c0,8.449-6.271,19.809-13.42,24.311l-122.099,76.885c-6.492,4.088-12.427,5.212-16.284,3.084c-3.856-2.129-6.067-7.75-6.067-15.423 c0-19.438,13.896-44.61,30.345-54.967l139.023-87.542c2.181-1.373,3.503-3.77,3.503-6.347s-1.323-4.974-3.503-6.347L184.368,50.615 c-2.442-1.538-5.551-1.538-7.993,0L35.66,139.223C15.664,151.815,0,180.188,0,203.818v4c0,23.63,15.664,52.004,35.66,64.595 l209.292,131.791c3.505,2.207,8.136,1.154,10.343-2.35c2.207-3.505,1.155-8.136-2.35-10.343L43.653,259.72 C28.121,249.941,15,226.172,15,207.818v-4c0-18.354,13.121-42.122,28.653-51.902l136.718-86.091l253.059,159.35l-128.944,81.196 c-20.945,13.189-37.352,42.909-37.352,67.661c0,13.495,4.907,23.636,13.818,28.555c3.579,1.976,7.526,2.956,11.709,2.956 c6.231,0,12.985-2.176,19.817-6.479l122.099-76.885c11.455-7.213,20.427-23.467,20.427-37.004 C455.004,277.119,451.78,270.719,446.158,267.615z"
+              ></path>
+              <path
+                d="M353.664,232.676c2.492,0,4.928-1.241,6.354-3.504c2.207-3.505,1.155-8.136-2.35-10.343l-173.3-109.126 c-3.506-2.207-8.136-1.154-10.343,2.35c-2.207,3.505-1.155,8.136,2.35,10.343l173.3,109.126 C350.916,232.303,352.298,232.676,353.664,232.676z"
+              ></path>
+              <path
+                d="M323.68,252.58c2.497,0,4.938-1.246,6.361-3.517c2.201-3.509,1.14-8.138-2.37-10.338L254.46,192.82 c-3.511-2.202-8.139-1.139-10.338,2.37c-2.201,3.51-1.14,8.138,2.37,10.338l73.211,45.905 C320.941,252.21,322.318,252.58,323.68,252.58z"
+              ></path>
+              <path
+                d="M223.903,212.559c-3.513-2.194-8.14-1.124-10.334,2.39c-2.194,3.514-1.124,8.14,2.39,10.334l73.773,46.062 c1.236,0.771,2.608,1.139,3.965,1.139c2.501,0,4.947-1.251,6.369-3.529c2.194-3.514,1.124-8.14-2.39-10.334L223.903,212.559z"
+              ></path>
+              <path
+                d="M145.209,129.33l-62.33,39.254c-2.187,1.377-3.511,3.783-3.503,6.368s1.345,4.983,3.54,6.348l74.335,46.219 c1.213,0.754,2.586,1.131,3.96,1.131c1.417,0,2.833-0.401,4.071-1.201l16.556-10.7c3.479-2.249,4.476-6.891,2.228-10.37 c-2.248-3.479-6.891-4.475-10.37-2.228l-12.562,8.119l-60.119-37.38l48.2-30.355l59.244,37.147l-6.907,4.464 c-3.479,2.249-4.476,6.891-2.228,10.37c2.249,3.479,6.894,4.476,10.37,2.228l16.8-10.859c2.153-1.392,3.446-3.787,3.429-6.351 c-0.018-2.563-1.344-4.94-3.516-6.302l-73.218-45.909C150.749,127.792,147.647,127.795,145.209,129.33z"
+              ></path>
+              <path
+                d="M270.089,288.846c2.187-3.518,1.109-8.142-2.409-10.329l-74.337-46.221c-3.518-2.188-8.143-1.109-10.329,2.409 c-2.187,3.518-1.109,8.142,2.409,10.329l74.337,46.221c1.232,0.767,2.601,1.132,3.953,1.132 C266.219,292.387,268.669,291.131,270.089,288.846z"
+              ></path>
+              <path
+                d="M53.527,192.864c-2.187,3.518-1.109,8.142,2.409,10.329l183.478,114.081c1.232,0.767,2.601,1.132,3.953,1.132 c2.506,0,4.956-1.256,6.376-3.541c2.187-3.518,1.109-8.142-2.409-10.329L63.856,190.455 C60.338,188.266,55.714,189.346,53.527,192.864z"
+              ></path>
+            </g>
+          </svg>
+          <a href="#" class="font-semibold inline-block"
+            ><%= blogsByCategory.Tutorial[0].category %></a
+          >
+        </div>
+        <a href="/blog/tutorial" class="font-medium hover:text-indigo-600"
+          >See All</a
+        >
+      </div>
+      <% } %>
+
+      <ul
+        class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8"
+      >
+        <% blogsByCategory.Tutorial.slice(0,6).forEach(blog => { %>
+        <li
+          class="relative border-2 border-indigo-600 shadow-md rounded-xl px-2 py-4 flex flex-col sm:flex-row xl:flex-col items-start hover:scale-105 duration-500 hover:shadow-xl"
+        >
+          <div class="order-1 sm:ml-6 xl:ml-0">
+            <h3 class="mb-1 text-slate-900 font-semibold">
+              <span class="mb-1 block text-sm leading-6 text-indigo-600"
+                ><%= blog.tags %></span
+              >
+              <%= blog.title %>
+            </h3>
+            <div class="prose prose-slate prose-sm text-slate-600">
+              <p class="whitespace-nowrap">
+                <%= blog.description.length > 30 ? blog.description.slice(0, 30)
+                + '...' : blog.description %>
+              </p>
+            </div>
+            <a
+              href="/blog/<%= blog.slug %>"
+              class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 duration-300 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6"
+            >
+              Learn more
+              <span class="sr-only"
+                >, Completely unstyled, fully accessible UI components</span
+              >
+              <svg
+                class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+                width="3"
+                height="6"
+                viewBox="0 0 3 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M0 0L3 3L0 6"></path>
+              </svg>
+            </a>
+          </div>
+          <img
+            src="<%= blog.image || 'https://images.unsplash.com/photo-1716831320710-5b159b831fdb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8' %>"
+            alt=""
+            class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
+            width="1216"
+            height="640"
+          />
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <% } else { %>
+    <p
+      class="mb-4 text-3xl tracking-tight font-bold mx-auto text-red-900 md:text-4xl dark:text-white"
+    >
+      No Tutorial available.
+    </p>
+    <% } %> <% if (blogsByCategory.Technology &&
+    blogsByCategory.Technology.length > 0) { %>
+    <div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+      <% if (blogsByCategory.Technology[0] &&
+      blogsByCategory.Technology[0].category) { %>
+      <div class="border-b mb-5 flex justify-between text-sm">
+        <div
+          class="text-indigo-600 flex items-center pb-2 pr-2 border-b-2 border-indigo-600 uppercase"
+        >
+          <svg
+            class="h-6 mr-3"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 455.005 455.005"
+            style="enable-background: new 0 0 455.005 455.005"
+            xml:space="preserve"
+          >
+            <g>
+              <path
+                d="M446.158,267.615c-5.622-3.103-12.756-2.421-19.574,1.871l-125.947,79.309c-3.505,2.208-4.557,6.838-2.35,10.343 c2.208,3.505,6.838,4.557,10.343,2.35l125.947-79.309c2.66-1.675,4.116-1.552,4.331-1.432c0.218,0.12,1.096,1.285,1.096,4.428 c0,8.449-6.271,19.809-13.42,24.311l-122.099,76.885c-6.492,4.088-12.427,5.212-16.284,3.084c-3.856-2.129-6.067-7.75-6.067-15.423 c0-19.438,13.896-44.61,30.345-54.967l139.023-87.542c2.181-1.373,3.503-3.77,3.503-6.347s-1.323-4.974-3.503-6.347L184.368,50.615 c-2.442-1.538-5.551-1.538-7.993,0L35.66,139.223C15.664,151.815,0,180.188,0,203.818v4c0,23.63,15.664,52.004,35.66,64.595 l209.292,131.791c3.505,2.207,8.136,1.154,10.343-2.35c2.207-3.505,1.155-8.136-2.35-10.343L43.653,259.72 C28.121,249.941,15,226.172,15,207.818v-4c0-18.354,13.121-42.122,28.653-51.902l136.718-86.091l253.059,159.35l-128.944,81.196 c-20.945,13.189-37.352,42.909-37.352,67.661c0,13.495,4.907,23.636,13.818,28.555c3.579,1.976,7.526,2.956,11.709,2.956 c6.231,0,12.985-2.176,19.817-6.479l122.099-76.885c11.455-7.213,20.427-23.467,20.427-37.004 C455.004,277.119,451.78,270.719,446.158,267.615z"
+              ></path>
+              <path
+                d="M353.664,232.676c2.492,0,4.928-1.241,6.354-3.504c2.207-3.505,1.155-8.136-2.35-10.343l-173.3-109.126 c-3.506-2.207-8.136-1.154-10.343,2.35c-2.207,3.505-1.155,8.136,2.35,10.343l173.3,109.126 C350.916,232.303,352.298,232.676,353.664,232.676z"
+              ></path>
+              <path
+                d="M323.68,252.58c2.497,0,4.938-1.246,6.361-3.517c2.201-3.509,1.14-8.138-2.37-10.338L254.46,192.82 c-3.511-2.202-8.139-1.139-10.338,2.37c-2.201,3.51-1.14,8.138,2.37,10.338l73.211,45.905 C320.941,252.21,322.318,252.58,323.68,252.58z"
+              ></path>
+              <path
+                d="M223.903,212.559c-3.513-2.194-8.14-1.124-10.334,2.39c-2.194,3.514-1.124,8.14,2.39,10.334l73.773,46.062 c1.236,0.771,2.608,1.139,3.965,1.139c2.501,0,4.947-1.251,6.369-3.529c2.194-3.514,1.124-8.14-2.39-10.334L223.903,212.559z"
+              ></path>
+              <path
+                d="M145.209,129.33l-62.33,39.254c-2.187,1.377-3.511,3.783-3.503,6.368s1.345,4.983,3.54,6.348l74.335,46.219 c1.213,0.754,2.586,1.131,3.96,1.131c1.417,0,2.833-0.401,4.071-1.201l16.556-10.7c3.479-2.249,4.476-6.891,2.228-10.37 c-2.248-3.479-6.891-4.475-10.37-2.228l-12.562,8.119l-60.119-37.38l48.2-30.355l59.244,37.147l-6.907,4.464 c-3.479,2.249-4.476,6.891-2.228,10.37c2.249,3.479,6.894,4.476,10.37,2.228l16.8-10.859c2.153-1.392,3.446-3.787,3.429-6.351 c-0.018-2.563-1.344-4.94-3.516-6.302l-73.218-45.909C150.749,127.792,147.647,127.795,145.209,129.33z"
+              ></path>
+              <path
+                d="M270.089,288.846c2.187-3.518,1.109-8.142-2.409-10.329l-74.337-46.221c-3.518-2.188-8.143-1.109-10.329,2.409 c-2.187,3.518-1.109,8.142,2.409,10.329l74.337,46.221c1.232,0.767,2.601,1.132,3.953,1.132 C266.219,292.387,268.669,291.131,270.089,288.846z"
+              ></path>
+              <path
+                d="M53.527,192.864c-2.187,3.518-1.109,8.142,2.409,10.329l183.478,114.081c1.232,0.767,2.601,1.132,3.953,1.132 c2.506,0,4.956-1.256,6.376-3.541c2.187-3.518,1.109-8.142-2.409-10.329L63.856,190.455 C60.338,188.266,55.714,189.346,53.527,192.864z"
+              ></path>
+            </g>
+          </svg>
+          <a href="#" class="font-semibold inline-block"
+            ><%= blogsByCategory.Technology[0].category %></a
+          >
+        </div>
+        <a href="/blog/technology" class="font-medium hover:text-indigo-600"
+          >See All</a
+        >
+      </div>
+      <% } %>
+
+      <ul
+        class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8"
+      >
+        <% blogsByCategory.Technology.slice(0,6).forEach(blog => { %>
+        <li
+          class="relative border-2 border-indigo-600 shadow-md rounded-xl px-2 py-4 flex flex-col sm:flex-row xl:flex-col items-start hover:scale-105 duration-500 hover:shadow-xl"
+        >
+          <div class="order-1 sm:ml-6 xl:ml-0">
+            <h3 class="mb-1 text-slate-900 font-semibold">
+              <span class="mb-1 block text-sm leading-6 text-indigo-600"
+                ><%= blog.tags %></span
+              >
+              <%= blog.title %>
+            </h3>
+            <div class="prose prose-slate prose-sm text-slate-600">
+              <p class="whitespace-nowrap">
+                <%= blog.description.length > 30 ? blog.description.slice(0, 30)
+                + '...' : blog.description %>
+              </p>
+            </div>
+            <a
+              href="/blog/<%= blog.slug %>"
+              class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 duration-300 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6"
+            >
+              Learn more
+              <span class="sr-only"
+                >, Completely unstyled, fully accessible UI components</span
+              >
+              <svg
+                class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+                width="3"
+                height="6"
+                viewBox="0 0 3 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M0 0L3 3L0 6"></path>
+              </svg>
+            </a>
+          </div>
+          <img
+            src="<%= blog.image || 'https://images.unsplash.com/photo-1716831320710-5b159b831fdb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8' %>"
+            alt=""
+            class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
+            width="1216"
+            height="640"
+          />
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <% } else { %>
+    <p
+      class="mb-4 text-3xl tracking-tight font-bold mx-auto text-red-900 md:text-4xl dark:text-white"
+    >
+      No Technology available.
+    </p>
+    <% } %> <%- include('../partials/footer.ejs') %>
   </body>
 </html>

@@ -17,61 +17,61 @@
     <script src="/javascripts/switch.js"></script>
   </head>
   <body class="bg-white dark:bg-gray-900 min-h-screen">
-    <%- include('../partials/navbar.ejs') %>
-    <section class="bg-white dark:bg-gray-900 py-12">
-      <div class="container mx-auto">
-        <% if (blogs.length<1) { %>
-        <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
-          No posts yet, create a
-          <a href="/blog/create" class="text-blue-600 font-bold">new one</a>
-        </p>
-        <% } %> <% blogs.sort((a, b) => new Date(b.createdAt) - new
-        Date(a.createdAt)); %>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <% blogs.forEach(blog => { %>
+    <%- include('../partials/navbar.ejs') %> <% if (blogs.length<1) { %>
+    <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+      No posts yet, create a
+      <a href="/blog/create" class="text-blue-600 font-bold">new one</a>
+    </p>
+    <% } %> <% blogs.sort((a, b) => new Date(b.createdAt) - new
+    Date(a.createdAt)); %>
+
+    <ul
+      class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8"
+    >
+      <% blogs.forEach(blog => { %>
+      <li class="relative flex flex-col sm:flex-row xl:flex-col items-start">
+        <div class="order-1 sm:ml-6 xl:ml-0">
+          <h3 class="mb-1 text-slate-900 font-semibold">
+            <span class="mb-1 block text-sm leading-6 text-indigo-500"
+              ><%= blog.tags %></span
+            >
+            <span class="dark:text-white"><%= blog.title %></span>
+          </h3>
           <div
-            class="bg-gray-100 dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden"
+            class="prose prose-slate prose-sm text-slate-600 dark:text-white"
           >
-            <img
-              src="<%= blog.image || 'https://via.placeholder.com/600' %>"
-              alt="Blog Image"
-              class="w-full h-64 object-cover object-center"
-            />
-            <div class="p-6">
-              <h3
-                class="text-xl font-semibold text-gray-800 dark:text-white mb-2"
-              >
-                <%= blog.title %>
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                <%= blog.description %>
-              </p>
-              <div class="flex items-center">
-                <img
-                  src="<%= blog.author.image || 'https://via.placeholder.com/50' %>"
-                  alt="Author Image"
-                  class="w-8 h-8 rounded-full object-cover mr-2"
-                />
-                <div>
-                  <p class="text-gray-700 dark:text-gray-300 font-medium">
-                    <%= blog.author.name %>
-                  </p>
-                  <p class="text-gray-500 dark:text-gray-400">
-                    @<%= blog.author.username %>
-                  </p>
-                </div>
-              </div>
-              <a
-                href="/blog/<%= blog.slug %>"
-                class="block mt-4 text-primary-600 dark:text-primary-400 hover:underline"
-                >Read more</a
-              >
-            </div>
+            <p><%= blog.description %></p>
           </div>
-          <% }); %>
+          <a
+            href="/blog/<%= blog.slug %>"
+            class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 focus:ring-slate-500 mt-6"
+            >Learn more<span class="sr-only"
+              >, Completely unstyled, fully accessible UI components</span
+            >
+            <svg
+              class="overflow-visible ml-3 text-slate-300 group-hover:text-slate-400"
+              width="3"
+              height="6"
+              viewBox="0 0 3 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M0 0L3 3L0 6"></path></svg
+          ></a>
         </div>
-      </div>
-    </section>
+        <img
+          src="<%= blog.image || 'https://res.cloudinary.com/djc5o8g94/image/upload/v1714826023/blog-folder/images/fbsqzvssuyhm6imbjv2c.jpg' %>"
+          alt=""
+          class="mb-6 shadow-md rounded-lg bg-slate-50 w-full sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full"
+          width="1216"
+          height="640"
+        />
+      </li>
+      <% }); %>
+    </ul>
 
     <%- include('../partials/footer.ejs') %>
   </body>

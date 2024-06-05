@@ -9,6 +9,7 @@ const { blogUpload } = require("../../middleware/image.config");
 
 const express = require("express");
 const router = express.Router();
+
 // Define CRUD routes
 router.get("/", authenticateToken, async (req, res) => {
   try {
@@ -26,7 +27,7 @@ router.get("/", authenticateToken, async (req, res) => {
   }
 });
 
-router.get("/categories", authenticateToken, async (req, res) => {
+router.get("/categories", authenticateTokenPublic, async (req, res) => {
   try {
     let blogsByCategory = await blogController.getBlogsGroupedByCategory();
     res.render("category/categories", {
